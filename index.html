@@ -250,7 +250,7 @@ body.cocukBoyu .toast{bottom:130px}
    DEĞİŞİM KOLEJİ · ÖĞRENCİ GELİŞİM KARNESİ  — sürüm 1
    Tek dosya · çevrimdışı çalışır · veriler bu bilgisayarda saklanır
    ============================================================ */
-var SURUM = 12;
+var SURUM = 13;
 var ANAHTAR = 'dkKarne_v1';
 var SITE = 'https://baris-ogretmen.github.io/site-1/';
 
@@ -738,7 +738,20 @@ var HZ2={
     kc:{g:['Hedeflerini netleştirdik ve bu hedeflere uygun bir çalışma planı oluşturduk.','Çalışma planını uygulama konusunda sorumluluk alıyor.','Deneme sonuçlarını değerlendirirken eksiklerini görüp üzerine gitmeye istekli.','Düzenli tekrar ve soru çözümünün önemini çok iyi kavradı.','Haftalık hedeflerini takip etme konusunda güzel bir istikrar yakaladı.','Zamanını verimli kullanmanın yollarını başarıyla uyguluyor.','Kendine olan güveni koçluk sürecinde belirgin şekilde arttı.'],
         z:['Planlı çalışma alışkanlığı kazanmaya başladı; düzenli devam ettikçe sonuçlarını görecek.','Görüşmelerimizde kendini rahatça ifade ediyor.','Hedeflerini küçük adımlara bölerek ilerlemeyi öğreniyor.','Sınav kaygısıyla başa çıkma yöntemlerini öğrenmeye açık.']}}
 };
-function acilisCumle(kd,t,ad,alan){
+var ACILIS2={
+  genel:['{ad}, satranç turnuvasında 100 öğrenci arasından birinci olarak büyük bir başarıya imza attı.','{ad}, katıldığı yarışmada aldığı dereceyle hem kendini hem okulumuzu gururlandırdı.',
+    '{ad}, {alan} gösterdiği üstün performansla sınıfına örnek oluyor.','{ad}, {alan} konuları hızla kavrıyor ve her etkinlikte başarısını gösteriyor.',
+    '{ad}, {alan} bilgi ve becerilerini başarıyla ortaya koyuyor.','{ad}, {alan} derslere hevesle katılan, başarılı bir öğrencimiz.',
+    '{ad}, {alan} gelişimini her derste biraz daha ileri taşıyor.','{ad}, {alan} etkinliklere ilgi gösteriyor ve görevlerini özenle yapmaya çalışıyor.',
+    '{ad}, {alan} kendine güvendikçe daha emin adımlarla ilerliyor.','{ad}, {alan} merakını ve emeğini sürdürdükçe çok daha güzel başarılar elde edecek.'],
+  ana:['{ad}, satranç derslerinde gösterdiği dikkat ve hevesle arkadaşlarına örnek oluyor.','{ad}, öğrendiklerini kısa sürede uygulamaya geçirerek hepimizi şaşırtıyor.'],
+  kocluk:['{ad}, deneme sonuçlarındaki istikrarlı yükselişiyle hedeflerine çok yakın bir noktada.','{ad}, sınav ve yarışmalarda gösterdiği performansla emeğinin karşılığını alıyor.',
+    '{ad}, {alan} son derece disiplinli ve kararlı bir duruş sergiliyor.','{ad}, {alan} hedeflerine odaklanmış, planlı bir öğrenci.',
+    '{ad}, {alan} verilen önerileri hayata geçirme konusunda başarılı.','{ad}, {alan} gelişime açık ve istekli bir tutum gösteriyor.',
+    '{ad}, {alan} çalışma düzenini her geçen hafta güçlendiriyor.','{ad}, {alan} görüşmelerimize düzenli katılıyor ve hedeflerini takip etmeye çalışıyor.',
+    '{ad}, {alan} kendi temposunda ilerliyor; küçük adımlar büyük farklar yaratacak.','{ad}, {alan} desteklendikçe potansiyelini çok daha iyi ortaya koyacak.']};
+function acilisCumle(kd,t,ad,alan,v){
+  if(v){var L=kd==='kocluk'?ACILIS2.kocluk:ACILIS2.genel,s=L[t];if((kd==='anaA'||kd==='anaB')&&t<2)s=ACILIS2.ana[t];return s.replace(/\{alan\}/g,alan).replace(/\{ad\}/g,ad);}
   if(kd==='kocluk'){var K=['{ad}, deneme sınavlarındaki üstün başarısıyla sınıfında öne çıkıyor ve hedeflerine emin adımlarla ilerliyor.',
     '{ad}, katıldığı yarışma ve sınavlarda elde ettiği derecelerle emeğinin karşılığını alıyor.','{ad}, LGS sürecine son derece kararlı ve hedef odaklı hazırlanıyor.',
     '{ad}, koçluk görüşmelerimizde gösterdiği olgunluk ve kararlılıkla dikkat çekiyor.','{ad}, '+alan+' sorumluluk alan ve planlı çalışan bir öğrenci.',
@@ -760,20 +773,20 @@ function kademe(s){var a=(s&&s.ad)||'',id=(s&&s.id)||'';if(/^ana/i.test(a))retur
 function barisDers(s){var k=kademe(s);return k==='anaA'?'Satranç · Robotik ve Kodlama':(k==='anaB'?'Satranç':(k==='kocluk'?'Eğitim Koçluğu':'Robotik ve Kodlama · Yapay Zekâ · Satranç ve Akıl Oyunları'));}
 function barisSatiri(r){return r&&(r.ogretmen||'').trim()===BARIS;}
 /* t: 0 = en üst (yarışma birinciliği) … 9 = teşvik edici. k: öğrencinin sınıftaki sırası → aynı sınıfta cümleler tekrar etmez */
-function hazirGorus(o,s,t){var liste=sinifOgr(s.id),k=Math.max(0,liste.map(function(x){return x.id;}).indexOf(o.id)),c=hash(s.id)%7,ad=ilkAd(o.ad),kd=kademe(s),B=HZ2[kd];
+function hazirGorus(o,s,i){var t=Math.floor(i/2),v=i%2,liste=sinifOgr(s.id),k=Math.max(0,liste.map(function(x){return x.id;}).indexOf(o.id)),c=hash(s.id)%7+(v?3:0),ad=ilkAd(o.ad),kd=kademe(s),B=HZ2[kd];
   function al(dz,n){return dz[((n%dz.length)+dz.length)%dz.length];}
-  var bant=t<=6?'g':'z',p=[acilisCumle(kd,t,ad,B.ad)];
+  var bant=t<=6?'g':'z',p=[acilisCumle(kd,t,ad,B.ad,v)];
   if(kd==='kocluk'){p.push(al(B.kc[bant],c+k*2+t));p.push(al(B.kc[bant],c+k*2+t+3));}
   else if(kd==='anaB'){p.push(al(B.sat[bant],c+k+t*2));p.push(al(B.sat[bant],c+k+t*2+3));}
   else if(kd==='anaA'){p.push(al(B.sat[bant],c+k+t*2));p.push(al(B.rob[bant],c+2*k+t));}
   else{var USAT=['Satrançta birkaç hamle sonrasını hesaplayarak oynuyor; rakiplerinin planlarını önceden görebiliyor.','Turnuva temposunda bile sakin, planlı ve kararlı oynamasıyla dikkat çekiyor.','Taktik kombinasyonları hızla fark ediyor ve oyunlarını ustalıkla yönetiyor.'];
-    var x=[al(B.rob[bant],c+k+t*2),al(B.yz[bant],c+3*k+t),t<=1?al(USAT,c+k+t):al(B.sat[bant],c+2*k+t*3)];p=p.concat(t%2?[x[2],x[0],x[1]]:x);}
+    var x=[al(B.rob[bant],c+k+t*2),al(B.yz[bant],c+3*k+t),t<=1?al(USAT,c+k+t):al(B.sat[bant],c+2*k+t*3)];p=p.concat((t+v)%2?[x[2],x[0],x[1]]:x);}
   var kp=t<=2?KAPANIS.ust:(t<=6?KAPANIS.orta:KAPANIS.alt);p.push(al(kp,c+k+t));
   return p.join(' ');}
 function hazirAc(oid,sid,rid){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0],s=sinifBul(sid);if(!o||!s)return;CUMLE_HEDEF={oid:oid,rid:rid};
-  var kd=kademe(s),h='';for(var i=0;i<10;i++){var et=KADEME_ETIKET[i];if((kd==='anaA'||kd==='anaB')&&i<2)et=i?'🌟 Yaşının üzerinde başarı':'🏆 Sınıfın en başarılılarından';if(kd==='kocluk'&&i<2)et=i?'🥇 Yarışma/sınav derecesi':'🏆 Denemelerde üstün başarı';
+  var kd=kademe(s),h='';for(var i=0;i<20;i++){var tt=Math.floor(i/2),et=KADEME_ETIKET[tt];if((kd==='anaA'||kd==='anaB')&&tt<2)et=tt?'🌟 Yaşının üzerinde başarı':'🏆 Sınıfın en başarılılarından';if(kd==='kocluk'&&tt<2)et=tt?'🥇 Yarışma/sınav derecesi':'🏆 Denemelerde üstün başarı';
     h+='<button class="cumle" onclick="hazirSec(\''+oid+'\',\''+rid+'\','+i+')"><small style="color:#b8893b;font-weight:700">Seçenek '+(i+1)+' · '+et+'</small><br>'+esc(hazirGorus(o,s,i))+'</button>';}
-  modal('<div class="pencereUst"><h3>📋 '+esc(o.ad)+' · hazır görüşler</h3><button class="ikonBtn" onclick="kapatModal()">✕</button></div><p class="aciklama">Seçenekler en üst başarıdan (1) teşvik edici olana (10) doğru sıralıdır ve sınıf düzeyine göre yazılmıştır. Birine dokunun, kutuya yazılsın; sonra dilediğiniz gibi düzeltebilirsiniz. Mevcut bir yazı varsa “Önceki sürümler”de saklanır.</p>'+h);}
+  modal('<div class="pencereUst"><h3>📋 '+esc(o.ad)+' · hazır görüşler</h3><button class="ikonBtn" onclick="kapatModal()">✕</button></div><p class="aciklama">20 seçenek en üst başarıdan (1) teşvik edici olana (20) doğru sıralıdır ve sınıf düzeyine göre yazılmıştır. Birine dokunun, kutuya yazılsın; sonra dilediğiniz gibi düzeltebilirsiniz. Mevcut bir yazı varsa “Önceki sürümler”de saklanır.</p>'+h);}
 function hazirSec(oid,rid,i){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0],s=sinifBul(o.sinifId);
   var g=gorusAl(oid,rid);if(doluMu(g)&&!confirm('Kutudaki mevcut yazının yerine bu seçenek yazılsın mı?\n(Mevcut yazı “Önceki sürümler”de saklanır.)'))return;
   surumZorla(g);g.metin=hazirGorus(o,s,i);g.ts=Date.now();if(V.secim.ogretmen)g.y=V.secim.ogretmen;kaydet();kapatModal();
@@ -781,7 +794,7 @@ function hazirSec(oid,rid,i){var o=V.ogrenciler.filter(function(x){return x.id==
 function hazirHepsine(sid,rid){var s=sinifBul(sid),n=0,bos=sinifOgr(sid).filter(function(o){return !doluMu(gorus(o.id,rid));});
   if(!bos.length){toast('Bu sınıfta boş kutu yok; yazılmış hiçbir görüşe dokunulmadı.');return;}
   if(!confirm(s.ad+' sınıfında görüşü BOŞ olan '+bos.length+' öğrenciye birer hazır görüş yazılacak.\n\nDolu kutulara (sizin ya da başkasının yazdıklarına) kesinlikle dokunulmaz. Devam?'))return;
-  var tum=sinifOgr(sid);bos.forEach(function(o){var g=gorusAl(o.id,rid);if(doluMu(g))return;g.metin=hazirGorus(o,s,3+(tum.indexOf(o)%4));g.ts=Date.now();if(V.secim.ogretmen)g.y=V.secim.ogretmen;n++;});
+  var tum=sinifOgr(sid);bos.forEach(function(o){var g=gorusAl(o.id,rid);if(doluMu(g))return;g.metin=hazirGorus(o,s,6+(tum.indexOf(o)%8));g.ts=Date.now();if(V.secim.ogretmen)g.y=V.secim.ogretmen;n++;});
   kaydet();cizKoru();toast('✓ '+n+' öğrenciye hazır görüş yazıldı. Beğenmediğinizi “📋 Hazır görüşler”den değiştirebilirsiniz.',4500);}
 /* Kadro başlık güncellemesi: yalnızca bulut kopyası geldikten sonra ve yalnızca eski varsayılan değerler duruyorsa uygulanır (görüşlere dokunmaz) */
 var SINIF_OGRETMENI={s_anasinifia:'Ebru Aldağ',s_anasinifib:'Özlem Sercan'};
@@ -831,7 +844,7 @@ function ogrKartHTML(o,s,r){var g=gorus(o.id,r.id)||{},sv=g.sev||{},m=g.metin||'
     '<textarea class="gorusMetin" id="t_'+o.id+'" placeholder="'+esc(ilkAd(o.ad))+' hakkındaki görüşünüzü yazın…" oninput="metinYaz(\''+o.id+'\',\''+r.id+'\',this)">'+esc(m)+'</textarea>'+
     '<div class="gorusAlt"><div class="satir"><button class="btn kucuk altin" onclick="taslak(\''+o.id+'\',\''+s.id+'\',\''+r.id+'\')">✨ Taslak oluştur</button>'+
     '<button class="btn kucuk acik" onclick="cumleAc(\''+o.id+'\',\''+s.id+'\',\''+r.id+'\')">💡 Cümle ekle</button>'+
-    (barisSatiri(r)?'<button class="btn kucuk" style="background:#1e3a5f" onclick="hazirAc(\''+o.id+'\',\''+s.id+'\',\''+r.id+'\')">📋 Hazır görüşler (10)</button>':'')+
+    (barisSatiri(r)?'<button class="btn kucuk" style="background:#1e3a5f" onclick="hazirAc(\''+o.id+'\',\''+s.id+'\',\''+r.id+'\')">📋 Hazır görüşler (20)</button>':'')+
     '<button class="btn kucuk cizgili" onclick="karneGoster(\''+o.id+'\')">👁️ Karnesini gör</button>'+
     ((g.h&&g.h.length)?'<button class="btn kucuk cizgili" onclick="surumler(\''+o.id+'\',\''+r.id+'\')">↩️ Önceki sürümler ('+g.h.length+')</button>':'')+'</div>'+
     '<span class="sayac" id="c_'+o.id+'">'+sayacYazi(g)+'</span></div></div>';
@@ -1385,7 +1398,7 @@ var ORNEK_METIN={
   'sosyal':'Örnek, sosyal bilgiler derslerinde çevresini ve toplumu tanımaya ilgi duyuyor, fikirlerini rahatlıkla paylaşıyor.',
   'türkçe':'Örnek, Türkçe derslerinde okuduğunu anlama ve kendini ifade etme becerilerinde güzel bir gelişim gösteriyor. Kitap okumaya ilgisi takdire değer.',
   'fen':'Örnek, fen bilimleri derslerinde deney ve gözlem etkinliklerine büyük ilgi gösteriyor, merak ederek soru soruyor.'};
-function ornekMetin(r,s,o,i){var d=(r.ders||'').toLocaleLowerCase('tr-TR');if(barisSatiri(r))return hazirGorus(o,s,3);
+function ornekMetin(r,s,o,i){var d=(r.ders||'').toLocaleLowerCase('tr-TR');if(barisSatiri(r))return hazirGorus(o,s,6);
   for(var k in ORNEK_METIN){if(d.indexOf(k)>-1)return ORNEK_METIN[k];}return 'Örnek, '+r.ders.trim()+' derslerine istekle katılıyor, verilen görevleri özenle tamamlıyor ve arkadaşlarıyla uyumlu çalışıyor.';}
 function ornekKarneGorsel(){var s=seciliSinif();if(!s){toast('Önce bir sınıf seçin.');return;}
   var o={id:'ornek_ogrenci',sinifId:s.id,ad:'Örnek Öğrenci',no:'000'},eklenen=[];

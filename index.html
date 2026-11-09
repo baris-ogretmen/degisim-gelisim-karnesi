@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Değişim Koleji · Öğrenci Gelişim Karnesi</title>
+<title>Değişim Koleji · Öğrenci Değişim Karnesi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
 <style>
@@ -146,7 +146,7 @@ body.cocukBoyu .pencere{max-height:62vh}
 body.cocukBoyu .toast{bottom:130px}
 
 /* ================= KARNE (A4) ================= */
-.karne{--c1:#1e3a5f;--c2:#b8893b;--c3:#f6f1e6;--c4:#fbf9f4;--fs:10.6px;width:210mm;height:297mm;position:relative;background:#fff;overflow:hidden;color:#1f2937;font-family:Inter,"Segoe UI",Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.karne{--c2a:rgba(184,137,59,.45);--c2b:rgba(184,137,59,.3);--c1:#1e3a5f;--c2:#b8893b;--c3:#f6f1e6;--c4:#fbf9f4;--fs:10.6px;width:210mm;height:297mm;position:relative;background:#fff;overflow:hidden;color:#1f2937;font-family:Inter,"Segoe UI",Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .karne.t-bordo{--c1:#7a1f2b;--c2:#b8893b;--c3:#f8efe9;--c4:#fcf8f5}
 .karne.t-zumrut{--c1:#14532d;--c2:#b8893b;--c3:#eef5ee;--c4:#f8fbf7}
 .karne.t-mor{--c1:#3b2a6b;--c2:#c09a4a;--c3:#f1eef8;--c4:#f9f8fc}
@@ -156,11 +156,11 @@ body.cocukBoyu .toast{bottom:130px}
 .karne .kKose.k1{left:4.2mm;top:4.2mm}.karne .kKose.k2{right:4.2mm;top:4.2mm;transform:scaleX(-1)}
 .karne .kKose.k3{left:4.2mm;bottom:4.2mm;transform:scaleY(-1)}.karne .kKose.k4{right:4.2mm;bottom:4.2mm;transform:scale(-1,-1)}
 .karne .kFiligran{position:absolute;left:50%;top:54%;width:120mm;height:120mm;transform:translate(-50%,-50%);opacity:.05;color:var(--c1)}
-.karne.t-yesil{--c1:#2f7a3e;--c2:#8bc34a;--c3:#eff7ec;--c4:#f8fcf6}
+.karne.t-yesil{--c2a:rgba(139,195,74,.5);--c2b:rgba(139,195,74,.35);--c1:#2f7a3e;--c2:#8bc34a;--c3:#eff7ec;--c4:#f8fcf6}
 .karne .kIc{position:absolute;inset:11mm 13mm 10mm;display:flex;flex-direction:column;overflow:hidden}
 .karne .kIc>*{flex-shrink:0}
 .karne .kIc>.kBosluk{flex-shrink:1}
-.karne .kBas{display:grid;grid-template-columns:24mm 1fr 24mm;align-items:center;gap:3mm;padding-top:1mm}
+.karne .kBas{display:grid;grid-template-columns:26mm 1fr 26mm;align-items:center;gap:3mm;padding-top:1mm}
 .karne .kMuhur{width:23mm;height:23mm;color:var(--c1)}
 .karne .kMuhur img{width:100%;height:100%;object-fit:contain}
 .karne .kOkul{font-size:9.5px;letter-spacing:3.2px;font-weight:700;color:var(--c2);text-align:center;text-transform:uppercase}
@@ -168,10 +168,16 @@ body.cocukBoyu .toast{bottom:130px}
 .karne .kAlt{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:12px;color:#475569;text-align:center}
 .karne .kDonem{display:flex;justify-content:center;margin-top:2mm}
 .karne .kDonem span{background:var(--c1);color:#fff;font-size:9px;font-weight:700;letter-spacing:1.6px;padding:1.1mm 4mm;border-radius:99px;text-transform:uppercase}
+.karne .kFoto{width:25mm;height:25mm;border-radius:50%;justify-self:center;padding:1.1mm;background-color:var(--c2);background-image:conic-gradient(var(--c2),#f3e3b8,var(--c2),#f3e3b8,var(--c2));box-shadow:0 0 0 .5mm #fff inset}
+.karne .kFoto img,.karne .kFoto span{width:100%;height:100%;border-radius:50%;object-fit:cover;display:grid;place-items:center;border:1mm solid #fff;background:var(--c3);color:var(--c1);font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:22px}
+.karne .kOzet{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;margin-top:3mm;padding:2mm 3mm;border:1px solid #ece6d8;border-radius:2mm;background:#fff}
+.karne .kOzetU{display:flex;justify-content:space-between;font-size:8.2px;color:#475569;margin-bottom:1mm}.karne .kOzetU b{color:var(--c1);letter-spacing:.3px}.karne .kOzetU span{font-weight:700;color:var(--c2)}
+.karne .kOzetC{height:1.6mm;background:#eef0f4;border-radius:99px;overflow:hidden}.karne .kOzetC i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--c2),var(--c1))}
+.karne .kIkon{font-style:normal;margin-right:1.3mm;font-size:calc(var(--fs) + 1px)}
 .karne .kSag{text-align:center;font-size:8px;color:var(--c1);font-weight:700;letter-spacing:.6px;line-height:1.3}
 .karne .kSag .kYil{font-family:"Playfair Display",Georgia,serif;font-size:15px;font-weight:800;display:block}
-.karne .kBilgi{display:grid;grid-template-columns:2.2fr 1fr 1fr 1.2fr;margin-top:4.5mm;background:var(--c3);border:1px solid color-mix(in srgb,var(--c2) 45%,transparent);border-radius:2.2mm;overflow:hidden}
-.karne .kBilgi div{padding:2.2mm 3mm;border-right:1px solid color-mix(in srgb,var(--c2) 30%,transparent)}
+.karne .kBilgi{display:grid;grid-template-columns:2.2fr 1fr 1fr 1.2fr;margin-top:4.5mm;background:var(--c3);border:1px solid var(--c2a);border-radius:2.2mm;overflow:hidden}
+.karne .kBilgi div{padding:2.2mm 3mm;border-right:1px solid var(--c2b)}
 .karne .kBilgi div:last-child{border-right:0}
 .karne .kBilgi small{display:block;font-size:7.3px;font-weight:700;color:var(--c2);letter-spacing:1px;text-transform:uppercase}
 .karne .kBilgi b{display:block;font-size:12.5px;color:var(--c1);margin-top:.6mm;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -179,10 +185,13 @@ body.cocukBoyu .toast{bottom:130px}
 .karne .kBolum::before,.karne .kBolum::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--c2),transparent)}
 .karne .kIzgara{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm}
 .karne .kIzgara.tek{grid-template-columns:1fr}
-.karne .kKart{background:var(--c4);border:1px solid #ece6d8;border-left:2.6px solid var(--c2);border-radius:1.8mm;padding:2.2mm 3mm 2.4mm;break-inside:avoid}
-.karne .kKart.genel{grid-column:1/-1;background:linear-gradient(135deg,var(--c3),#fff);border-left-color:var(--c1)}
+.karne .kKart{--dr:var(--c2);background:#fff;border:1px solid var(--drC,#e5e7eb);border-left:3px solid var(--dr);border-radius:1.8mm;padding:0 0 2.2mm;break-inside:avoid;overflow:hidden}
+.karne .kKart .kKartUst{background:var(--drA,#f8fafc);padding:1.5mm 3mm 1.3mm;margin-bottom:1.3mm;border-bottom:1px solid var(--drB,#eef2f7)}
+.karne .kKart .kPiller,.karne .kKart .kMetin{padding:0 3mm}
+.karne .kKart.genel{grid-column:1/-1;--dr:var(--c1);background:linear-gradient(135deg,var(--c3),#fff 70%)}
+.karne .kKart.genel .kKartUst{background:transparent}
 .karne .kKartUst{display:flex;justify-content:space-between;align-items:baseline;gap:2mm;margin-bottom:1mm}
-.karne .kDers{font-size:calc(var(--fs) + .6px);font-weight:800;color:var(--c1)}
+.karne .kDers{font-size:calc(var(--fs) + .6px);font-weight:800;color:var(--dr,var(--c1))}
 .karne .kOgr{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:calc(var(--fs) - .4px);color:#6b7280;white-space:nowrap}
 .karne .kPiller{display:flex;gap:1.2mm;flex-wrap:wrap;margin:.6mm 0 1.2mm}
 .karne .kPil{font-size:calc(var(--fs) - 3px);font-weight:700;border-radius:99px;padding:.35mm 2mm;letter-spacing:.2px}
@@ -199,16 +208,25 @@ body.cocukBoyu .toast{bottom:130px}
 .karne .kEtiket{background:var(--c1);color:#fff;font-weight:800;font-size:8.6px;letter-spacing:2px;padding:1.6mm 3.4mm;border-radius:1.4mm;white-space:nowrap;position:relative}
 .karne .kEtiket::after{content:"";position:absolute;inset:.7mm;border:.6px solid var(--c2);border-radius:1mm}
 .karne .kRozet{width:19mm;height:19mm;color:var(--c2);flex:none}
+.karne.kompakt .kPiller{display:none}
+.karne .kDevam{display:flex;align-items:center;gap:3mm;padding-bottom:2mm;border-bottom:1px solid #ece6d8}
+.karne .kDevam b{display:block;font-family:"Playfair Display",Georgia,serif;font-size:15px;color:var(--c1);letter-spacing:.8px}
+.karne .kDevam span{font-size:9.5px;color:#64748b}
+.karne .kDevamNot{text-align:right;font-size:8.5px;font-style:italic;color:#64748b;margin-top:1.5mm;flex-shrink:0}
+#onizOlcek .karne+.karne,#mOnizOlcek .karne+.karne{margin-top:6mm}
 .karne.uzun{height:auto;min-height:297mm}
 .karne.uzun .kCer1,.karne.uzun .kCer2,.karne.uzun .kKose,.karne.uzun .kFiligran{display:none}
 .karne.uzun .kKart{break-inside:avoid;page-break-inside:avoid}
 .karne.uzun .kIc{position:relative;inset:auto;margin:11mm 13mm 10mm}
 
 #yazdirAlani{position:absolute;left:-99999px;top:0}
+.avatar{border-radius:50%;background:#e8eef7;color:#1e3a5f;font-weight:800;display:inline-grid;place-items:center;overflow:hidden;flex:none;border:2px solid #fff;box-shadow:0 0 0 1px #e2e8f0}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.fotoBtn{border:0;background:none;padding:0;position:relative;cursor:pointer}.fotoBtn em{position:absolute;right:-4px;bottom:-4px;font-style:normal;font-size:12px;background:#fff;border-radius:50%;width:18px;height:18px;display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.2)}
 .bulutRozet{border:1px solid var(--cizgi);background:#fff;border-radius:999px;padding:7px 11px;font-size:12.5px;font-weight:700;white-space:nowrap;flex:none;color:var(--soluk)}
 .bulutRozet.ok{color:#15803d;border-color:#bbf7d0;background:#f0fdf4}.bulutRozet.bek{color:#b45309;border-color:#fde68a;background:#fffbeb}
 .bulutRozet.hata{color:#b91c1c;border-color:#fecaca;background:#fef2f2}
-@media(max-width:520px){.bulutRozet .uzunYazi{display:none}}
+@media(max-width:520px){.bulutRozet .uzunYazi,.tablo .uzunYazi{display:none}.tablo td:nth-child(2){width:58px}.tablo td{padding:6px 3px}.tablo input{padding:7px 4px}}
 @media(max-width:520px){.ustBaslik b{font-size:17px;white-space:nowrap}.ustBaslik span{font-size:11px}.ustSatir{gap:7px}.ikonBtn{width:36px;height:36px}}
 .arsivBant{background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;border-radius:12px;padding:10px 13px;margin:-4px 0 14px;font-size:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .taniSatir{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #f1f5f9;font-size:14px}
@@ -232,7 +250,7 @@ body.cocukBoyu .toast{bottom:130px}
    DEĞİŞİM KOLEJİ · ÖĞRENCİ GELİŞİM KARNESİ  — sürüm 1
    Tek dosya · çevrimdışı çalışır · veriler bu bilgisayarda saklanır
    ============================================================ */
-var SURUM = 8;
+var SURUM = 10;
 var ANAHTAR = 'dkKarne_v1';
 var SITE = 'https://baris-ogretmen.github.io/site-1/';
 
@@ -403,7 +421,7 @@ function logoHTML(){return '<img src="'+(V.ayar.logo||DK_LOGO)+'" alt="Değişim
 function ciz(){
   var a=V.ayar,html='';
   html+='<div class="ust"><div class="ustSatir"><div class="logoMini" style="color:var(--ana)">'+logoHTML()+'</div>'+
-    '<div class="ustBaslik"><b>Gelişim Karnesi</b><span>'+esc(a.okul)+' · '+esc(V.meta.donem||a.donem)+' <span id="kayitDurum" style="color:#16a34a;font-weight:600"></span></span></div>'+
+    '<div class="ustBaslik"><b>Değişim Karnesi</b><span>'+esc(a.okul)+' · '+esc(V.meta.donem||a.donem)+' <span id="kayitDurum" style="color:#16a34a;font-weight:600"></span></span></div>'+
     '<button class="bulutRozet" id="bulutRozet" onclick="bulutTani()"></button>'+
     '<button class="ikonBtn" title="Sitedeki diğer çalışmalar" onclick="siteAc()">🏠</button>'+
     '<button class="ikonBtn" title="Ayarlar" onclick="sekmeGit(\'ayar\')">⚙️</button></div>'+
@@ -464,8 +482,10 @@ function cizKurulum(){
     '<textarea id="yapistir" rows="4" placeholder="Ali Yılmaz	12&#10;Zeynep Kaya	15&#10;..."></textarea></div>'+
     '<div class="satir"><button class="btn" onclick="listeEkle(\''+s.id+'\')">＋ Listeyi ekle</button>'+
     '<label class="btn acik" style="cursor:pointer">📄 Excel / CSV dosyası seç<input type="file" accept=".xlsx,.xls,.csv,.txt" hidden onchange="dosyadanListe(this,\''+s.id+'\')"></label></div>'+
-    (ogr.length?'<table class="tablo" style="margin-top:12px"><tr><th style="width:70px">No</th><th>Ad Soyad</th><th></th></tr>'+
-      ogr.map(function(o){return '<tr><td><input value="'+esc(o.no)+'" onchange="ogrDegis(\''+o.id+'\',\'no\',this.value)"></td><td><input value="'+esc(o.ad)+'" onchange="ogrDegis(\''+o.id+'\',\'ad\',this.value)"></td><td><button class="sil" onclick="ogrSil(\''+o.id+'\')">✕</button></td></tr>';}).join('')+'</table>'
+    (ogr.length?'<div class="ipucu" style="margin:12px 0 0;background:#f0fdf4;border-color:#bbf7d0;color:#14532d">📷 <b>Fotoğraf:</b> öğrencinin yuvarlak resmine dokunun (telefonda doğrudan kamera açılabilir). Ya da fotoğrafları toplu seçin — dosya adında öğrencinin <b>okul numarası</b> veya <b>adı</b> olsun (ör. 276.jpg, Aras Alpkan.jpg). '+
+      '<label class="btn kucuk" style="cursor:pointer;margin-top:8px">📷 Toplu fotoğraf yükle<input type="file" accept="image/*" multiple hidden onchange="fotoToplu(this,\''+s.id+'\')"></label></div>'+
+      '<table class="tablo" style="margin-top:12px"><tr><th></th><th style="width:70px">No</th><th>Ad Soyad</th><th></th></tr>'+
+      ogr.map(function(o){return '<tr><td style="width:46px"><button class="fotoBtn" title="Fotoğraf ekle / değiştir" onclick="fotoSec(\''+o.id+'\')">'+avatarHTML(o,36)+'<em>📷</em></button></td><td><input value="'+esc(o.no)+'" onchange="ogrDegis(\''+o.id+'\',\'no\',this.value)"></td><td><input value="'+esc(o.ad)+'" onchange="ogrDegis(\''+o.id+'\',\'ad\',this.value)"></td><td style="white-space:nowrap">'+(FOTO[o.id]?'<button class="btn kucuk cizgili" style="margin-right:8px" title="Fotoğrafı kaldır" onclick="fotoKaldir(\''+o.id+'\')">🗑️<span class="uzunYazi"> Foto</span></button>':'')+'<button class="sil" onclick="ogrSil(\''+o.id+'\')">✕</button></td></tr>';}).join('')+'</table>'
       :'<p class="aciklama" style="margin-top:12px">Bu sınıfta henüz öğrenci yok.</p>')+'</div></div>';
   return h;
 }
@@ -727,7 +747,7 @@ function cizGorus(){
   return h;
 }
 function ogrKartHTML(o,s,r){var g=gorus(o.id,r.id)||{},sv=g.sev||{},m=g.metin||'',uz=V.ayar.onerilenUzunluk;
-  return '<div class="ogrKart'+(doluMu(g)?' tamam':'')+'" id="k_'+o.id+'"><div class="ogrUst"><span class="ogrNo">'+esc(o.no||'—')+'</span><span class="ogrAd">'+esc(o.ad)+'</span>'+
+  return '<div class="ogrKart'+(doluMu(g)?' tamam':'')+'" id="k_'+o.id+'"><div class="ogrUst">'+avatarHTML(o,34)+'<span class="ogrNo">'+esc(o.no||'—')+'</span><span class="ogrAd">'+esc(o.ad)+'</span>'+
     '<span class="durum'+(doluMu(g)?' ok':'')+'" id="d_'+o.id+'">'+(doluMu(g)?'✓ Yazıldı':'Bekliyor')+'</span></div>'+
     '<div class="seviyeler">'+ALANLAR.map(function(a){return '<div class="sev"><small>'+buyukTR(a[1])+'</small><div class="sevBtnlar">'+
       [1,2,3].map(function(n){return '<button class="s'+n+(sv[a[0]]===n?' aktif':'')+'" onclick="sevSec(\''+o.id+'\',\''+r.id+'\',\''+a[0]+'\','+n+',this)">'+SEVIYE_AD[n]+'</button>';}).join('')+'</div></div>';}).join('')+'</div>'+
@@ -756,7 +776,7 @@ function karneGoster(oid){var o=V.ogrenciler.filter(function(x){return x.id===oi
     '<div class="onizlemeKap" id="mOnizKap"><div class="olcek" id="mOnizOlcek">'+karneHTML(o)+'</div></div>'+
     '<p class="aciklama" style="margin-top:8px">Diğer öğretmenlerin görüşleri de burada görünür. Yazdırma işini sınıf öğretmeni 🖨️ Karneler bölümünden yapar.</p>',true);
   var kap=document.getElementById('mOnizOlcek'),el=kap.firstChild;karneSigdir(el);
-  var w=document.getElementById('mOnizKap').clientWidth-28,k=w/el.offsetWidth;kap.style.transform='scale('+k+')';kap.parentNode.style.height=(el.offsetHeight*k+28)+'px';}
+  var w=document.getElementById('mOnizKap').clientWidth-28,k=w/el.offsetWidth;kap.style.transform='scale('+k+')';kap.parentNode.style.height=(kap.offsetHeight*k+28)+'px';}
 function sayacYazi(g){var t=(g&&g.metin)||'';var s=t.length+' karakter';
   if(g&&g.y&&g.ts){var d=new Date(g.ts);s+=' · son kaydeden: '+g.y+' · '+d.toLocaleDateString('tr-TR',{day:'numeric',month:'short'})+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);}return s;}
 function ogretmenSec(a){V.secim.ogretmen=a;V.secim.satir='';kaydet(true);ciz();}
@@ -846,36 +866,57 @@ function cizKarneler(){
   var h=sinifCipleri('karneSinif',s.id,true);
   h+='<div class="kart"><div class="satir" style="justify-content:space-between"><div><h2 style="margin:0">'+esc(s.ad)+' karneleri</h2><p class="aciklama" style="margin:4px 0 0">Yazdır → yazıcıyı seçin. PDF için yazıcı olarak “PDF olarak kaydet”i seçin. Arka plan renkleri otomatik açıktır.</p></div>'+
     '<div class="satir"><button class="btn altin" onclick="yazdir(\'sinif\')" '+(ogr.length?'':'disabled')+'>🖨️ Tüm sınıfı yazdır ('+ogr.length+')</button>'+
-    '<button class="btn" onclick="yazdir(\'tek\')" '+(ONIZ_OGR?'':'disabled')+'>🖨️ Seçili karneyi yazdır</button></div></div></div>';
+    '<button class="btn" onclick="yazdir(\'tek\')" '+(ONIZ_OGR?'':'disabled')+'>🖨️ Seçili karneyi yazdır</button>'+
+    '<button class="btn cizgili" onclick="ornekKarneGorsel()" title="Gerçek öğrenci bilgisi içermez">🖼️ Örnek karne görseli indir</button></div></div></div>';
   if(!ogr.length)return h+'<div class="kart bos">Bu sınıfta öğrenci yok.</div>';
   h+='<div class="karneDuzen"><div class="kart" style="padding:8px 14px">'+
     ogr.map(function(o){var d=s.kadro.filter(function(r){return doluMu(gorus(o.id,r.id));}).length;
-      return '<div class="karneSatir" style="cursor:pointer;'+(o.id===ONIZ_OGR?'background:#f8fafc;border-radius:10px':'')+'" onclick="onizSec(\''+o.id+'\')"><span class="ogrNo">'+esc(o.no||'—')+'</span><span class="ad">'+esc(o.ad)+'</span><span class="rozet '+(d===s.kadro.length?'tam':(d?'yarim':''))+'">'+d+'/'+s.kadro.length+'</span></div>';}).join('')+
+      return '<div class="karneSatir" style="cursor:pointer;'+(o.id===ONIZ_OGR?'background:#f8fafc;border-radius:10px':'')+'" onclick="onizSec(\''+o.id+'\')">'+avatarHTML(o,30)+'<span class="ogrNo">'+esc(o.no||'—')+'</span><span class="ad">'+esc(o.ad)+'</span><span class="rozet '+(d===s.kadro.length?'tam':(d?'yarim':''))+'">'+d+'/'+s.kadro.length+'</span></div>';}).join('')+
     '</div><div><div class="onizlemeKap" id="onizKap"><div class="olcek" id="onizOlcek"></div></div><p class="aciklama" id="onizNot" style="margin-top:8px"></p></div></div>';
   return h;
 }
 function karneSinif(id){V.secim.sinif=id;kaydet(true);ciz();}
 function onizSec(id){ONIZ_OGR=id;ciz();}
+/* ---------- Ders renkleri ve simgeleri (karnede her öğretmen kendi renginde) ---------- */
+var DERS_RENK=[['sınıf öğretmeni','#1e3a5f','🏫'],['matematik','#2563eb','📐'],['türkçe','#dc2626','📖'],['fen','#059669','🔬'],['sosyal','#b45309','🌍'],
+  ['speaking','#db2777','🗣️'],['ingilizce','#7c3aed','💬'],['beden','#ea580c','⚽'],['koçluk','#4f46e5','🧭'],['robotik','#0891b2','🤖'],['satranç','#0f766e','♟️'],
+  ['yapay','#0891b2','🤖'],['müzik','#9333ea','🎵'],['görsel','#c026d3','🎨'],['din','#047857','🌙'],['bilişim','#0284c7','💻']];
+var YEDEK_RENK=['#2563eb','#059669','#b45309','#7c3aed','#db2777','#0891b2','#ea580c','#4f46e5','#be123c','#15803d','#a16207','#6d28d9','#0e7490','#c2410c'];
+function dersStil(ders){var d=(ders||'').toLocaleLowerCase('tr-TR');for(var i=0;i<DERS_RENK.length;i++)if(d.indexOf(DERS_RENK[i][0])>-1)return {r:DERS_RENK[i][1],i:DERS_RENK[i][2]};
+  return {r:YEDEK_RENK[hash(d)%YEDEK_RENK.length],i:'📘'};}
+var TEMA_ANA={lacivert:'#1e3a5f',bordo:'#7a1f2b',zumrut:'#14532d',mor:'#3b2a6b',yesil:'#2f7a3e'};
+function renkKaris(hex,oran){var n=parseInt(hex.slice(1),16),r=n>>16&255,g=n>>8&255,b=n&255;function m(c){return Math.round(255+(c-255)*oran);}return 'rgb('+m(r)+','+m(g)+','+m(b)+')';}
+function basHarf(ad){return (ad||'').trim().split(/\s+/).slice(0,2).map(function(k){return k.charAt(0).toLocaleUpperCase('tr-TR');}).join('');}
+function ozetSeviye(satirlar){var t={};ALANLAR.forEach(function(al){var top=0,n=0;satirlar.forEach(function(x){var v=((x.g||{}).sev||{})[al[0]];if(v){top+=v;n++;}});t[al[0]]=n?top/n:0;});return t;}
 function karneHTML(o){
   var s=sinifBul(o.sinifId),a=V.ayar,ad=o.ad;
   var satirlar=s.kadro.map(function(r){return {r:r,g:gorus(o.id,r.id)};}).filter(function(x){return !a.bosGizle||doluMu(x.g);});
   var genel=satirlar.filter(function(x){return x.r.ders==='Sınıf Öğretmeni';});
   var diger=satirlar.filter(function(x){return x.r.ders!=='Sınıf Öğretmeni';});
-  function kart(x,genelMi){var g=x.g||{},sv=g.sev||{};
+  var kullanilan={};
+  function kart(x,genelMi){var g=x.g||{},sv=g.sev||{},st=genelMi?{r:'var(--c1)',i:'🏫'}:dersStil(x.r.ders);
+    if(!genelMi){if(kullanilan[st.r]){for(var q=0;q<YEDEK_RENK.length;q++){if(!kullanilan[YEDEK_RENK[q]]){st={r:YEDEK_RENK[q],i:st.i};break;}}}kullanilan[st.r]=1;}
     var piller=a.pilGoster?ALANLAR.filter(function(al){return sv[al[0]];}).map(function(al){return '<span class="kPil p'+sv[al[0]]+'">'+al[1]+' · '+SEVIYE_AD[sv[al[0]]]+'</span>';}).join(''):'';
-    return '<div class="kKart'+(genelMi?' genel':'')+'"><div class="kKartUst"><span class="kDers">'+(genelMi?'Sınıf Öğretmeni · Genel Değerlendirme':esc(x.r.ders))+'</span><span class="kOgr">'+esc(x.r.ogretmen||'')+'</span></div>'+
+    var hx=genelMi?TEMA_ANA[V.ayar.tema]||'#1e3a5f':st.r;
+    return '<div class="kKart'+(genelMi?' genel':'')+'" style="--dr:'+hx+';--drA:'+renkKaris(hx,.09)+';--drB:'+renkKaris(hx,.16)+';--drC:'+renkKaris(hx,.22)+'"><div class="kKartUst"><span class="kDers"><i class="kIkon">'+st.i+'</i>'+(genelMi?'Sınıf Öğretmeni · Genel Değerlendirme':esc(x.r.ders.trim()))+'</span><span class="kOgr">'+esc(x.r.ogretmen||'')+'</span></div>'+
       (piller?'<div class="kPiller">'+piller+'</div>':'')+'<div class="kMetin">'+(doluMu(g)?esc(g.metin.trim()):'<span style="color:#cbd5e1">………………………………………………………………</span>')+'</div></div>';}
   var sinifOgretmeni=(genel[0]&&genel[0].r.ogretmen)||((s.kadro.filter(function(r){return r.ders==='Sınıf Öğretmeni';})[0]||{}).ogretmen)||'';
   var tema={lacivert:'',bordo:' t-bordo',zumrut:' t-zumrut',mor:' t-mor',yesil:' t-yesil'}[a.tema]||'';
   var ayak=esc(a.ayakYazi||'').replace(/\{ad\}/g,'<b>'+esc(ad)+'</b>').replace(/\{okul\}/g,esc(a.okul));
+  var foto=FOTO[o.id];
+  var fotoHTML='<div class="kFoto">'+(foto?'<img src="'+foto+'" alt="">':'<span>'+esc(basHarf(ad))+'</span>')+'</div>';
+  var oz=ozetSeviye(satirlar),ozVar=a.ozetGoster!==false&&ALANLAR.some(function(al){return oz[al[0]];});
+  var ozHTML=ozVar?'<div class="kOzet">'+ALANLAR.map(function(al){var v=oz[al[0]];if(!v)return '';var yuz=Math.round(v/3*100),et=v>=2.5?'Çok İyi':(v>=1.5?'İyi':'Gelişiyor');
+      return '<div class="kOzetK"><div class="kOzetU"><b>'+al[1]+' Gelişim</b><span>'+et+'</span></div><div class="kOzetC"><i style="width:'+yuz+'%"></i></div></div>';}).join('')+'</div>':'';
   return '<div class="karne'+tema+'">'+
     '<div class="kCer1"></div><div class="kCer2"></div>'+
     '<div class="kKose k1">'+KOSE_SVG+'</div><div class="kKose k2">'+KOSE_SVG+'</div><div class="kKose k3">'+KOSE_SVG+'</div><div class="kKose k4">'+KOSE_SVG+'</div>'+
     '<div class="kFiligran"><img src="'+(a.logo||DK_LOGO)+'" alt="" style="width:100%;height:100%;object-fit:contain;clip-path:circle(40%);filter:grayscale(1) contrast(1.4)"></div>'+
     '<div class="kIc">'+
-      '<div class="kBas"><div class="kMuhur">'+logoHTML()+'</div><div><div class="kOkul">'+esc(a.okul)+'</div><div class="kBaslik">ÖĞRENCİ GELİŞİM KARNESİ</div><div class="kAlt">Öğretmen Görüş ve Değerlendirme Formu</div>'+
-        '<div class="kDonem"><span>'+esc(V.meta.donem||a.donem)+'</span></div></div><div class="kSag"><span class="kYil">'+esc(V.meta.yil||a.yil)+'</span>EĞİTİM ÖĞRETİM<br>YILI</div></div>'+
-      '<div class="kBilgi"><div><small>Öğrencinin Adı Soyadı</small><b>'+esc(ad)+'</b></div><div><small>Okul No</small><b>'+esc(o.no||'—')+'</b></div><div><small>Sınıfı / Şubesi</small><b>'+esc(s.ad)+'</b></div><div><small>Dönem</small><b>'+esc(V.meta.donem||a.donem)+'</b></div></div>'+
+      '<div class="kBas"><div class="kMuhur">'+logoHTML()+'</div><div><div class="kOkul">'+esc(a.okul)+'</div><div class="kBaslik">ÖĞRENCİ DEĞİŞİM KARNESİ</div><div class="kAlt">Öğretmen Görüş ve Değerlendirme Formu</div>'+
+        '<div class="kDonem"><span>'+esc(V.meta.donem||a.donem)+'</span></div></div>'+fotoHTML+'</div>'+
+      '<div class="kBilgi"><div><small>Öğrencinin Adı Soyadı</small><b>'+esc(ad)+'</b></div><div><small>Okul No</small><b>'+esc(o.no||'—')+'</b></div><div><small>Sınıfı / Şubesi</small><b>'+esc(s.ad)+'</b></div><div><small>Eğitim Öğretim Yılı</small><b>'+esc(V.meta.yil||a.yil)+'</b></div></div>'+
+      ozHTML+
       (genel.length?'<div class="kBolum">Genel Değerlendirme</div><div class="kIzgara tek">'+genel.map(function(x){return kart(x,true);}).join('')+'</div>':'')+
       '<div class="kBolum">Ders Öğretmenlerimizin Görüşleri</div>'+
       '<div class="kIzgara'+(diger.length<=2?' tek':'')+'">'+(diger.length?diger.map(function(x){return kart(x,false);}).join(''):'<div class="kMetin" style="color:#94a3b8">Henüz ders öğretmeni görüşü girilmedi.</div>')+'</div>'+
@@ -885,23 +926,38 @@ function karneHTML(o){
     '</div></div>';
 }
 function karneTasiyor(ic){var son=ic.querySelector('.kAyak'),bos=ic.querySelector('.kBosluk');return (son.offsetTop+son.offsetHeight>ic.clientHeight+1)||bos.offsetHeight<4;}
-function karneSigdir(el){var ic=el.querySelector('.kIc');var fs=10.6;el.classList.remove('uzun');el.style.setProperty('--fs',fs+'px');
-  var say=0;while(karneTasiyor(ic)&&fs>8&&say<40){fs-=.2;el.style.setProperty('--fs',fs.toFixed(1)+'px');say++;}
-  if(karneTasiyor(ic)){el.style.setProperty('--fs','9.8px');el.classList.add('uzun');return false;}return true;}
+function karneTasti(ic){var b=ic.querySelector(':scope>.kBosluk'),son=ic.lastElementChild;if(!b)return ic.scrollHeight>ic.clientHeight+1;return b.offsetHeight<4||son.offsetTop+son.offsetHeight>ic.clientHeight+1;}
+/* Sığdırma sırası: yazı 10,6→9 px · seviye etiketleri gizlenir · 8,6 px · olmazsa çerçeveli “devam” sayfasına bölünür (yazı 9,6 px, okunaklı) */
+function karneSigdir(el){var ic=el.querySelector('.kIc');var fs=10.6;el.classList.remove('uzun','kompakt');el.style.setProperty('--fs',fs+'px');
+  function tas(){return ic.querySelector('.kAyak')?karneTasiyor(ic):karneTasti(ic);}
+  var say=0;while(tas()&&fs-0.2>=9.0&&say<40){fs-=.2;el.style.setProperty('--fs',fs.toFixed(1)+'px');say++;}
+  if(tas()){el.classList.add('kompakt');while(tas()&&fs-0.2>=8.6&&say<60){fs-=.2;el.style.setProperty('--fs',fs.toFixed(1)+'px');say++;}}
+  if(tas()){karneIkiSayfa(el);return false;}return true;}
+function karneIkiSayfa(el){el.classList.remove('kompakt');el.style.setProperty('--fs','9.6px');
+  var ic1=el.querySelector('.kIc'),imza=ic1.querySelector('.kImzalar'),ayak=ic1.querySelector('.kAyak');
+  var ad=(ic1.querySelector('.kBilgi b')||{}).textContent||'',sinif=(ic1.querySelectorAll('.kBilgi b')[2]||{}).textContent||'';
+  var p2=el.cloneNode(true);el.parentNode.insertBefore(p2,el.nextSibling);var ic2=p2.querySelector('.kIc');
+  ic2.innerHTML='<div class="kDevam"><div class="kMuhur" style="width:14mm;height:14mm">'+logoHTML()+'</div><div><b>ÖĞRENCİ DEĞİŞİM KARNESİ</b><span>'+esc(ad)+' · '+esc(sinif)+' · devam</span></div></div>'+
+    '<div class="kBolum">Ders Öğretmenlerimizin Görüşleri (devam)</div><div class="kIzgara"></div><div class="kBosluk"></div>'+imza.outerHTML+ayak.outerHTML;
+  imza.remove();ayak.remove();
+  var not=document.createElement('div');not.className='kDevamNot';not.textContent='Görüşlerin devamı arka sayfadadır →';ic1.appendChild(not);
+  var izg=ic1.querySelectorAll('.kIzgara'),g1=izg[izg.length-1],g2=ic2.querySelector('.kIzgara');
+  var say=0;while(karneTasti(ic1)&&g1.children.length>1&&say<40){g2.insertBefore(g1.lastElementChild,g2.firstChild);say++;}
+  if(g2.children.length<=2)g2.classList.add('tek');else g2.classList.remove('tek');}
 function onizlemeYenile(){var kap=document.getElementById('onizOlcek');if(!kap||!ONIZ_OGR)return;
   var o=V.ogrenciler.filter(function(x){return x.id===ONIZ_OGR;})[0];kap.innerHTML=karneHTML(o);
   var el=kap.firstChild;var sigdi=karneSigdir(el);
-  function olcekle(){var w=document.getElementById('onizKap').clientWidth-28;var k=w/el.offsetWidth;kap.style.transform='scale('+k+')';kap.parentNode.style.height=(el.offsetHeight*k+28)+'px';}
-  olcekle();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){karneSigdir(el);olcekle();});
-  var not=document.getElementById('onizNot');if(not)not.innerHTML=sigdi?'✓ Karne tek sayfaya sığıyor (yazı boyutu otomatik ayarlandı).':'⚠️ Görüşler çok uzun; karne 2 sayfaya taşıyor. Bazı görüşleri kısaltmanız önerilir.';}
+  function olcekle(){var w=document.getElementById('onizKap').clientWidth-28;var k=w/el.offsetWidth;kap.style.transform='scale('+k+')';kap.parentNode.style.height=(kap.offsetHeight*k+28)+'px';}
+  olcekle();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){kap.innerHTML=karneHTML(o);el=kap.firstChild;sigdi=karneSigdir(el);olcekle();notYaz();});
+  function notYaz(){var not=document.getElementById('onizNot');if(not)not.innerHTML=sigdi?'✓ Karne tek sayfaya sığıyor (yazı boyutu otomatik ayarlandı).':'📄 Görüşler uzun olduğu için karne düzenli bir şekilde 2 sayfaya bölündü (ön-arka basılabilir).';}notYaz();}
 window.addEventListener('resize',function(){if(SEKME==='karne')onizlemeYenile();});
 function yazdir(tur){var s=seciliSinif();var liste=tur==='tek'?V.ogrenciler.filter(function(x){return x.id===ONIZ_OGR;}):sinifOgr(s.id);
   if(!liste.length)return;var alan=document.getElementById('yazdirAlani');alan.innerHTML=liste.map(karneHTML).join('');
   function hazirla(){var ks=alan.querySelectorAll('.karne'),uzun=0;for(var i=0;i<ks.length;i++){if(!karneSigdir(ks[i]))uzun++;}
     var z=document.getElementById('app').style.zoom;document.getElementById('app').style.zoom='';
-    var eskiBaslik=document.title;document.title=(tur==='tek'?'Gelisim_Karnesi_'+liste[0].ad:'Gelisim_Karneleri_'+s.ad).replace(/\s+/g,'_');
+    var eskiBaslik=document.title;document.title=(tur==='tek'?'Degisim_Karnesi_'+liste[0].ad:'Degisim_Karneleri_'+s.ad).replace(/\s+/g,'_');
     window.addEventListener('afterprint',function geri(){document.title=eskiBaslik;window.removeEventListener('afterprint',geri);});
-    if(uzun)toast(uzun+' karne 2 sayfa olacak (görüşler uzun).',3000);
+    if(uzun)toast(uzun+' karne görüşler uzun olduğu için 2 sayfaya bölündü (ön-arka basabilirsiniz).',3500);
     setTimeout(function(){window.print();document.getElementById('app').style.zoom=z;},120);}
   toast('Karneler hazırlanıyor…',1200);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(hazirla);else hazirla();}
@@ -916,6 +972,7 @@ function cizAyar(){var a=V.ayar;
     '<div class="alan"><label>Renk teması</label><div class="cipler">'+[['lacivert','🔵 Lacivert-Altın'],['yesil','🟩 Değişim Yeşili'],['bordo','🟥 Bordo'],['zumrut','🟢 Zümrüt'],['mor','🟣 Mor']].map(function(t){return '<button class="cip'+(a.tema===t[0]?' aktif':'')+'" onclick="ayarDegis(\'tema\',\''+t[0]+'\',1)">'+t[1]+'</button>';}).join('')+'</div></div>'+
     '<div class="satir"><label class="btn acik" style="cursor:pointer">🖼️ Okul logosu yükle<input type="file" accept="image/*" hidden onchange="logoYukle(this)"></label>'+(a.logo?'<button class="btn kucuk kirmizi" onclick="ayarDegis(\'logo\',\'\',1)">Yüklenen logoyu kaldır (okul logosuna dön)</button>':'<span class="aciklama" style="margin:0">Değişim Koleji logosu hazır olarak kullanılıyor.</span>')+'</div>'+
     '<div style="margin-top:12px" class="satir"><label class="satir" style="gap:6px"><input type="checkbox" '+(a.pilGoster?'checked':'')+' onchange="ayarDegis(\'pilGoster\',this.checked,1)"> Seviye etiketlerini (Akademik · Çok İyi…) karnede göster</label></div>'+
+    '<div class="satir"><label class="satir" style="gap:6px"><input type="checkbox" '+(a.ozetGoster!==false?'checked':'')+' onchange="ayarDegis(\'ozetGoster\',this.checked,1)"> Karnede “Gelişim Özeti” çubuklarını göster</label></div>'+
     '<div class="satir"><label class="satir" style="gap:6px"><input type="checkbox" '+(a.bosGizle?'checked':'')+' onchange="ayarDegis(\'bosGizle\',this.checked,1)"> Görüş yazılmamış dersleri karnede gösterme</label></div></div>';
   h+=cizBulutKart()+cizArsivKart();
   h+='<div class="kart"><h2>💾 Ek yedek (isteğe bağlı)</h2><p class="aciklama">Veriler zaten bulutta ve bu cihazda saklanıyor. Yine de dönem sonunda bir yedek dosyası indirip saklamanız önerilir. İnternetsiz çalışan öğretmen “Görüşlerimi dosya olarak gönder” ile dosya da yollayabilir; “İçe aktar” ile birleşir.</p>'+
@@ -926,6 +983,7 @@ function cizAyar(){var a=V.ayar;
     '<button class="btn kucuk cizgili" onclick="cocukBoyu()">📏 Çocuk Boyu: '+(document.body.classList.contains('cocukBoyu')?'Açık':'Kapalı')+'</button>'+
     '<button class="btn kucuk cizgili" onclick="ekranModu()">📺 Ekran: '+EKRAN_AD[ekranIdx()]+'</button>'+
     '<button class="btn kucuk cizgili" onclick="qrAc()">📲 QR ile paylaş</button>'+
+    '<button class="btn kucuk cizgili" onclick="ornekKarneGorsel()">🖼️ Örnek karne görseli</button>'+
     '<button class="btn kucuk cizgili" onclick="karsilama(true)">❓ Nasıl kullanılır?</button>'+
     '<button class="btn kucuk cizgili" onclick="siteAc()">🏠 Sitedeki diğer çalışmalar</button>'+
     '</div><p class="aciklama" style="margin:12px 0 0">🔒 Veriler okulun kendi bulut veritabanında (Değişim Koleji MEGA sistemiyle aynı Firebase projesi) ve bu cihazda saklanır; üçüncü kişilerle paylaşılmaz. Sistemde “kalıcı silme” yoktur. · Sürüm '+SURUM+'</p></div>';
@@ -937,14 +995,14 @@ function logoYukle(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r
 function dosyaIndir(ad,metin){var b=new Blob([metin],{type:'application/json'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download=ad;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},1500);}
 function tarihEk(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
 function disaAktar(tur){
-  if(tur==='tam'){dosyaIndir('Gelisim_Karnesi_Yedek_'+sabitId(V.meta.donem||'')+'_'+tarihEk()+'.json',JSON.stringify({tip:'dkKarneTam',surum:SURUM,donem:PK,veri:V}));toast('Yedek indirildi.');return;}
+  if(tur==='tam'){dosyaIndir('Degisim_Karnesi_Yedek_'+sabitId(V.meta.donem||'')+'_'+tarihEk()+'.json',JSON.stringify({tip:'dkKarneTam',surum:SURUM,donem:PK,veri:V}));toast('Yedek indirildi.');return;}
   var ad=V.secim.ogretmen;if(!ad){toast('Önce “Görüş Yaz” bölümünden adınızı seçin.');sekmeGit('gorus');return;}
   var ogm=tumOgretmenler()[ad]||[],rids={};ogm.forEach(function(g){rids[g.r.id]=1;});var paket={};
   Object.keys(V.gorusler).forEach(function(k){if(rids[k.split('|')[1]])paket[k]=V.gorusler[k];});
   var dad='Gorusler_'+ad.replace(/[^\wçğıöşüÇĞİÖŞÜ]+/g,'_')+'_'+tarihEk()+'.json',icerik=JSON.stringify({tip:'dkKarnePaket',surum:SURUM,ogretmen:ad,gorusler:paket}),say=Object.keys(paket).length;
   if(!say){toast('Henüz yazılmış görüşünüz yok.');return;}
   try{var dosya=new File([icerik],dad,{type:'application/json'});
-    if(navigator.canShare&&navigator.canShare({files:[dosya]})){navigator.share({files:[dosya],title:'Gelişim Karnesi görüşlerim',text:ad+' – '+say+' öğrenci görüşü'}).then(function(){toast('✓ Gönderildi.');}).catch(function(){});return;}}catch(e){}
+    if(navigator.canShare&&navigator.canShare({files:[dosya]})){navigator.share({files:[dosya],title:'Değişim Karnesi görüşlerim',text:ad+' – '+say+' öğrenci görüşü'}).then(function(){toast('✓ Gönderildi.');}).catch(function(){});return;}}catch(e){}
   dosyaIndir(dad,icerik);
   toast(say+' görüş dosyası indirildi. Bu dosyayı WhatsApp’tan karne sorumlusuna gönderin.',4500);}
 function iceAktar(inp){var dosyalar=[].slice.call(inp.files);if(!dosyalar.length)return;var toplam=0,i=0;
@@ -981,7 +1039,7 @@ function ornekYukle(){
 
 /* ================= ZİRVE: Karşılama · QR · Çocuk Boyu · Ekran · Site ================= */
 function karsilama(zorla){if(!zorla){try{if(localStorage.getItem('zirve_karsilama_karne'))return;}catch(e){}}
-  modal('<div class="karsilamaKafa"><h2>Öğrenci Gelişim Karnesi</h2><p>'+esc(V.ayar.okul)+' · Her öğrenciye, öğretmenlerinin kaleminden özel bir karne.</p></div>'+
+  modal('<div class="karsilamaKafa"><h2>Öğrenci Değişim Karnesi</h2><p>'+esc(V.ayar.okul)+' · Her öğrenciye, öğretmenlerinin kaleminden özel bir karne.</p></div>'+
    '<div class="adim"><i>1</i><div><b>Sınıflar ve öğrenciler hazır</b><p>Anaokulundan 8. sınıfa tüm şubeler e-Okul listesiyle yüklü. Yeni öğrenci gelince e-Okul PDF’i ile eklenir.</p></div></div>'+
    '<div class="adim"><i>2</i><div><b>Her öğretmen adını seçip yazar</b><p>Seviyeleri işaretleyin, ✨ <b>Taslak oluştur</b> ile öğrenciye özel metin hazırlansın, siz son dokunuşu yapın.</p></div></div>'+
    '<div class="adim"><i>3</i><div><b>Kendiliğinden buluta gider</b><p>Evden, telefondan, bilgisayardan — nerede yazarsanız yazın görüşleriniz anında okulun bulutuna kaydedilir ve sınıf öğretmeninin ekranına düşer. Hiçbir kayıt silinmez; yıllar sonra bile Ayarlar → Arşiv’den açılır.</p></div></div>'+
@@ -995,7 +1053,7 @@ function qrAc(){var url=location.href;var dosya=location.protocol==='file:';
    '<div class="satir" style="justify-content:center"><button class="btn acik" onclick="kopyala(\''+esc(url).replace(/'/g,"\\'")+'\',\'Bağlantı kopyalandı.\')">🔗 Bağlantıyı kopyala</button><button class="btn" onclick="qrIndir()">⬇️ PNG indir</button></div>');
   betikYukle('https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js',function(ok){var y=document.getElementById('qrYer');if(!y)return;
     if(!ok||!window.qrcode){y.textContent='QR için internet gerekli.';return;}var q=qrcode(0,'M');q.addData(url);q.make();y.innerHTML=q.createImgTag(6,8);});}
-function qrIndir(){var im=document.querySelector('#qrYer img');if(!im)return;var a=document.createElement('a');a.href=im.src;a.download='Gelisim_Karnesi_QR.gif';a.click();}
+function qrIndir(){var im=document.querySelector('#qrYer img');if(!im)return;var a=document.createElement('a');a.href=im.src;a.download='Degisim_Karnesi_QR.gif';a.click();}
 window.ZIRVE_paylasAc=qrAc;
 function cocukBoyu(d){var acik=d===undefined?!document.body.classList.contains('cocukBoyu'):!!d;document.body.classList.toggle('cocukBoyu',acik);
   try{localStorage.setItem('zirve_cocuk_boyu',acik?'1':'0');}catch(e){}cbRozet();if(SEKME==='ayar')ciz();}
@@ -1070,7 +1128,7 @@ function donemGecisBekle(eskiPk){var yeniAyar=temiz(V.ayar),yeniTs=V.ayarTs,bas=
   (function bekle(){var hazirSay=V.siniflar.filter(function(s){return BULUT.hazir[s.id];}).length;
     if(PK===eskiPk&&(hazirSay<V.siniflar.length||BULUT.bekleyen>0)&&Date.now()-bas<25000){bulutFark();setTimeout(bekle,1000);return;}
     V.ayar=yeniAyar;V.ayarTs=yeniTs;donemDegistir();toast('🗓️ Yeni döneme geçildi: '+V.ayar.donem+'. Önceki dönem arşivde.',4500);})();}
-function aboneBirakHepsi(){Object.keys(BULUT.abone).forEach(function(k){if(k==='_ayar')return;try{BULUT.abone[k]();}catch(e){}delete BULUT.abone[k];});}
+function aboneBirakHepsi(){Object.keys(BULUT.abone).forEach(function(k){if(k==='_ayar'||k.indexOf('f_')===0)return;try{BULUT.abone[k]();}catch(e){}delete BULUT.abone[k];});}
 function donemAbone(){if(!BULUT.db)return;aboneBirakHepsi();BULUT.listeHazir=false;BULUT.liste={};BULUT.hazir={};BULUT.gonderilen.sinif={};BULUT.gonderilen.g={};
   var pk=PK;
   function listeAbone(){BULUT.abone._liste=BULUT.F.onSnapshot(bRef(pk+'_liste'),function(sn){if(pk!==PK||sunucuYok(sn))return;var D=sn.exists()?sn.data():{};BULUT.okuHata='';
@@ -1083,7 +1141,7 @@ function donemAbone(){if(!BULUT.db)return;aboneBirakHepsi();BULUT.listeHazir=fal
     bulutPlanla();bulutRozetGuncelle();},dinleyiciHata('_liste',function(){if(pk===PK)listeAbone();}));}
   listeAbone();
   V.siniflar.forEach(function(s){sinifAbone(s.id);});}
-function sinifAbone(sid){if(!BULUT.db||BULUT.abone[sid])return;var pk=PK;
+function sinifAbone(sid){if(BULUT.db&&typeof fotoAbone==='function')fotoAbone(sid);if(!BULUT.db||BULUT.abone[sid])return;var pk=PK;
   BULUT.abone[sid]=BULUT.F.onSnapshot(bRef(pk+'_'+sid),function(sn){if(pk!==PK||sunucuYok(sn))return;BULUT.okuHata='';bulutSinifUygula(sid,sn.exists()?sn.data():null);},
     dinleyiciHata(sid,function(){if(pk===PK&&sinifBul(sid))sinifAbone(sid);}));}
 function sinifAboneBirak(sid){if(BULUT.abone[sid]){try{BULUT.abone[sid]();}catch(e){}delete BULUT.abone[sid];}delete BULUT.hazir[sid];}
@@ -1121,7 +1179,7 @@ function temiz(o){return JSON.parse(JSON.stringify(o));}
 function yaz(ek,veri,geriAl){BULUT.bekleyen++;bulutRozetGuncelle();
   return BULUT.F.setDoc(bRef(ek),temiz(veri),{merge:true}).then(function(){BULUT.bekleyen--;BULUT.sonOk=Date.now();BULUT.yazHata='';bulutRozetGuncelle();},
     function(e){BULUT.bekleyen--;BULUT.yazHata=hataAcikla(e);if(geriAl)geriAl();bulutRozetGuncelle();setTimeout(function(){bulutPlanla();},20000);});}
-function bulutFark(){if(BULUT.durum!=='bagli'||!BULUT.db)return;var pk=PK;
+function bulutFark(){if(BULUT.durum!=='bagli'||!BULUT.db)return;var pk=PK;if(Object.keys(FOTO_BEK).length)fotoGonder();
   if(BULUT.ayarHazir){var ay={},gerek=false,aktifPk=pkHesap(V.ayar);
     if((V.ayarTs||0)>(BULUT.gonderilen.ayarTs||0)){ay.ayar=V.ayar;ay.ts=V.ayarTs;gerek=true;}
     if(!BULUT.donemler[aktifPk]){ay.donemler={};ay.donemler[aktifPk]={yil:V.ayar.yil,donem:V.ayar.donem,ts:Date.now()};gerek=true;}
@@ -1175,7 +1233,7 @@ function bulutTani(){
     '<p class="aciklama" style="margin-top:12px">Hiçbir kayıt silinmez: bulutta dönem dönem arşivlenir, ayrıca bu cihazda da kopyası durur.</p>'+
     '<div class="satir" style="justify-content:flex-end"><button class="btn acik" onclick="kopyala(bulutRapor(),\'Durum kopyalandı — Barış Öğretmene gönderebilirsiniz.\')">📋 Durumu kopyala</button><button class="btn" onclick="bulutYenidenEsitle()">🔄 Şimdi eşitle</button></div>';
   modal(h);}
-function bulutRapor(){return 'Gelişim Karnesi durum · sürüm '+SURUM+' · dönem '+PK+'\nİnternet: '+navigator.onLine+'\nBulut: '+BULUT.durum+' '+(BULUT.hata||'')+'\nOkuma: '+(BULUT.okuHata||('ok, sınıf '+Object.keys(BULUT.hazir).length))+'\nYazma: '+(BULUT.yazHata||('ok, bekleyen '+BULUT.bekleyen))+'\nGiriş: '+(BULUT.authHata||'ok')+'\nSon eşitleme: '+zamanOnce(BULUT.sonOk)+'\nTarayıcı: '+navigator.userAgent;}
+function bulutRapor(){return 'Değişim Karnesi durum · sürüm '+SURUM+' · dönem '+PK+'\nİnternet: '+navigator.onLine+'\nBulut: '+BULUT.durum+' '+(BULUT.hata||'')+'\nOkuma: '+(BULUT.okuHata||('ok, sınıf '+Object.keys(BULUT.hazir).length))+'\nYazma: '+(BULUT.yazHata||('ok, bekleyen '+BULUT.bekleyen))+'\nGiriş: '+(BULUT.authHata||'ok')+'\nSon eşitleme: '+zamanOnce(BULUT.sonOk)+'\nTarayıcı: '+navigator.userAgent;}
 function bulutYenidenEsitle(){kapatModal();BULUT.yazHata='';BULUT.okuHata='';if(!BULUT.F){guvenliYenile();return;}if(BULUT.durum!=='bagli'){BULUT.durum='yok';bulutBaslat();}else donemAbone();toast('🔄 Eşitleniyor…');}
 function cizBulutKart(){return '<div class="kart"><h2>☁️ Kayıt ve eşitleme</h2><p class="aciklama">Her görüş yazıldığı anda <b>bu cihaza</b> ve <b>okulun bulut veritabanına</b> kaydedilir. Hangi cihazdan yazılırsa yazılsın tüm öğretmenlerin ekranına düşer. Sistemde “kalıcı silme” yoktur: kaldırılan sınıf/öğrenci/ders bile bulutta saklanır, her dönem ayrı arşivlenir; yıllar sonra da açılabilir.</p>'+
   '<div class="satir"><button class="btn" onclick="bulutTani()">🔍 Kayıt durumunu kontrol et</button></div></div>';}
@@ -1203,6 +1261,71 @@ function yeniDonem(){var ad=prompt('Yeni dönemin adı (örn: Haziran 2027):',''
   V.meta={yil:V.ayar.yil,donem:V.ayar.donem};V.secim.satir='';kaydet();if(BULUT.db)donemAbone();ciz();toast('🗓️ '+V.ayar.donem+' dönemi başladı. Önceki dönem arşivde.',4000);}
 function geriGetir(sid){var L=BULUT.liste[sid];if(!L)return;if(!sinifBul(sid)){V.siniflar.push({id:sid,ad:L.ad,kadro:[]});V.siniflar.sort(sinifSira);}
   BULUT.listeBekleyen[sid]={ad:L.ad,gizli:false};BULUT.liste[sid]={ad:L.ad,gizli:false};sinifAbone(sid);kaydet();ciz();toast('↩️ '+L.ad+' geri getirildi.');}
+
+/* ================= ÖĞRENCİ FOTOĞRAFLARI =================
+   Görüşlerden tamamen ayrı tutulur: cihazda dkKarne2_foto, bulutta maas_config/k12_gk_foto_<sınıf> (döneme bağlı değil). */
+var FOTO=lsAl(DEPO+'foto')||{},FOTO_BEK=lsAl(DEPO+'fotoBek')||{};
+function fotoBekKaydet(){try{lsYaz(DEPO+'fotoBek',FOTO_BEK);}catch(e){}}
+function fotoKaydetYerel(){try{lsYaz(DEPO+'foto',FOTO);}catch(e){toast('⚠️ Fotoğraf bu cihaza sığmadı; bulutta saklanıyor.',3500);}}
+function avatarHTML(o,boy){boy=boy||34;var f=FOTO[o.id];return '<span class="avatar" style="width:'+boy+'px;height:'+boy+'px;font-size:'+Math.round(boy*.38)+'px">'+(f?'<img src="'+f+'" alt="">':esc(basHarf(o.ad)))+'</span>';}
+function resimKucult(dosya,cb,hata){var r=new FileReader();r.onerror=function(){if(hata)hata();else toast('Dosya okunamadı.');};r.onload=function(){var img=new Image();img.onload=function(){
+    var k=Math.min(img.width,img.height),c=document.createElement('canvas');c.width=c.height=260;var x=c.getContext('2d');
+    x.fillStyle='#fff';x.fillRect(0,0,260,260);x.drawImage(img,(img.width-k)/2,Math.max(0,(img.height-k)/2-k*0.08),k,k,0,0,260,260);
+    var q=.78,d=c.toDataURL('image/jpeg',q);while(d.length>40000&&q>.4){q-=.08;d=c.toDataURL('image/jpeg',q);}cb(d);};
+    img.onerror=function(){if(hata)hata();else toast('Bu dosya resim olarak açılamadı (iPhone HEIC ise JPG olarak kaydedip deneyin).',4500);};img.src=r.result;};r.readAsDataURL(dosya);}
+function fotoAta(oid,veri){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0];if(!o)return;FOTO[oid]=veri;FOTO_BEK[oid]=o.sinifId;fotoKaydetYerel();fotoBekKaydet();fotoGonder();}
+function fotoSec(oid){var i=document.createElement('input');i.type='file';i.accept='image/*';
+  i.onchange=function(){if(!i.files[0])return;resimKucult(i.files[0],function(d){fotoAta(oid,d);cizKoru();toast('📷 Fotoğraf eklendi.');});};i.click();}
+function fotoKaldir(oid){if(!confirm('Bu öğrencinin fotoğrafı kaldırılsın mı?'))return;fotoAta(oid,'');cizKoru();}
+function fotoToplu(inp,sid){var dosyalar=[].slice.call(inp.files);inp.value='';var ogr=sinifOgr(sid),eslesmedi=[],plan={},say=0;
+  function norm(t){return sabitId(t);}
+  dosyalar.forEach(function(f){var ad=f.name.replace(/\.[^.]+$/,''),n=norm(ad),o=null;
+    if(/^\d{1,6}$/.test(ad.replace(/[\s_\-]/g,'')))o=ogr.filter(function(x){return x.no&&x.no===ad.replace(/[\s_\-]/g,'');})[0];
+    if(!o)o=ogr.filter(function(x){return norm(x.ad)===n;})[0];
+    if(!o&&n.length>=4){var aday=ogr.filter(function(x){return norm(x.ad).indexOf(n)>-1||n.indexOf(norm(x.ad))>-1;});if(aday.length===1)o=aday[0];}
+    if(!o){eslesmedi.push(f.name);return;}
+    if(plan[o.id]){plan[o.id].cift=true;plan[o.id].adlar.push(f.name);return;}
+    plan[o.id]={o:o,f:f,adlar:[f.name],cift:false};});
+  var isler=Object.keys(plan).map(function(k){return plan[k];}).filter(function(p){if(p.cift){eslesmedi=eslesmedi.concat(p.adlar.map(function(a){return a+' (aynı öğrenciye birden çok dosya)';}));return false;}return true;});
+  var i=0;(function sonraki(){if(i>=isler.length){cizKoru();toast('📷 '+say+' fotoğraf eklendi'+(eslesmedi.length?' · eşleşmeyen: '+eslesmedi.join(', '):'')+'. Eşleşmeyenleri öğrencinin resmine dokunarak tek tek ekleyebilirsiniz.',7000);return;}
+    var p=isler[i++];resimKucult(p.f,function(d){fotoAta(p.o.id,d);say++;sonraki();},function(){eslesmedi.push(p.f.name+' (açılamadı)');sonraki();});})();}
+function fotoGonder(){if(BULUT.durum!=='bagli'||!BULUT.db)return;var grup={};Object.keys(FOTO_BEK).forEach(function(oid){var sid=FOTO_BEK[oid];(grup[sid]=grup[sid]||{})[oid]=FOTO[oid]||'';});
+  Object.keys(grup).forEach(function(sid){var paket=grup[sid];Object.keys(paket).forEach(function(oid){delete FOTO_BEK[oid];});
+    yaz('foto_'+sid,{f:paket,ts:Date.now()},function(){Object.keys(paket).forEach(function(oid){FOTO_BEK[oid]=sid;});fotoBekKaydet();}).then(fotoBekKaydet);});}
+function fotoAbone(sid){var key='f_'+sid;if(!BULUT.db||BULUT.abone[key])return;
+  BULUT.abone[key]=BULUT.F.onSnapshot(bRef('foto_'+sid),function(sn){if(sunucuYok(sn)||!sn.exists())return;var f=(sn.data()||{}).f||{},degisti=false;
+    Object.keys(f).forEach(function(oid){if(FOTO_BEK[oid])return;if((FOTO[oid]||'')!==(f[oid]||'')){FOTO[oid]=f[oid]||'';degisti=true;}});
+    if(degisti){fotoKaydetYerel();bulutCizPlanla();}},dinleyiciHata(key,function(){if(sinifBul(sid))fotoAbone(sid);}));}
+
+/* ================= ÖRNEK KARNE GÖRSELİ (gruba paylaşmak için; gerçek öğrenci bilgisi içermez) ================= */
+var ORNEK_METIN={
+  'sınıf öğretmeni':'Örnek, sınıfımızın neşeli ve sorumluluk sahibi öğrencilerinden biri. Derslere hazırlıklı geliyor, arkadaşlarıyla uyumlu ve yardımsever. Okuma alışkanlığı her geçen gün gelişiyor. Bu güzel çabasının devamını diliyor, kendisiyle gurur duyuyorum.',
+  'beden':'Örnek, beden eğitimi derslerinde takım oyunlarına istekle katılıyor, kurallara uyuyor ve arkadaşlarını cesaretlendiriyor. Koordinasyon becerileri her derste gelişiyor.',
+  'matematik':'Örnek, matematik derslerinde işlem becerilerini güzel kullanıyor ve problem çözerken farklı yollar deneyebiliyor. Düzenli tekrarlarla hızı ve doğruluğu daha da artacaktır.',
+  'ingilizce':'Örnek, İngilizce derslerinde yeni kelimeleri kolayca öğreniyor ve etkinliklere istekle katılıyor. Kendini ifade etmeye çalışması çok değerli.',
+  'speaking':'Örnek, speaking etkinliklerinde cesaretle söz alıyor; telaffuzu ve akıcılığı her derste biraz daha gelişiyor.',
+  'sosyal':'Örnek, sosyal bilgiler derslerinde çevresini ve toplumu tanımaya ilgi duyuyor, fikirlerini rahatlıkla paylaşıyor.',
+  'türkçe':'Örnek, Türkçe derslerinde okuduğunu anlama ve kendini ifade etme becerilerinde güzel bir gelişim gösteriyor. Kitap okumaya ilgisi takdire değer.',
+  'fen':'Örnek, fen bilimleri derslerinde deney ve gözlem etkinliklerine büyük ilgi gösteriyor, merak ederek soru soruyor.'};
+function ornekMetin(r,s,o,i){var d=(r.ders||'').toLocaleLowerCase('tr-TR');if(barisSatiri(r))return hazirGorus(o,s,i%10);
+  for(var k in ORNEK_METIN){if(d.indexOf(k)>-1)return ORNEK_METIN[k];}return 'Örnek, '+r.ders.trim()+' derslerine istekle katılıyor, verilen görevleri özenle tamamlıyor ve arkadaşlarıyla uyumlu çalışıyor.';}
+function ornekKarneGorsel(){var s=seciliSinif();if(!s){toast('Önce bir sınıf seçin.');return;}
+  var o={id:'ornek_ogrenci',sinifId:s.id,ad:'Örnek Öğrenci',no:'000'},eklenen=[];
+  /* geçici örnek görüşler: ts=0 olduğu için buluta ASLA gönderilmez; görsel alınınca hemen silinir */
+  s.kadro.forEach(function(r,i){var k=gKey(o.id,r.id);if(V.gorusler[k])return;V.gorusler[k]={metin:ornekMetin(r,s,o,i),sev:{akademik:[3,3,2][i%3],sosyal:3,duygusal:[3,2][i%2]},ts:0,s:'ornek'};eklenen.push(k);});
+  var kap=document.createElement('div');kap.style.cssText='position:fixed;left:-99999px;top:0;background:#fff';kap.innerHTML=karneHTML(o);document.body.appendChild(kap);
+  eklenen.forEach(function(k){delete V.gorusler[k];});
+  var el=kap.firstChild;karneSigdir(el);var sayfalar=[].slice.call(kap.querySelectorAll('.karne'));
+  toast('🖼️ Örnek karne görseli hazırlanıyor…',2500);
+  betikYukle('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',function(ok){
+    if(!ok||!window.html2canvas){kap.remove();toast('Görsel için internet gerekli. İsterseniz örneği PDF olarak yazdırabilirsiniz.',4500);return;}
+    var bekle=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();
+    bekle.then(function(){return html2canvas(sayfalar[0],{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false});}).then(function(c){
+      kap.remove();c.toBlob(function(b){var ad='Ornek_Degisim_Karnesi.png';
+        try{var f=new File([b],ad,{type:'image/png'});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:'Öğrenci Değişim Karnesi – örnek'}).catch(function(){});return;}}catch(e){}
+        var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=ad;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},2000);
+        toast('✓ Örnek karne görseli indirildi — gruba paylaşabilirsiniz.',4000);},'image/png');
+    }).catch(function(){kap.remove();toast('Görsel oluşturulamadı. Örneği PDF olarak yazdırabilirsiniz.',4500);});});}
 
 /* ---------- Başlat ---------- */
 yukle();

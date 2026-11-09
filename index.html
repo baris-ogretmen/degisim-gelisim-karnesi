@@ -250,7 +250,7 @@ body.cocukBoyu .toast{bottom:130px}
    DEĞİŞİM KOLEJİ · ÖĞRENCİ GELİŞİM KARNESİ  — sürüm 1
    Tek dosya · çevrimdışı çalışır · veriler bu bilgisayarda saklanır
    ============================================================ */
-var SURUM = 11;
+var SURUM = 12;
 var ANAHTAR = 'dkKarne_v1';
 var SITE = 'https://baris-ogretmen.github.io/site-1/';
 
@@ -284,17 +284,25 @@ var BANKA = {
   akademik:{
     3:['{ad}, {ders} dersinde konuları hızla kavrıyor ve öğrendiklerini yeni durumlara başarıyla uyguluyor.',
        '{ad}, derse hazırlıklı geliyor; sorduğu sorular ve yaptığı katkılarla sınıfına örnek oluyor.',
-       '{ad}, {ders} dersinde yüksek bir başarı gösteriyor; görevlerini özenle ve eksiksiz tamamlıyor.'],
+       '{ad}, {ders} dersinde yüksek bir başarı gösteriyor; görevlerini özenle ve eksiksiz tamamlıyor.',
+       '{ad}, {ders} dersinde öğrendiklerini yeni durumlara aktarabiliyor ve düşüncelerini açıkça ifade ediyor.',
+       '{ad}, {ders} dersinde sınıf düzeyinin üzerinde bir performans sergiliyor; merakı ve azmi takdire değer.',
+       '{ad}, derslerde dikkatle dinliyor, sorularıyla konuyu derinleştiriyor ve çalışmalarını titizlikle yapıyor.'],
     2:['{ad}, {ders} dersindeki temel kazanımları büyük ölçüde edinmiş durumda; düzenli tekrarla daha da ileri gidecektir.',
        '{ad}, derse ilgiyle katılıyor; görevlerini çoğunlukla zamanında ve özenle tamamlıyor.',
-       '{ad}, {ders} dersinde istikrarlı bir gelişim gösteriyor; biraz daha dikkat ve tekrarla potansiyelini tam olarak ortaya koyacaktır.'],
+       '{ad}, {ders} dersinde istikrarlı bir gelişim gösteriyor; biraz daha dikkat ve tekrarla potansiyelini tam olarak ortaya koyacaktır.',
+       '{ad}, {ders} dersinde konuları anlıyor ve etkinliklere gönüllü olarak katılıyor.',
+       '{ad}, {ders} dersinde sorumluluklarını yerine getiriyor; özgüveni arttıkça derse katkısı da artacaktır.'],
     1:['{ad}, {ders} dersinde gelişim göstermeye devam ediyor; ek tekrar ve evdeki destekle konuları daha iyi pekiştirecektir.',
        '{ad}, derse katılımını artırdıkça ve görevlerini düzenli takip ettikçe gelişimi hızlanacaktır.',
-       '{ad}, {ders} dersinde adım adım ilerliyor; küçük başarılarının takdir edilmesi motivasyonunu artıracaktır.']
+       '{ad}, {ders} dersinde adım adım ilerliyor; küçük başarılarının takdir edilmesi motivasyonunu artıracaktır.',
+       '{ad}, {ders} dersinde emek veriyor; düzenli çalışma alışkanlığı kazandıkça başarısı da artacaktır.']
   },
   sosyal:{
     3:['Arkadaşlarıyla uyumlu, yardımsever ve saygılı; grup çalışmalarında sorumluluk almaktan çekinmiyor.',
-       'Sınıf içinde sevilen, paylaşımcı ve iş birliğine açık bir öğrencimiz.'],
+       'Sınıf içinde sevilen, paylaşımcı ve iş birliğine açık bir öğrencimiz.',
+       'Arkadaşlarına karşı nazik ve anlayışlı; grup içinde uyumu sağlayan bir rol üstleniyor.',
+       'Kendi fikirlerini saygılı bir dille ifade ediyor, başkalarının fikirlerini de dinliyor.'],
     2:['Arkadaşlarıyla olumlu ilişkiler kuruyor; grup çalışmalarında daha etkin rol alması teşvik edilmektedir.',
        'Sınıf kurallarına genel olarak uyuyor ve arkadaşlarıyla iyi iletişim kuruyor.'],
     1:['Paylaşma ve iş birliği becerilerini geliştirmesi için onu desteklemeye devam ediyoruz.',
@@ -302,7 +310,9 @@ var BANKA = {
   },
   duygusal:{
     3:['Duygularını uygun biçimde ifade ediyor, özgüveni yüksek ve sınıfta kendini mutlu hissediyor.',
-       'Kendine güveni tam, sakin ve olumlu tutumuyla sınıfa güzel bir enerji katıyor.'],
+       'Kendine güveni tam, sakin ve olumlu tutumuyla sınıfa güzel bir enerji katıyor.',
+       'Zorlandığı durumlarda pes etmiyor, sakin kalarak çözüm arıyor.',
+       'Başarılarından mutluluk duyuyor, arkadaşlarının başarılarına da içtenlikle seviniyor.'],
     2:['Genel olarak duygularını dengeli yönetiyor; yeni durumlarda kendine güvenini artırmaya devam ediyor.',
        'Olumlu bir ruh hâliyle derslere katılıyor; zorlandığında yardım istemeyi öğreniyor.'],
     1:['Duygularını ifade etme ve zorlandığında sakin kalma konusunda gelişim gösteriyor; sabırlı ve destekleyici bir tutumla birlikte ilerliyoruz.',
@@ -313,7 +323,10 @@ var BANKA = {
     'Ekran süresinin dengelenmesi dikkatine ve odaklanmasına katkı sağlayacaktır.',
     'Merakını ve yaratıcılığını destekleyen etkinlikler önerilir.',
     'Gösterdiği emek için kendisini tebrik ediyor, başarılarının devamını diliyorum.',
-    'Ödevlerini düzenli bir saatte yapma alışkanlığı kazanması faydalı olacaktır.']
+    'Ödevlerini düzenli bir saatte yapma alışkanlığı kazanması faydalı olacaktır.',
+    'Derslerde kullandığımız materyallerini eksiksiz getirmesi etkinliklerden daha fazla verim almasını sağlayacaktır.',
+    'Derse aktif katılımını artırması, öğrendiklerini kalıcı hâle getirecektir.',
+    'Bu güzel çabasının devamını diliyor, kendisiyle gurur duyuyorum.']
 };
 /* g = güçlü yön cümleleri (İyi/Çok İyi), z = gelişim cümleleri (Gelişmekte) */
 var DERS_OZEL = {
@@ -335,6 +348,8 @@ var DERS_OZEL = {
          z:['Deney ve gözlem etkinliklerine katılımı arttıkça konuları daha kalıcı öğrenecektir.']},
   'sosyal bilgiler':{g:['Çevresini ve toplumu tanımaya ilgi duyuyor; derste fikirlerini rahatlıkla paylaşıyor.'],
                      z:['Derste fikirlerini paylaşmaya teşvik edildikçe konulara ilgisi artacaktır.']},
+  'görsel':{g:['Sanat çalışmalarında renkleri ve malzemeleri yaratıcı biçimde kullanıyor.','Çalışmalarını özenle ve sabırla tamamlıyor; hayal gücü takdire değer.'],z:['Sanat etkinliklerine istekle katılıyor; çalışmalarını tamamlamaya özen gösterdikçe daha güzel ürünler ortaya koyacak.']},
+  'müzik':{g:['Müzik derslerinde ritim ve ezgileri kolayca takip ediyor.','Şarkı ve çalgı etkinliklerine büyük bir keyifle katılıyor.'],z:['Müzik etkinliklerine katılmaya istekli; ritim çalışmalarıyla daha da gelişecek.']},
   'beden':{g:['Fiziksel etkinliklere istekle katılıyor; takım oyunlarında kurallara uyuyor ve centilmence davranıyor.'],
            z:['Koordinasyon ve denge becerileri gelişiyor; spora olan ilgisinin desteklenmesi önerilir.']}
 };
@@ -687,20 +702,78 @@ var HZ={
     'Önümüzdeki aylarda çok güzel sonuçlar alacağından eminim.','Azmini kaybetmeden yoluna devam etmesini dilerim.',
     'Gösterdiği olgunluk için kendisini kutluyorum.','Birlikte çok güzel bir dönem geçireceğimize inanıyorum.']}
 };
-function kademe(s){var a=(s&&s.ad)||'';if(/^ana/i.test(a))return 'ana';if(/^8/.test(a))return 'kocluk';return 'ilk';}
-function barisDers(s){var k=kademe(s);return k==='ana'?'Satranç · Robotik ve Kodlama':(k==='kocluk'?'Eğitim Koçluğu':'Robotik ve Kodlama · Yapay Zekâ · Satranç ve Akıl Oyunları');}
+/* Sınıf düzeyine göre hazır görüşler. 10 seçenek EN ÜST başarıdan (yarışma birinciliği) teşvik edici olana doğru sıralıdır; hepsi olumlu dilde. */
+var KADEME_ETIKET=['🏆 Yarışma birinciliği','🥇 Yarışma derecesi','🌟 Üstün başarı','⭐ Çok başarılı','👍 Başarılı','😊 İstekli ve başarılı','📈 Güzel gelişim','🌱 İlgili ve özenli','🐢 Adım adım ilerliyor','💪 Teşvik edici'];
+var HZ2={
+  ilk12:{ad:'robotik ve kodlama, yapay zekâ ve satranç derslerinde',
+    rob:{g:['Yön oklarıyla yaptığımız kodlama oyunlarında adımları doğru sıraya koyabiliyor.','Kartlarla yaptığımız algoritma etkinliklerinde “önce–sonra” ilişkisini çok iyi kuruyor.','Basit komut dizileriyle karakteri hedefe ulaştırmayı başarıyla yapıyor.','Robotik etkinliklerde parçaları tanımaya ve basit modeller kurmaya büyük ilgi gösteriyor.','Örüntü ve sıralama oyunlarında hızlı ve doğru düşünüyor.','Ekransız kodlama oyunlarında yönergeleri dikkatle takip ediyor.'],
+         z:['Kodlama oyunlarında adımları sıralamayı öğreniyor; tekrar ettikçe daha da hızlanıyor.','Yön komutlarını kullanmaya istekli; dikkatini topladığında görevleri başarıyla tamamlıyor.','Algoritma oyunlarında her derste biraz daha emin adımlarla ilerliyor.']},
+    yz:{g:['Yapay zekâ derslerimizde akıllı cihazların günlük hayatımızdaki yerini fark etti.','Bir makinenin nasıl “öğrendiğini” anlattığımız oyunlara büyük merakla katılıyor.','Yapay zekâ etkinliklerinde gözlemlerini cesaretle paylaşıyor.','Teknolojiyi güvenli ve doğru kullanmanın önemini kavradı.','Akıllı cihazlarla ilgili sorduğu sorularla derse renk katıyor.'],
+        z:['Yapay zekâ etkinliklerinde soru sormaya başladı; merakını desteklemeye devam ediyoruz.','Teknolojiyle ilgili sohbetlerimizi ilgiyle dinliyor.','Yapay zekâ örneklerini tanımaya istekli.']},
+    sat:{g:['Satranç taşlarının hareketlerini ve temel kuralları çok iyi öğrendi.','Satranç oynarken hamle yapmadan önce düşünmeye başladı.','Akıl oyunlarında dikkatini uzun süre koruyabiliyor.','Satrançta kazanmayı da kaybetmeyi de olgunlukla karşılıyor.','Satranç tahtasında taşları bilinçli şekilde yerleştiriyor.'],
+         z:['Satranç taşlarını tanıyor; oynadıkça kuralları daha da pekiştiriyor.','Akıl oyunlarına istekle katılıyor, sabırla düşünmeyi öğreniyor.','Satrançta her derste yeni bir şey öğrenmeye hevesli.']}},
+  ilk34:{ad:'robotik ve kodlama, yapay zekâ ve satranç derslerinde',
+    rob:{g:['Blok tabanlı kodlamada döngü ve koşul yapılarını başarıyla kullanıyor.','Kodlama projelerinde hatalarını kendi başına bulup düzeltebiliyor.','Sensörlerin nasıl çalıştığını anlamaya yönelik güzel sorular soruyor.','Verilen bir problemi küçük adımlara bölerek algoritma kurabiliyor.','Robot tasarım etkinliklerinde yaratıcı ve uygulanabilir fikirler üretiyor.','Kodlama görevlerini kısa ve düzenli çözümlerle tamamlamaya özen gösteriyor.'],
+         z:['Blok kodlamada temel komutları kullanıyor; döngüleri pekiştirdikçe daha zor görevleri de çözecek.','Kodlama görevlerinde deneme–yanılma yoluyla ilerliyor; sabırla devam etmesi çok değerli.','Robotik etkinliklerde arkadaşlarıyla birlikte üretmeye istekli.']},
+    yz:{g:['Yapay zekânın örneklerden nasıl öğrendiğini somut etkinliklerle çok iyi kavradı.','Görüntü ve ses tanıma uygulamalarını incelerken dikkatli gözlemler yapıyor.','Yapay zekâ araçlarını sorumlu ve güvenli kullanmanın önemini biliyor.','Yapay zekâ ile ilgili tartışmalarımızda yerinde yorumlar yapıyor.','Yapay zekânın hata yapabileceğini ve bilginin kontrol edilmesi gerektiğini fark etti.'],
+        z:['Yapay zekâ kavramlarını tanımaya başladı; örneklerle pekiştirdikçe daha iyi anlayacak.','Yapay zekâ etkinliklerine ilgiyle katılıyor.','Yapay zekâ derslerinde soru sormaya başladı.']},
+    sat:{g:['Satrançta açılış ilkelerini uyguluyor ve temel mat kalıplarını tanıyor.','Satranç oynarken rakibinin planını da düşünmeye başladı.','Mantık bulmacalarında farklı çözüm yolları deneyebiliyor.','Akıl ve zekâ oyunlarında hızlı ve doğru kararlar veriyor.','Satrançta taşlarını uyum içinde geliştirmeyi öğrendi.'],
+         z:['Satrançta taşları doğru kullanıyor; oyun deneyimi arttıkça stratejileri de gelişecek.','Zekâ oyunlarında dikkatini toplamaya çalışıyor, her derste biraz daha ilerliyor.','Akıl oyunlarına istekle katılıyor.']}},
+  orta:{ad:'robotik ve kodlama, yapay zekâ ve satranç derslerinde',
+    rob:{g:['Algoritma tasarlarken değişken ve koşul yapılarını bilinçli şekilde kullanıyor.','Robotik projelerde sensör verilerini yorumlayarak çözüm üretebiliyor.','Kod yazarken hata ayıklama sürecini sabırla ve sistemli şekilde yürütüyor.','Takım projelerinde görev paylaşımına katkı sağlıyor, fikirlerini net ifade ediyor.','Gerçek hayattaki problemlere kodlama ile çözüm önerileri geliştirebiliyor.','Projelerini planlayıp adım adım hayata geçirme becerisi gelişmiş durumda.'],
+         z:['Kodlama projelerinde temel yapıları kullanıyor; düzenli pratikle daha kapsamlı projelere geçebilecek.','Robotik çalışmalarda takım arkadaşlarıyla birlikte üretmeye istekli.','Algoritma kurarken her derste biraz daha sistemli düşünüyor.']},
+    yz:{g:['Yapay zekâda verinin önemini ve modellerin nasıl eğitildiğini çok iyi kavradı.','Yapay zekâ araçlarını eleştirel bir gözle değerlendirip doğru bilgiyi ayırt edebiliyor.','Yapay zekânın etik boyutlarıyla ilgili tartışmalarda olgun ve yerinde görüşler ortaya koyuyor.','Yapay zekâ araçlarına açık ve doğru yönergeler vererek verimli sonuçlar alabiliyor.','Yapay zekâyı öğrenmesini destekleyen bir araç olarak bilinçli kullanıyor.'],
+        z:['Yapay zekâ kavramlarını öğreniyor; uygulamalarla pekiştirdikçe daha bilinçli kullanacak.','Yapay zekâ derslerinde konuları ilgiyle takip ediyor.','Yapay zekâ araçlarını tanımaya istekli.']},
+    sat:{g:['Satrançta taktik ve strateji kavramlarını oyunlarına yansıtabiliyor.','Oyun sonu tekniklerini ve taktik kombinasyonları başarıyla uyguluyor.','Akıl oyunlarında çok adımlı düşünerek sistemli çözümler üretiyor.','Satranç oynarken sabırlı, planlı ve centilmence bir tutum sergiliyor.','Oyunlarını analiz edip hatalarından ders çıkarabiliyor.'],
+         z:['Satrançta temel taktikleri tanıyor; daha çok oyunla stratejik düşüncesi gelişecek.','Zekâ oyunlarında farklı yolları denemeye istekli.','Satrançta planlı oynamayı öğreniyor.']}},
+  anaA:{ad:'satranç ve robotik kodlama derslerinde',
+    sat:{g:['Satranç taşlarının nasıl hareket ettiğini öğrenirken çok keyif alıyor.','Satranç hikâyeleri ve oyunlarıyla taşları kolayca öğrendi.','Satranç etkinliklerinde sırasını sabırla bekliyor ve kurallara uyuyor.','Satranç tahtasını tanırken büyük bir merak gösteriyor.','Satranç oynarken arkadaşlarıyla paylaşmayı güzelce uyguluyor.'],
+         z:['Satranç taşlarını tanımaya başladı; oynadıkça daha da keyif alıyor.','Satranç etkinliklerine istekle katılıyor.','Satranç oyunlarında dikkatini toplamayı öğreniyor.']},
+    rob:{g:['Robotik kodlama oyunlarında yön komutlarını keyifle uyguluyor.','Kodlama etkinliklerinde ileri, geri, sağ ve sol kavramlarını güzelce kullanıyor.','Sıralama ve örüntü oyunlarını büyük bir hevesle oynuyor.','Kodlama oyunlarında adımları sırayla takip etmeyi öğrendi.','Akıllı tahtadaki kodlama oyunlarında görevini özenle yapıyor.'],
+         z:['Kodlama oyunlarında yön kavramlarını öğreniyor.','Robotik kodlama etkinliklerine heyecanla katılıyor.','Kodlama oyunlarında yönergeleri dinlemeyi öğreniyor.']}},
+  anaB:{ad:'satranç derslerinde',
+    sat:{g:['Satranç taşlarının nasıl hareket ettiğini öğrenirken çok keyif alıyor.','Satranç hikâyeleri ve oyunlarıyla taşları kolayca öğrendi.','Satranç etkinliklerinde sırasını sabırla bekliyor ve kurallara uyuyor.','Satranç tahtasını tanırken büyük bir merak gösteriyor.','Satranç oynarken arkadaşlarıyla paylaşmayı güzelce uyguluyor.','Satranç oyunlarında dikkatini toplamayı her geçen hafta daha iyi başarıyor.','Satranç derslerinde öğrendiklerini hatırlamada çok başarılı.'],
+         z:['Satranç taşlarını tanımaya başladı; oynadıkça daha da keyif alıyor.','Satranç etkinliklerine istekle katılıyor.','Satranç oyunlarında dikkatini toplamayı öğreniyor.','Satranç taşlarının isimlerini öğrenmeye hevesli.']}},
+  kocluk:{ad:'eğitim koçluğu sürecinde',
+    kc:{g:['Hedeflerini netleştirdik ve bu hedeflere uygun bir çalışma planı oluşturduk.','Çalışma planını uygulama konusunda sorumluluk alıyor.','Deneme sonuçlarını değerlendirirken eksiklerini görüp üzerine gitmeye istekli.','Düzenli tekrar ve soru çözümünün önemini çok iyi kavradı.','Haftalık hedeflerini takip etme konusunda güzel bir istikrar yakaladı.','Zamanını verimli kullanmanın yollarını başarıyla uyguluyor.','Kendine olan güveni koçluk sürecinde belirgin şekilde arttı.'],
+        z:['Planlı çalışma alışkanlığı kazanmaya başladı; düzenli devam ettikçe sonuçlarını görecek.','Görüşmelerimizde kendini rahatça ifade ediyor.','Hedeflerini küçük adımlara bölerek ilerlemeyi öğreniyor.','Sınav kaygısıyla başa çıkma yöntemlerini öğrenmeye açık.']}}
+};
+function acilisCumle(kd,t,ad,alan){
+  if(kd==='kocluk'){var K=['{ad}, deneme sınavlarındaki üstün başarısıyla sınıfında öne çıkıyor ve hedeflerine emin adımlarla ilerliyor.',
+    '{ad}, katıldığı yarışma ve sınavlarda elde ettiği derecelerle emeğinin karşılığını alıyor.','{ad}, LGS sürecine son derece kararlı ve hedef odaklı hazırlanıyor.',
+    '{ad}, koçluk görüşmelerimizde gösterdiği olgunluk ve kararlılıkla dikkat çekiyor.','{ad}, '+alan+' sorumluluk alan ve planlı çalışan bir öğrenci.',
+    '{ad}, '+alan+' istekli ve açık bir tutum sergiliyor.','{ad}, '+alan+' her geçen hafta güzel bir gelişim gösteriyor.',
+    '{ad}, '+alan+' önerileri dikkatle dinliyor ve uygulamaya çalışıyor.','{ad}, '+alan+' kendi hızında, adım adım ilerliyor.',
+    '{ad}, '+alan+' potansiyelini fark etmeye başladı; düzenli çalıştıkça çok daha güzel sonuçlar alacağına inanıyorum.'];return K[t].replace(/\{ad\}/g,ad);}
+  var ana=kd==='anaA'||kd==='anaB';
+  var A=[ana?'{ad}, satranç etkinliklerinde gösterdiği üstün dikkat ve başarıyla sınıfının en başarılı öğrencilerinden biri.':'{ad}, 100 öğrencinin katıldığı satranç turnuvasında birinci olarak hepimizi çok gururlandırdı.',
+    ana?'{ad}, satranç oyunlarında yaşının üzerinde bir dikkat ve sabır gösteriyor.':'{ad}, katıldığı satranç yarışmasında elde ettiği dereceyle emeğinin karşılığını aldı ve okulumuzu başarıyla temsil etti.',
+    '{ad}, '+alan+' sınıf düzeyinin üzerinde bir başarı gösteriyor.','{ad}, '+alan+' her derste çok başarılı bir performans sergiliyor.',
+    '{ad}, '+alan+' öğrendiklerini başarıyla uyguluyor ve derslere değerli katkılar sunuyor.','{ad}, '+alan+' istekli ve başarılı bir öğrenci.',
+    '{ad}, '+alan+' her geçen hafta güzel bir gelişim gösteriyor.','{ad}, '+alan+' derslere ilgiyle katılıyor ve verilen görevleri tamamlamaya özen gösteriyor.',
+    '{ad}, '+alan+' kendi hızında, adım adım ilerliyor.','{ad}, '+alan+' becerilerini geliştirmeye devam ediyor; derslere daha aktif katıldıkça çok daha güzel sonuçlar alacağına inanıyorum.'];
+  return A[t].replace(/\{ad\}/g,ad);}
+var KAPANIS={ust:['Kendisiyle gurur duyuyorum, başarılarının devamını diliyorum.','Bu üstün başarısı için kendisini yürekten kutluyorum.','Önümüzdeki dönemde de aynı azimle devam etmesini diliyorum.','Emeği ve azmi için kendisini tebrik ediyorum.'],
+  orta:['Bu güzel merakını ve emeğini aynen sürdürmesini dilerim.','Gösterdiği emek için kendisini tebrik ediyorum.','Onunla ders yapmak benim için büyük bir keyif.','Önümüzdeki dönemde de aynı istekle devam edeceğine inanıyorum.','Bu ilgisini evde de desteklemenizi rica ederim.','Emeği ve güzel tavırları için kendisini kutluyorum.'],
+  alt:['Kendisine güveniyorum; desteğinizle çok daha ileriye gidecek.','Evde küçük tekrarlarla bu gelişimini birlikte hızlandırabiliriz.','Merakını desteklemeye devam edersek önümüzdeki dönemde çok güzel adımlar atacak.','Gösterdiği çaba için kendisini tebrik ediyorum.']};
+function kademe(s){var a=(s&&s.ad)||'',id=(s&&s.id)||'';if(/^ana/i.test(a))return id==='s_anasinifib'?'anaB':'anaA';if(/^8/.test(a))return 'kocluk';if(/^[12][A-Za-zÇĞİÖŞÜ]/.test(a))return 'ilk12';if(/^[34][A-Za-zÇĞİÖŞÜ]/.test(a))return 'ilk34';return 'orta';}
+function barisDers(s){var k=kademe(s);return k==='anaA'?'Satranç · Robotik ve Kodlama':(k==='anaB'?'Satranç':(k==='kocluk'?'Eğitim Koçluğu':'Robotik ve Kodlama · Yapay Zekâ · Satranç ve Akıl Oyunları'));}
 function barisSatiri(r){return r&&(r.ogretmen||'').trim()===BARIS;}
-/* k: öğrencinin sınıftaki sırası, i: seçenek no (0–9). Aynı öğrencinin 10 seçeneği ve aynı sınıftaki öğrencilerin seçenekleri birbirinden farklıdır. */
-function hazirGorus(o,s,i){var liste=sinifOgr(s.id),k=Math.max(0,liste.map(function(x){return x.id;}).indexOf(o.id)),c=hash(s.id)%10,ad=ilkAd(o.ad),T=HZ[kademe(s)];
+/* t: 0 = en üst (yarışma birinciliği) … 9 = teşvik edici. k: öğrencinin sınıftaki sırası → aynı sınıfta cümleler tekrar etmez */
+function hazirGorus(o,s,t){var liste=sinifOgr(s.id),k=Math.max(0,liste.map(function(x){return x.id;}).indexOf(o.id)),c=hash(s.id)%7,ad=ilkAd(o.ad),kd=kademe(s),B=HZ2[kd];
   function al(dz,n){return dz[((n%dz.length)+dz.length)%dz.length];}
-  var a=al(T.A,c+k+i*5).replace(/\{ad\}/g,ad),b=al(T.B,c+3*k+i*3),d=al(T.D,c+k+i),p;
-  if(T.C){var cc=al(T.C,c+7*k+i*7);p=(i%2)?[a,cc,b,d]:[a,b,cc,d];}
-  else if(kademe(s)==='kocluk'){var b2=al(T.B,c+3*k+i*3+5);p=(i%2)?[a,b2,b,d]:[a,b,b2,d];}
-  else p=[a,b,d];
+  var bant=t<=6?'g':'z',p=[acilisCumle(kd,t,ad,B.ad)];
+  if(kd==='kocluk'){p.push(al(B.kc[bant],c+k*2+t));p.push(al(B.kc[bant],c+k*2+t+3));}
+  else if(kd==='anaB'){p.push(al(B.sat[bant],c+k+t*2));p.push(al(B.sat[bant],c+k+t*2+3));}
+  else if(kd==='anaA'){p.push(al(B.sat[bant],c+k+t*2));p.push(al(B.rob[bant],c+2*k+t));}
+  else{var USAT=['Satrançta birkaç hamle sonrasını hesaplayarak oynuyor; rakiplerinin planlarını önceden görebiliyor.','Turnuva temposunda bile sakin, planlı ve kararlı oynamasıyla dikkat çekiyor.','Taktik kombinasyonları hızla fark ediyor ve oyunlarını ustalıkla yönetiyor.'];
+    var x=[al(B.rob[bant],c+k+t*2),al(B.yz[bant],c+3*k+t),t<=1?al(USAT,c+k+t):al(B.sat[bant],c+2*k+t*3)];p=p.concat(t%2?[x[2],x[0],x[1]]:x);}
+  var kp=t<=2?KAPANIS.ust:(t<=6?KAPANIS.orta:KAPANIS.alt);p.push(al(kp,c+k+t));
   return p.join(' ');}
 function hazirAc(oid,sid,rid){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0],s=sinifBul(sid);if(!o||!s)return;CUMLE_HEDEF={oid:oid,rid:rid};
-  var h='';for(var i=0;i<10;i++)h+='<button class="cumle" onclick="hazirSec(\''+oid+'\',\''+rid+'\','+i+')"><small style="color:#b8893b;font-weight:700">Seçenek '+(i+1)+'</small><br>'+esc(hazirGorus(o,s,i))+'</button>';
-  modal('<div class="pencereUst"><h3>📋 '+esc(o.ad)+' · hazır görüşler</h3><button class="ikonBtn" onclick="kapatModal()">✕</button></div><p class="aciklama">Birine dokunun, kutuya yazılsın. Sonra dilediğiniz gibi düzeltebilirsiniz. Mevcut bir yazı varsa “Önceki sürümler”de saklanır.</p>'+h);}
+  var kd=kademe(s),h='';for(var i=0;i<10;i++){var et=KADEME_ETIKET[i];if((kd==='anaA'||kd==='anaB')&&i<2)et=i?'🌟 Yaşının üzerinde başarı':'🏆 Sınıfın en başarılılarından';if(kd==='kocluk'&&i<2)et=i?'🥇 Yarışma/sınav derecesi':'🏆 Denemelerde üstün başarı';
+    h+='<button class="cumle" onclick="hazirSec(\''+oid+'\',\''+rid+'\','+i+')"><small style="color:#b8893b;font-weight:700">Seçenek '+(i+1)+' · '+et+'</small><br>'+esc(hazirGorus(o,s,i))+'</button>';}
+  modal('<div class="pencereUst"><h3>📋 '+esc(o.ad)+' · hazır görüşler</h3><button class="ikonBtn" onclick="kapatModal()">✕</button></div><p class="aciklama">Seçenekler en üst başarıdan (1) teşvik edici olana (10) doğru sıralıdır ve sınıf düzeyine göre yazılmıştır. Birine dokunun, kutuya yazılsın; sonra dilediğiniz gibi düzeltebilirsiniz. Mevcut bir yazı varsa “Önceki sürümler”de saklanır.</p>'+h);}
 function hazirSec(oid,rid,i){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0],s=sinifBul(o.sinifId);
   var g=gorusAl(oid,rid);if(doluMu(g)&&!confirm('Kutudaki mevcut yazının yerine bu seçenek yazılsın mı?\n(Mevcut yazı “Önceki sürümler”de saklanır.)'))return;
   surumZorla(g);g.metin=hazirGorus(o,s,i);g.ts=Date.now();if(V.secim.ogretmen)g.y=V.secim.ogretmen;kaydet();kapatModal();
@@ -708,7 +781,7 @@ function hazirSec(oid,rid,i){var o=V.ogrenciler.filter(function(x){return x.id==
 function hazirHepsine(sid,rid){var s=sinifBul(sid),n=0,bos=sinifOgr(sid).filter(function(o){return !doluMu(gorus(o.id,rid));});
   if(!bos.length){toast('Bu sınıfta boş kutu yok; yazılmış hiçbir görüşe dokunulmadı.');return;}
   if(!confirm(s.ad+' sınıfında görüşü BOŞ olan '+bos.length+' öğrenciye birer hazır görüş yazılacak.\n\nDolu kutulara (sizin ya da başkasının yazdıklarına) kesinlikle dokunulmaz. Devam?'))return;
-  bos.forEach(function(o){var g=gorusAl(o.id,rid);if(doluMu(g))return;g.metin=hazirGorus(o,s,0);g.ts=Date.now();if(V.secim.ogretmen)g.y=V.secim.ogretmen;n++;});
+  var tum=sinifOgr(sid);bos.forEach(function(o){var g=gorusAl(o.id,rid);if(doluMu(g))return;g.metin=hazirGorus(o,s,3+(tum.indexOf(o)%4));g.ts=Date.now();if(V.secim.ogretmen)g.y=V.secim.ogretmen;n++;});
   kaydet();cizKoru();toast('✓ '+n+' öğrenciye hazır görüş yazıldı. Beğenmediğinizi “📋 Hazır görüşler”den değiştirebilirsiniz.',4500);}
 /* Kadro başlık güncellemesi: yalnızca bulut kopyası geldikten sonra ve yalnızca eski varsayılan değerler duruyorsa uygulanır (görüşlere dokunmaz) */
 var SINIF_OGRETMENI={s_anasinifia:'Ebru Aldağ',s_anasinifib:'Özlem Sercan'};
@@ -718,6 +791,7 @@ function kadroGoc(s){var ok=false;(s.kadro||[]).forEach(function(r){
   /* Sürüm 7'nin yaptığı ad değişikliği geri alınır: satır eskisi gibi “Sede Öğretmen · Speaking” kalır (görüşlere dokunulmaz) */
   /* not: ders adının sonundaki boşluk görünmez; açık kalmış eski sürüm 7 sekmelerinin satırı tekrar değiştirmesini (döngüyü) engeller */
   if((r.ogretmen||'').trim()==='Sedi Teacher'&&r.ders==='İngilizce'){r.ogretmen='Sede Öğretmen';r.ders='Speaking ';ok=true;}
+  if(barisSatiri(r)&&s.id==='s_anasinifib'&&r.ders==='Satranç · Robotik ve Kodlama'){r.ders='Satranç';ok=true;}
   if(barisSatiri(r)&&(r.ders==='Robotik ve Kodlama'||r.ders==='Robotik Kodlama')){var y=barisDers(s);if(r.ders!==y){r.ders=y;ok=true;}}});return ok;}
 
 /* ================= 2) GÖRÜŞ YAZ ================= */
@@ -825,6 +899,7 @@ function cumleAc(oid,sid,rid){var o=V.ogrenciler.filter(function(x){return x.id=
   var dk=dersAnahtar(r.ders);
   modal('<div class="pencereUst"><h3>💡 '+esc(o.ad)+' · Cümle bankası</h3><button class="ikonBtn" onclick="kapatModal()">✕</button></div><p class="aciklama">Dokunduğunuz cümle metnin sonuna eklenir. Dilediğiniz kadar seçebilirsiniz.</p>'+
     (dk?grup('🎯 '+buyukTR(r.ders)+' DERSİNE ÖZEL',DERS_OZEL[dk].g.concat(DERS_OZEL[dk].z)):'')+
+    grup('🏆 ÖNE ÇIKAN BAŞARI',['{ad}, okulumuzu temsil ettiği yarışmada elde ettiği başarıyla hepimizi gururlandırdı.','{ad}, bu dönem gösterdiği üstün performansla sınıfına örnek oldu.','{ad}, katıldığı etkinlik ve yarışmalarda sergilediği başarıyla takdiri hak etti.'])+
     grup('📘 AKADEMİK — ÇOK İYİ',BANKA.akademik[3])+grup('📘 AKADEMİK — İYİ',BANKA.akademik[2])+grup('📘 AKADEMİK — GELİŞMEKTE',BANKA.akademik[1])+
     grup('🤝 SOSYAL',BANKA.sosyal[3].concat(BANKA.sosyal[2],BANKA.sosyal[1]))+grup('💛 DUYGUSAL',BANKA.duygusal[3].concat(BANKA.duygusal[2],BANKA.duygusal[1]))+grup('🏡 VELİYE ÖNERİ',BANKA.oneri));}
 function cumleEkle(btn){var g=gorusAl(CUMLE_HEDEF.oid,CUMLE_HEDEF.rid),c=btn.textContent;g.metin=(g.metin.trim()?g.metin.trim()+' ':'')+c;g.ts=Date.now();kaydet();
@@ -1310,7 +1385,7 @@ var ORNEK_METIN={
   'sosyal':'Örnek, sosyal bilgiler derslerinde çevresini ve toplumu tanımaya ilgi duyuyor, fikirlerini rahatlıkla paylaşıyor.',
   'türkçe':'Örnek, Türkçe derslerinde okuduğunu anlama ve kendini ifade etme becerilerinde güzel bir gelişim gösteriyor. Kitap okumaya ilgisi takdire değer.',
   'fen':'Örnek, fen bilimleri derslerinde deney ve gözlem etkinliklerine büyük ilgi gösteriyor, merak ederek soru soruyor.'};
-function ornekMetin(r,s,o,i){var d=(r.ders||'').toLocaleLowerCase('tr-TR');if(barisSatiri(r))return hazirGorus(o,s,i%10);
+function ornekMetin(r,s,o,i){var d=(r.ders||'').toLocaleLowerCase('tr-TR');if(barisSatiri(r))return hazirGorus(o,s,3);
   for(var k in ORNEK_METIN){if(d.indexOf(k)>-1)return ORNEK_METIN[k];}return 'Örnek, '+r.ders.trim()+' derslerine istekle katılıyor, verilen görevleri özenle tamamlıyor ve arkadaşlarıyla uyumlu çalışıyor.';}
 function ornekKarneGorsel(){var s=seciliSinif();if(!s){toast('Önce bir sınıf seçin.');return;}
   var o={id:'ornek_ogrenci',sinifId:s.id,ad:'Örnek Öğrenci',no:'000'},eklenen=[];

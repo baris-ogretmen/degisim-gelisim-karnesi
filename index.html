@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Değişim Koleji · Öğrenci Gelişim Karnesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--ana:#1e3a5f;--altin:#b8893b;--krem:#f6f1e6;--zemin:#f3f5f9;--yazi:#1e293b;--soluk:#64748b;--cizgi:#e2e8f0;--yesil:#15803d;--turuncu:#c2410c}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--zemin);color:var(--yazi);font-size:15px;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit;font-size:15px}
+#app{max-width:1150px;margin:0 auto;padding:0 14px 90px}
+
+/* Üst çubuk */
+.ust{position:sticky;top:0;z-index:50;background:rgba(243,245,249,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--cizgi);margin:0 -14px 16px;padding:10px 14px 0}
+.ustSatir{display:flex;align-items:center;gap:10px}
+.logoMini{width:38px;height:38px;flex:none}
+.ustBaslik{flex:1;min-width:0}
+.ustBaslik b{display:block;font-family:"Playfair Display",Georgia,serif;font-size:19px;color:var(--ana);line-height:1.1}
+.ustBaslik span{font-size:12px;color:var(--soluk)}
+.ikonBtn{border:1px solid var(--cizgi);background:#fff;border-radius:12px;width:40px;height:40px;font-size:18px;display:grid;place-items:center;flex:none}
+.sekmeler{display:flex;gap:4px;overflow-x:auto;margin-top:10px;scrollbar-width:none}
+.sekmeler::-webkit-scrollbar{display:none}
+@media(max-width:700px){.sekmeler{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:30px}}
+.sekme{border:0;background:transparent;padding:10px 14px;font-size:14.5px;font-weight:600;color:var(--soluk);border-bottom:3px solid transparent;white-space:nowrap}
+.sekme.aktif{color:var(--ana);border-bottom-color:var(--altin)}
+
+/* Kartlar */
+.kart{background:#fff;border:1px solid var(--cizgi);border-radius:16px;padding:18px;margin-bottom:14px}
+.kart h2{margin:0 0 4px;font-size:18px;color:var(--ana)}
+.kart h3{margin:0 0 10px;font-size:15.5px;color:var(--ana)}
+.aciklama{color:var(--soluk);font-size:13.5px;margin:0 0 12px;line-height:1.5}
+.btn{border:0;border-radius:11px;padding:10px 15px;font-weight:600;font-size:14.5px;background:var(--ana);color:#fff;display:inline-flex;align-items:center;gap:6px}
+.btn.altin{background:var(--altin)}
+.btn.acik{background:#eef2f7;color:var(--ana)}
+.btn.cizgili{background:#fff;color:var(--ana);border:1px solid var(--cizgi)}
+.btn.kirmizi{background:#fee2e2;color:#b91c1c}
+.btn.kucuk{padding:7px 11px;font-size:13px;border-radius:9px}
+.btn:disabled{opacity:.45;cursor:default}
+.satir{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.alan{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;flex:1;min-width:170px}
+.alan label{font-size:12.5px;font-weight:600;color:var(--soluk)}
+.alan input,.alan select,.alan textarea,.gir{border:1px solid #cbd5e1;border-radius:10px;padding:10px 12px;background:#fff;width:100%;color:var(--yazi)}
+.alan input:focus,.alan textarea:focus,.gir:focus,textarea:focus{outline:2px solid #93c5fd;border-color:#60a5fa}
+.cipler{display:flex;flex-wrap:wrap;gap:6px}
+.cip{border:1px solid var(--cizgi);background:#fff;border-radius:999px;padding:7px 13px;font-size:13.5px;font-weight:600;color:var(--yazi)}
+.cip.aktif{background:var(--ana);color:#fff;border-color:var(--ana)}
+.cip .say{font-weight:500;opacity:.7;margin-left:4px}
+.bos{text-align:center;color:var(--soluk);padding:26px 10px}
+.bos .buyuk{font-size:40px}
+.ipucu{background:#fffbeb;border:1px solid #fde68a;color:#78350f;border-radius:12px;padding:10px 13px;font-size:13.5px;line-height:1.5;margin-bottom:12px}
+.ilerleme{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden}
+.ilerleme i{display:block;height:100%;background:linear-gradient(90deg,var(--altin),#d6a85a);border-radius:99px;transition:width .3s}
+
+/* Kadro & öğrenci tabloları */
+.tablo{width:100%;border-collapse:collapse;font-size:14px}
+.tablo td,.tablo th{padding:7px 6px;border-bottom:1px solid #eef2f7;text-align:left;vertical-align:middle}
+.tablo th{font-size:12px;color:var(--soluk);font-weight:600}
+.tablo input{border:1px solid transparent;background:transparent;padding:7px 8px;border-radius:8px;width:100%}
+.tablo input:hover{border-color:var(--cizgi)}
+.tablo input:focus{border-color:#60a5fa;background:#fff;outline:none}
+.sil{border:0;background:transparent;color:#94a3b8;font-size:17px;padding:4px 8px;border-radius:8px}
+.sil:hover{background:#fee2e2;color:#b91c1c}
+.iki{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.iki{grid-template-columns:1fr}}
+.karneDuzen{display:grid;grid-template-columns:minmax(240px,320px) minmax(0,1fr);gap:14px;align-items:start}
+@media(max-width:820px){.karneDuzen{grid-template-columns:minmax(0,1fr)}}
+
+/* Görüş yazma */
+.ogrKart{background:#fff;border:1px solid var(--cizgi);border-radius:16px;padding:14px;margin-bottom:12px;transition:border-color .2s}
+.ogrKart.tamam{border-color:#86efac;box-shadow:inset 4px 0 0 #22c55e}
+.ogrUst{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ogrNo{background:var(--krem);color:var(--ana);font-weight:700;font-size:12.5px;border-radius:8px;padding:4px 8px;min-width:38px;text-align:center}
+.ogrAd{font-weight:700;font-size:16px;flex:1}
+.durum{font-size:12.5px;color:var(--soluk)}
+.durum.ok{color:var(--yesil);font-weight:600}
+.seviyeler{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+@media(max-width:640px){.seviyeler{grid-template-columns:1fr}}
+.sev{background:#f8fafc;border-radius:11px;padding:7px 8px}
+.sev small{display:block;font-size:11.5px;font-weight:700;color:var(--soluk);margin-bottom:5px;letter-spacing:.3px}
+.sevBtnlar{display:flex;gap:4px}
+.sevBtnlar button{flex:1;border:1px solid var(--cizgi);background:#fff;border-radius:8px;padding:6px 2px;font-size:12.5px;font-weight:600;color:var(--soluk)}
+.sevBtnlar button.s1.aktif{background:#fff7ed;border-color:#fb923c;color:#c2410c}
+.sevBtnlar button.s2.aktif{background:#eff6ff;border-color:#60a5fa;color:#1d4ed8}
+.sevBtnlar button.s3.aktif{background:#f0fdf4;border-color:#4ade80;color:#15803d}
+.gorusMetin{width:100%;min-height:96px;border:1px solid #cbd5e1;border-radius:12px;padding:11px 12px;line-height:1.55;resize:vertical;font-size:15px}
+.gorusAlt{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:7px;flex-wrap:wrap}
+.sayac{font-size:12px;color:var(--soluk)}
+.sayac.uzun{color:var(--turuncu);font-weight:600}
+
+/* Takip */
+.matris{overflow:auto;border:1px solid var(--cizgi);border-radius:12px;background:#fff}
+.matris table{border-collapse:collapse;font-size:13px;min-width:100%}
+.matris th,.matris td{border-bottom:1px solid #f1f5f9;padding:7px 8px;text-align:center;white-space:nowrap}
+.matris th{background:#f8fafc;font-size:11.5px;color:var(--soluk);position:sticky;top:0}
+.matris td:first-child,.matris th:first-child{text-align:left;position:sticky;left:0;background:#fff;z-index:1}
+.matris th:first-child{background:#f8fafc;z-index:2}
+.tik{color:#16a34a;font-weight:800}
+.eksik{color:#cbd5e1}
+.ozetKutular{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.ozet{background:#fff;border:1px solid var(--cizgi);border-radius:14px;padding:12px 14px}
+.ozet b{display:block;font-size:24px;color:var(--ana)}
+.ozet span{font-size:12.5px;color:var(--soluk)}
+
+/* Karne listesi */
+.karneSatir{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid #f1f5f9}
+.karneSatir:last-child{border-bottom:0}
+.karneSatir .ad{flex:1;font-weight:600}
+.rozet{font-size:11.5px;font-weight:700;border-radius:99px;padding:3px 9px;background:#f1f5f9;color:var(--soluk)}
+.rozet.tam{background:#dcfce7;color:#166534}
+.rozet.yarim{background:#fef3c7;color:#92400e}
+.onizlemeKap{background:#d6dbe3;border-radius:14px;padding:14px;overflow:hidden}
+.olcek{transform-origin:top left}
+
+/* Modal */
+.perde{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px}
+.pencere{background:#fff;border-radius:20px;max-width:620px;width:100%;max-height:88vh;overflow:auto;padding:20px;box-shadow:0 25px 60px rgba(0,0,0,.3)}
+.pencere.genis{max-width:980px}
+.pencereUst{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px}
+.pencereUst h3{margin:0;color:var(--ana);font-size:17px}
+.cumleGrup{margin-bottom:12px}
+.cumleGrup b{font-size:12.5px;color:var(--soluk);display:block;margin-bottom:6px;letter-spacing:.3px}
+.cumle{display:block;width:100%;text-align:left;border:1px solid var(--cizgi);background:#fff;border-radius:10px;padding:9px 11px;margin-bottom:6px;font-size:14px;line-height:1.45;color:var(--yazi)}
+.cumle:hover{border-color:var(--altin);background:#fffdf7}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#0f172a;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;z-index:400;box-shadow:0 10px 30px rgba(0,0,0,.3);max-width:90vw}
+.adim{display:flex;gap:12px;align-items:flex-start;margin:12px 0}
+.adim i{font-style:normal;background:var(--krem);color:var(--ana);font-weight:800;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none}
+.adim p{margin:3px 0 0;font-size:14px;line-height:1.5}
+.karsilamaKafa{background:linear-gradient(135deg,#1e3a5f,#2c5282);color:#fff;border-radius:16px;padding:18px;margin:-4px -4px 6px;position:relative;overflow:hidden}
+.karsilamaKafa h2{margin:0;font-family:"Playfair Display",Georgia,serif;font-size:23px}
+.karsilamaKafa p{margin:6px 0 0;opacity:.85;font-size:14px}
+.siteKatman{position:fixed;inset:0;z-index:300;background:#fff;display:flex;flex-direction:column}
+.siteKatman .sUst{display:flex;gap:8px;padding:10px;border-bottom:1px solid var(--cizgi);align-items:center}
+.siteKatman iframe{flex:1;border:0;width:100%}
+.cbRozet{position:fixed;left:10px;top:10px;z-index:60;font-size:11px;background:rgba(255,255,255,.8);border:1px solid var(--cizgi);border-radius:99px;padding:3px 8px;color:var(--soluk)}
+
+/* Çocuk Boyu (akıllı tahta): dokunulan her şey alta iner */
+body.cocukBoyu .ust{position:fixed;top:auto;bottom:0;left:0;right:0;margin:0;border-top:1px solid var(--cizgi);border-bottom:0;padding-bottom:8px}
+body.cocukBoyu #app{padding-top:14px;padding-bottom:150px}
+body.cocukBoyu .perde{align-items:flex-end}
+body.cocukBoyu .pencere{max-height:62vh}
+body.cocukBoyu .toast{bottom:130px}
+
+/* ================= KARNE (A4) ================= */
+.karne{--c1:#1e3a5f;--c2:#b8893b;--c3:#f6f1e6;--c4:#fbf9f4;--fs:10.6px;width:210mm;height:297mm;position:relative;background:#fff;overflow:hidden;color:#1f2937;font-family:Inter,"Segoe UI",Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.karne.t-bordo{--c1:#7a1f2b;--c2:#b8893b;--c3:#f8efe9;--c4:#fcf8f5}
+.karne.t-zumrut{--c1:#14532d;--c2:#b8893b;--c3:#eef5ee;--c4:#f8fbf7}
+.karne.t-mor{--c1:#3b2a6b;--c2:#c09a4a;--c3:#f1eef8;--c4:#f9f8fc}
+.karne .kCer1{position:absolute;inset:6mm;border:2.4px solid var(--c1);border-radius:2mm}
+.karne .kCer2{position:absolute;inset:8.2mm;border:.9px solid var(--c2);border-radius:1.4mm}
+.karne .kKose{position:absolute;width:15mm;height:15mm;color:var(--c2)}
+.karne .kKose.k1{left:4.2mm;top:4.2mm}.karne .kKose.k2{right:4.2mm;top:4.2mm;transform:scaleX(-1)}
+.karne .kKose.k3{left:4.2mm;bottom:4.2mm;transform:scaleY(-1)}.karne .kKose.k4{right:4.2mm;bottom:4.2mm;transform:scale(-1,-1)}
+.karne .kFiligran{position:absolute;left:50%;top:54%;width:120mm;height:120mm;transform:translate(-50%,-50%);opacity:.045;color:var(--c1)}
+.karne .kIc{position:absolute;inset:11mm 13mm 10mm;display:flex;flex-direction:column;overflow:hidden}
+.karne .kIc>*{flex-shrink:0}
+.karne .kIc>.kBosluk{flex-shrink:1}
+.karne .kBas{display:grid;grid-template-columns:24mm 1fr 24mm;align-items:center;gap:3mm;padding-top:1mm}
+.karne .kMuhur{width:23mm;height:23mm;color:var(--c1)}
+.karne .kMuhur img{width:100%;height:100%;object-fit:contain}
+.karne .kOkul{font-size:9.5px;letter-spacing:3.2px;font-weight:700;color:var(--c2);text-align:center;text-transform:uppercase}
+.karne .kBaslik{font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-size:27px;font-weight:800;color:var(--c1);text-align:center;letter-spacing:1.2px;line-height:1.1;margin:1.2mm 0 .8mm}
+.karne .kAlt{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:12px;color:#475569;text-align:center}
+.karne .kDonem{display:flex;justify-content:center;margin-top:2mm}
+.karne .kDonem span{background:var(--c1);color:#fff;font-size:9px;font-weight:700;letter-spacing:1.6px;padding:1.1mm 4mm;border-radius:99px;text-transform:uppercase}
+.karne .kSag{text-align:center;font-size:8px;color:var(--c1);font-weight:700;letter-spacing:.6px;line-height:1.3}
+.karne .kSag .kYil{font-family:"Playfair Display",Georgia,serif;font-size:15px;font-weight:800;display:block}
+.karne .kBilgi{display:grid;grid-template-columns:2.2fr 1fr 1fr 1.2fr;margin-top:4.5mm;background:var(--c3);border:1px solid color-mix(in srgb,var(--c2) 45%,transparent);border-radius:2.2mm;overflow:hidden}
+.karne .kBilgi div{padding:2.2mm 3mm;border-right:1px solid color-mix(in srgb,var(--c2) 30%,transparent)}
+.karne .kBilgi div:last-child{border-right:0}
+.karne .kBilgi small{display:block;font-size:7.3px;font-weight:700;color:var(--c2);letter-spacing:1px;text-transform:uppercase}
+.karne .kBilgi b{display:block;font-size:12.5px;color:var(--c1);margin-top:.6mm;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.karne .kBolum{display:flex;align-items:center;gap:3mm;margin:4.2mm 0 2.8mm;font-size:8.8px;font-weight:800;letter-spacing:2.2px;color:var(--c1);text-transform:uppercase}
+.karne .kBolum::before,.karne .kBolum::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--c2),transparent)}
+.karne .kIzgara{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm}
+.karne .kIzgara.tek{grid-template-columns:1fr}
+.karne .kKart{background:var(--c4);border:1px solid #ece6d8;border-left:2.6px solid var(--c2);border-radius:1.8mm;padding:2.2mm 3mm 2.4mm;break-inside:avoid}
+.karne .kKart.genel{grid-column:1/-1;background:linear-gradient(135deg,var(--c3),#fff);border-left-color:var(--c1)}
+.karne .kKartUst{display:flex;justify-content:space-between;align-items:baseline;gap:2mm;margin-bottom:1mm}
+.karne .kDers{font-size:calc(var(--fs) + .6px);font-weight:800;color:var(--c1)}
+.karne .kOgr{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:calc(var(--fs) - .4px);color:#6b7280;white-space:nowrap}
+.karne .kPiller{display:flex;gap:1.2mm;flex-wrap:wrap;margin:.6mm 0 1.2mm}
+.karne .kPil{font-size:calc(var(--fs) - 3px);font-weight:700;border-radius:99px;padding:.35mm 2mm;letter-spacing:.2px}
+.karne .p3{background:#dcfce7;color:#166534}.karne .p2{background:#dbeafe;color:#1e40af}.karne .p1{background:#ffedd5;color:#9a3412}
+.karne .kMetin{font-size:var(--fs);line-height:1.47;color:#1f2937;text-align:justify;hyphens:auto}
+.karne .kBosluk{flex:1;min-height:2mm}
+.karne .kImzalar{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm;margin-top:3mm;text-align:center}
+.karne .kImza{border-top:1px solid #94a3b8;padding-top:1.4mm;font-size:9px;color:#334155}
+.karne .kImza b{display:block;font-size:9.8px;color:var(--c1)}
+.karne .kImza span{font-size:8px;color:#64748b;letter-spacing:.4px}
+.karne .kAyak{display:flex;align-items:center;gap:3mm;margin-top:4mm;padding-top:2.4mm;border-top:1px solid #ece6d8}
+.karne .kAyakYazi{flex:1;font-family:"Playfair Display",Georgia,serif;font-style:italic;font-size:10.2px;color:#475569;line-height:1.4}
+.karne .kAyakYazi b{font-style:normal;color:var(--c1)}
+.karne .kEtiket{background:var(--c1);color:#fff;font-weight:800;font-size:8.6px;letter-spacing:2px;padding:1.6mm 3.4mm;border-radius:1.4mm;white-space:nowrap;position:relative}
+.karne .kEtiket::after{content:"";position:absolute;inset:.7mm;border:.6px solid var(--c2);border-radius:1mm}
+.karne .kRozet{width:19mm;height:19mm;color:var(--c2);flex:none}
+.karne.uzun{height:auto;min-height:297mm}
+.karne.uzun .kCer1,.karne.uzun .kCer2,.karne.uzun .kKose,.karne.uzun .kFiligran{display:none}
+.karne.uzun .kKart{break-inside:avoid;page-break-inside:avoid}
+.karne.uzun .kIc{position:relative;inset:auto;margin:11mm 13mm 10mm}
+
+#yazdirAlani{position:absolute;left:-99999px;top:0}
+.bulutRozet{border:1px solid var(--cizgi);background:#fff;border-radius:999px;padding:7px 11px;font-size:12.5px;font-weight:700;white-space:nowrap;flex:none;color:var(--soluk)}
+.bulutRozet.ok{color:#15803d;border-color:#bbf7d0;background:#f0fdf4}.bulutRozet.bek{color:#b45309;border-color:#fde68a;background:#fffbeb}
+.bulutRozet.hata{color:#b91c1c;border-color:#fecaca;background:#fef2f2}
+@media(max-width:520px){.bulutRozet .uzunYazi{display:none}}
+@media(max-width:520px){.ustBaslik b{font-size:17px;white-space:nowrap}.ustBaslik span{font-size:11px}.ustSatir{gap:7px}.ikonBtn{width:36px;height:36px}}
+.arsivBant{background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;border-radius:12px;padding:10px 13px;margin:-4px 0 14px;font-size:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.taniSatir{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #f1f5f9;font-size:14px}
+.taniSatir b{display:block}.taniSatir small{color:var(--soluk)}
+@page{size:A4 portrait;margin:0}
+@media print{
+  html,body{background:#fff!important;zoom:1!important}
+  body>*:not(#yazdirAlani){display:none!important}
+  #yazdirAlani{position:static!important;left:auto}
+  #yazdirAlani .karne{page-break-after:always;break-after:page;box-shadow:none}
+  #yazdirAlani .karne:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="yazdirAlani"></div>
+
+<script>
+/* ============================================================
+   DEĞİŞİM KOLEJİ · ÖĞRENCİ GELİŞİM KARNESİ  — sürüm 1
+   Tek dosya · çevrimdışı çalışır · veriler bu bilgisayarda saklanır
+   ============================================================ */
+var SURUM = 4;
+var ANAHTAR = 'dkKarne_v1';
+var SITE = 'https://baris-ogretmen.github.io/site-1/';
+
+var VARSAYILAN_KADRO = [
+  ['Sınıf Öğretmeni',''],
+  ['Beden Eğitimi','Gülay Öğretmen'],
+  ['Robotik ve Kodlama','Barış Öğretmen'],
+  ['Matematik','Uğur Öğretmen'],
+  ['İngilizce','Erva Öğretmen'],
+  ['İngilizce','Ayça Öğretmen'],
+  ['Speaking','Sede Öğretmen'],
+  ['Sosyal Bilgiler','Nurbanu Öğretmen'],
+  ['Türkçe','Gamze Öğretmen'],
+  ['Fen Bilgisi','Tuncay Öğretmen'],
+  ['İngilizce','Derya Öğretmen']
+];
+/* Değişim Koleji e-Okul sınıf listeleri (Ekim 2026). Kimlikler sabittir: farklı cihazlardan gelen görüşler sorunsuz birleşir. */
+var OKUL_LISTESI = [["Ana Sınıfı A","",[["4","Ayaz Selim Gögce"],["5","Dolunay Vuralgil"],["6","Miray Uluslar"],["9","Ramin İbrahim"],["10","Hamza Daşdan"],["11","Yusuf Daşdan"],["12","Yamaç Koca"],["16","Miray Çelikgün"],["4641","Kübra Neva Seven"]]],["Ana Sınıfı B","",[["1","Ahsen Kurt"],["2","Çağdaş Armağan Aksakal"],["3","Karan Aydın"],["7","Aylol Bekkouche"],["8","Metehan Sağlam"],["15","Mehmet Selim Ateş"]]],["1A","",[["72","Derya Erkoç"],["132","Fatma Nil Cengiz"],["140","Davran Ibragimov"],["256","Ahsen Taç"],["263","Noah Naamna"],["364","Yusuf Kaya"],["590","Yaman Ali Karagöz"],["696","Almira Ayşen Soylu"],["876","Buğlem Pırıl Aksakal"],["3549","Hamza Ahmet Memiş"]]],["2A","Derya Bekiroğlu",[["61","Cihan Topal"],["276","Aras Alpkan"],["332","Alparslan Soylu"],["531","Ali Barlas Paçacı"],["659","Kuzey Ege Gögce"],["666","Agâh Yıldırım"],["740","Ömer Aslan"],["3044","Mina Gönül Uluslar"],["4949","Ömer Taha Aksoy"],["6534","Sümeyye Yadigar Arpa"]]],["3A","",[["21","Tahsin Ömür Dikici"],["34","Defne Koçdemir"],["135","Asya Koca"],["344","Simay Selin Aksakal"],["511","Sarp Samsunlu"],["723","Rami Bekkouche"]]],["4A","Derya Bekiroğlu",[["180","Sihra Azra Alizoroğlu"],["394","Oğuz Kağan Soylu"],["820","Ayşe Nur Yılmaz"],["1044","Yavuz Selim Ertürk"],["1406","Poyraz Mert"],["1407","Zeynep Aydın"],["1453","Utku Sarıbıyık"],["3535","Aras Mert Erçel"],["5555","Ece Bahar Çilingir"],["5949","Mustafa Öztürk"],["6565","Rabia Tüncel"],["7174","Levent İbrahim"],["8120","Atlas Alpkan"],["1008445","Emin Kaya"]]],["5A","",[["76","Ömer Ayaz Yorulmaz"],["106","Mustafa Onur Kurt"],["252","Dastan Ibragimov"],["330","Berat Başer"],["454","Emir Aslan"],["494","Kuzey Koca"],["516","Almila Işıl Atmış"],["834","Dilvin Vuralgil"],["894","Yağız Efe Tırıç"],["3465","Rania Üncü"],["3636","Ayaz Güzelaydın"]]],["6A","",[["22","Ayça Öztürk"],["122","Mikhail Tumgoev"],["156","Aybike Özbatı"],["216","Kerem Bulut"],["542","Yusuf Arda Çelik"],["686","Asım Turan"],["858","Muhammed Kuçar"],["886","İpek Emecen"],["918","Deniz Bekiroğlu"],["942","Zakariya Naamna"],["1000285","Emir Kaya"]]],["7A","",[["49","Fatma Gönül"],["86","Ayşe Pınar Sercan"],["584","Mustafa Mert İşler"],["723","Fatema Bekkouche"]]],["8A","",[["72","Yusuf Tuaç"],["124","Elif Erva Ustaoğlu"],["276","Kıvanç Tanrıverdi"],["281","Selman Emin Kurt"],["810","Zehra Öztürk"],["3404","Dilan Berfin Taşdemir"],["5016","Ailin Ibragimova"],["5020","Zeliha Sancak"],["5032","Beren Alpkan"],["7272","Rüzgar Zerdeşt Yılmaz"]]]];
+function sabitId(s){return String(s).toLocaleLowerCase('tr-TR').replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u').replace(/[^a-z0-9]+/g,'');}
+function okulListesiniKur(){var eklenen=0;
+  OKUL_LISTESI.forEach(function(x){var sid='s_'+sabitId(x[0]);var s=sinifBul(sid);
+    if(!s){s={id:sid,ad:x[0],kadro:VARSAYILAN_KADRO.map(function(k,i){return {id:'r_'+sabitId(x[0])+'_'+i,ders:k[0],ogretmen:(i===0?x[1]:k[1])};})};V.siniflar.push(s);}
+    x[2].forEach(function(o){var oid='o_'+sabitId(x[0])+'_'+o[0];if(!V.ogrenciler.some(function(y){return y.id===oid;})){V.ogrenciler.push({id:oid,sinifId:sid,ad:o[1],no:o[0]});eklenen++;}});});
+  return eklenen;}
+var SEVIYE_AD = {1:'Gelişmekte',2:'İyi',3:'Çok İyi'};
+var ALANLAR = [['akademik','Akademik'],['sosyal','Sosyal'],['duygusal','Duygusal']];
+
+/* ---------- Cümle bankası ({ad} = öğrencinin adı, {ders} = ders) ---------- */
+var BANKA = {
+  akademik:{
+    3:['{ad}, {ders} dersinde konuları hızla kavrıyor ve öğrendiklerini yeni durumlara başarıyla uyguluyor.',
+       '{ad}, derse hazırlıklı geliyor; sorduğu sorular ve yaptığı katkılarla sınıfına örnek oluyor.',
+       '{ad}, {ders} dersinde yüksek bir başarı gösteriyor; görevlerini özenle ve eksiksiz tamamlıyor.'],
+    2:['{ad}, {ders} dersindeki temel kazanımları büyük ölçüde edinmiş durumda; düzenli tekrarla daha da ileri gidecektir.',
+       '{ad}, derse ilgiyle katılıyor; görevlerini çoğunlukla zamanında ve özenle tamamlıyor.',
+       '{ad}, {ders} dersinde istikrarlı bir gelişim gösteriyor; biraz daha dikkat ve tekrarla potansiyelini tam olarak ortaya koyacaktır.'],
+    1:['{ad}, {ders} dersinde gelişim göstermeye devam ediyor; ek tekrar ve evdeki destekle konuları daha iyi pekiştirecektir.',
+       '{ad}, derse katılımını artırdıkça ve görevlerini düzenli takip ettikçe gelişimi hızlanacaktır.',
+       '{ad}, {ders} dersinde adım adım ilerliyor; küçük başarılarının takdir edilmesi motivasyonunu artıracaktır.']
+  },
+  sosyal:{
+    3:['Arkadaşlarıyla uyumlu, yardımsever ve saygılı; grup çalışmalarında sorumluluk almaktan çekinmiyor.',
+       'Sınıf içinde sevilen, paylaşımcı ve iş birliğine açık bir öğrencimiz.'],
+    2:['Arkadaşlarıyla olumlu ilişkiler kuruyor; grup çalışmalarında daha etkin rol alması teşvik edilmektedir.',
+       'Sınıf kurallarına genel olarak uyuyor ve arkadaşlarıyla iyi iletişim kuruyor.'],
+    1:['Paylaşma ve iş birliği becerilerini geliştirmesi için onu desteklemeye devam ediyoruz.',
+       'Arkadaşlarıyla iletişimde ve sınıf kurallarına uyumda gelişim göstermektedir.']
+  },
+  duygusal:{
+    3:['Duygularını uygun biçimde ifade ediyor, özgüveni yüksek ve sınıfta kendini mutlu hissediyor.',
+       'Kendine güveni tam, sakin ve olumlu tutumuyla sınıfa güzel bir enerji katıyor.'],
+    2:['Genel olarak duygularını dengeli yönetiyor; yeni durumlarda kendine güvenini artırmaya devam ediyor.',
+       'Olumlu bir ruh hâliyle derslere katılıyor; zorlandığında yardım istemeyi öğreniyor.'],
+    1:['Duygularını ifade etme ve zorlandığında sakin kalma konusunda gelişim gösteriyor; sabırlı ve destekleyici bir tutumla birlikte ilerliyoruz.',
+       'Özgüvenini artırmak için başarılarının fark edilmesi ve cesaretlendirilmesi önemlidir.']
+  },
+  oneri:['Evde her gün 20 dakika kitap okuması önerilir.',
+    'Derste öğrendiklerinin evde kısa tekrarlarla pekiştirilmesi gelişimini destekleyecektir.',
+    'Ekran süresinin dengelenmesi dikkatine ve odaklanmasına katkı sağlayacaktır.',
+    'Merakını ve yaratıcılığını destekleyen etkinlikler önerilir.',
+    'Gösterdiği emek için kendisini tebrik ediyor, başarılarının devamını diliyorum.',
+    'Ödevlerini düzenli bir saatte yapma alışkanlığı kazanması faydalı olacaktır.']
+};
+/* g = güçlü yön cümleleri (İyi/Çok İyi), z = gelişim cümleleri (Gelişmekte) */
+var DERS_OZEL = {
+  'robotik':{g:['Algoritmik düşünme ve problem çözme becerilerini kodlama etkinliklerinde başarıyla kullanıyor.',
+             'Blok tabanlı kodlamada adımları doğru sıralıyor ve hatalarını kendi başına ayıklayabiliyor.',
+             'Robot tasarım çalışmalarında yaratıcı fikirler üretiyor, takım arkadaşlarıyla uyumlu çalışıyor.'],
+             z:['Kodlama etkinliklerinde adımları sıralama becerisi gelişiyor; kısa ve düzenli denemelerle daha da güçlenecektir.']},
+  'matematik':{g:['İşlem becerileri güçlü; problem çözerken farklı stratejiler deneyebiliyor.'],
+               z:['Sayılar ve işlemler konusunda pratik yapması hızını ve doğruluğunu artıracaktır.']},
+  'türkçe':{g:['Okuduğunu anlama ve kendini ifade etme becerileri gelişiyor; kitap okumaya ilgisi takdire değer.',
+            'Yazılı anlatımında düzenli ve özenli; kelime dağarcığı giderek zenginleşiyor.'],
+            z:['Okuma alışkanlığı kazandıkça okuduğunu anlama ve yazılı anlatım becerileri de güçlenecektir.']},
+  'ingilizce':{g:['Yeni kelimeleri kolayca öğreniyor ve derste İngilizce kullanmaya istekli.'],
+               z:['Dinleme ve anlama becerileri gelişiyor; evde İngilizce şarkı ve çizgi filmlerle desteklenmesi önerilir.']},
+  'speaking':{g:['Konuşma etkinliklerine istekle katılıyor; telaffuzu ve akıcılığı gelişiyor.'],
+              z:['Konuşma sırasında kendine güveni arttıkça daha akıcı cümleler kuracaktır.']},
+  'fen':{g:['Deney ve gözlem etkinliklerine büyük ilgi gösteriyor, merak ederek soru soruyor.',
+         'Bilimsel süreç becerilerini derste etkin biçimde kullanıyor.'],
+         z:['Deney ve gözlem etkinliklerine katılımı arttıkça konuları daha kalıcı öğrenecektir.']},
+  'sosyal bilgiler':{g:['Çevresini ve toplumu tanımaya ilgi duyuyor; derste fikirlerini rahatlıkla paylaşıyor.'],
+                     z:['Derste fikirlerini paylaşmaya teşvik edildikçe konulara ilgisi artacaktır.']},
+  'beden':{g:['Fiziksel etkinliklere istekle katılıyor; takım oyunlarında kurallara uyuyor ve centilmence davranıyor.'],
+           z:['Koordinasyon ve denge becerileri gelişiyor; spora olan ilgisinin desteklenmesi önerilir.']}
+};
+
+/* ---------- Veri: cihazda (localStorage) + bulutta (Firestore) kalıcı ----------
+   Dönem başına ayrı kayıt tutulur; eski dönemler hiçbir zaman silinmez (arşiv). */
+function yeniId(o){return (o||'x')+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function varsayilanAyar(){return {okul:'Değişim Koleji',yil:'2026-2027',donem:'Kasım 2026',mudur:'Mehmet Emin Ateş',rehber:'',logo:'',tema:'lacivert',
+    ayakYazi:'Bu karne, Değişim Koleji öğretmenlerimiz tarafından {ad} için özenle ve özel olarak hazırlanmıştır.',
+    pilGoster:true,bosGizle:true,onerilenUzunluk:350};}
+function bosVeri(){return {ayar:varsayilanAyar(),ayarTs:0,siniflar:[],ogrenciler:[],gorusler:{},kts:{},meta:{},secim:{sinif:'',ogretmen:'',satir:''}};}
+var DEPO='dkKarne2_',V,PK='';
+function pkHesap(a){return sabitId(a.yil)+'_'+sabitId(a.donem);}
+function lsAl(k){try{var s=localStorage.getItem(k);return s?JSON.parse(s):null;}catch(e){return null;}}
+function lsYaz(k,v){localStorage.setItem(k,JSON.stringify(v));}
+function gorunenDonem(){try{return localStorage.getItem(DEPO+'gorunen')||'';}catch(e){return '';}}
+function tamamlaAyar(){var b=varsayilanAyar();for(var k in b){if(V.ayar[k]===undefined)V.ayar[k]=b[k];}V.secim=V.secim||{};}
+function yukle(){var ay=lsAl(DEPO+'ayar'),eski=lsAl(ANAHTAR);V=bosVeri();
+  if(ay&&ay.ayar){V.ayar=ay.ayar;V.ayarTs=ay.ayarTs||0;V.secim=ay.secim||V.secim;}
+  else if(eski&&eski.ayar){V.ayar=eski.ayar;V.secim=eski.secim||V.secim;}
+  tamamlaAyar();PK=gorunenDonem()||pkHesap(V.ayar);donemYukle(PK,eski);}
+function donemYukle(pk,eski){var arsiv=!!gorunenDonem(),d=lsAl(DEPO+'d_'+pk);
+  if(!d&&eski&&eski.siniflar&&eski.siniflar.length&&pkHesap(eski.ayar||V.ayar)===pk)d=gocHazirla(eski);
+  if(!d&&!arsiv){var son=lsAl(DEPO+'sonDonem'),o=(son&&son!==pk)?lsAl(DEPO+'d_'+son):null;
+    if(o)d={siniflar:JSON.parse(JSON.stringify(o.siniflar)),ogrenciler:JSON.parse(JSON.stringify(o.ogrenciler)),gorusler:{},kts:{}};}
+  V.siniflar=d?d.siniflar:[];V.ogrenciler=d?d.ogrenciler:[];V.gorusler=d?(d.gorusler||{}):{};V.kts=d?(d.kts||{}):{};V.goc=d?(d.goc||{}):{};
+  V.meta=(d&&d.meta&&d.meta.donem)?d.meta:(arsiv?((BULUT.donemler||{})[pk]||{yil:'',donem:pk}):{yil:V.ayar.yil,donem:V.ayar.donem});
+  if(!arsiv)V.meta={yil:V.ayar.yil,donem:V.ayar.donem};
+  if(!V.siniflar.length&&!arsiv)okulListesiniKur();}
+/* Eski sürümden (v1–v3) gelen veriyi kalıcı kimliklere taşır; hiçbir görüş kaybolmaz */
+function gocHazirla(eski){var sMap={},oMap={},sinifAdi={};
+  var siniflar=temiz(eski.siniflar).map(function(s){var yeni=/^s_/.test(s.id)?s.id:'s_'+sabitId(s.ad);sMap[s.id]=yeni;sinifAdi[yeni]=s.ad;s.id=yeni;return s;});
+  var ogr=(eski.ogrenciler||[]).map(function(o){var sid=sMap[o.sinifId]||o.sinifId;var yeni=/^o_/.test(o.id)?o.id:(o.no?'o_'+sabitId(sinifAdi[sid]||'')+'_'+o.no:o.id);oMap[o.id]=yeni;return {id:yeni,sinifId:sid,ad:o.ad,no:o.no||''};});
+  var ogrSinifi={};ogr.forEach(function(o){ogrSinifi[o.id]=o.sinifId;});
+  var gor={};Object.keys(eski.gorusler||{}).forEach(function(k){var p=k.split('|'),oid=oMap[p[0]]||p[0],g=temiz(eski.gorusler[k]);if(!g.s)g.s=ogrSinifi[oid]||'';gor[oid+'|'+p[1]]=g;});
+  var goc={};siniflar.forEach(function(s){goc[s.id]={kadro:temiz(s.kadro),ogr:ogr.filter(function(o){return o.sinifId===s.id;})};});
+  return {siniflar:siniflar,ogrenciler:ogr,gorusler:gor,kts:{},goc:goc};}
+var kayitZaman;
+function kaydet(sessiz){try{lsYaz(DEPO+'ayar',{ayar:V.ayar,ayarTs:V.ayarTs,secim:V.secim});
+    lsYaz(DEPO+'d_'+PK,{siniflar:V.siniflar,ogrenciler:V.ogrenciler,gorusler:V.gorusler,kts:V.kts,meta:V.meta,goc:V.goc||{}});
+    if(!gorunenDonem())lsYaz(DEPO+'sonDonem',PK);
+    if(!sessiz)kaydedildiGoster();}
+  catch(e){toast('⚠️ Cihaza kayıt yapılamadı (tarayıcı belleği dolu olabilir). Buluta kayıt devam ediyor.',4000);}
+  bulutPlanla();}
+function kaydedildiGoster(){var el=document.getElementById('kayitDurum');if(el){el.textContent='✓ Kaydedildi';clearTimeout(kayitZaman);kayitZaman=setTimeout(function(){el.textContent='';},1600);}}
+
+function sinifBul(id){for(var i=0;i<V.siniflar.length;i++)if(V.siniflar[i].id===id)return V.siniflar[i];return null;}
+function sinifOgr(sid){return V.ogrenciler.filter(function(o){return o.sinifId===sid;}).sort(function(a,b){
+  var na=parseInt(a.no,10),nb=parseInt(b.no,10);if(!isNaN(na)&&!isNaN(nb)&&na!==nb)return na-nb;return a.ad.localeCompare(b.ad,'tr');});}
+function ogretmenAdi(r,s){return (r.ogretmen||'').trim()||(r.ders+' ('+s.ad+')');}
+function gKey(oid,rid){return oid+'|'+rid;}
+function gorus(oid,rid){return V.gorusler[gKey(oid,rid)];}
+function doluMu(g){return g&&g.metin&&g.metin.trim().length>0;}
+function ilkAd(ad){return (ad||'').trim().split(/\s+/)[0]||'';}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function hash(s){var h=0;for(var i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0;}return Math.abs(h);}
+function buyukTR(s){return String(s||'').toLocaleUpperCase('tr-TR');}
+function sinifIlerleme(s){var ogr=sinifOgr(s.id),top=ogr.length*s.kadro.length,dolu=0;
+  ogr.forEach(function(o){s.kadro.forEach(function(r){if(doluMu(gorus(o.id,r.id)))dolu++;});});return {dolu:dolu,top:top};}
+
+/* ---------- Genel arayüz ---------- */
+var SEKME = 'gorus';
+function toast(m,sure){var t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove();},sure||2600);}
+function modal(html,genis){kapatModal();var p=document.createElement('div');p.className='perde';p.id='perde';
+  p.innerHTML='<div class="pencere'+(genis?' genis':'')+'">'+html+'</div>';
+  p.addEventListener('click',function(e){if(e.target===p)kapatModal();});document.body.appendChild(p);return p;}
+function kapatModal(){var p=document.getElementById('perde');if(p)p.remove();}
+
+var MUHUR_SVG = function(okul){var u=buyukTR(okul||'Değişim Koleji');return '<svg viewBox="0 0 200 200" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">'+
+ '<defs><path id="yayU" d="M 30,100 A 70,70 0 1,1 170,100"/><path id="yayA" d="M 38,104 A 62,62 0 0,0 162,104"/></defs>'+
+ '<circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" stroke-width="3"/>'+
+ '<circle cx="100" cy="100" r="88" fill="none" stroke="currentColor" stroke-width="1"/>'+
+ '<circle cx="100" cy="100" r="52" fill="none" stroke="currentColor" stroke-width="1.6"/>'+
+ '<text font-family="Georgia,serif" font-size="15" font-weight="700" letter-spacing="3" fill="currentColor"><textPath href="#yayU" startOffset="50%" text-anchor="middle">'+esc(u)+'</textPath></text>'+
+ '<text font-family="Georgia,serif" font-size="11" letter-spacing="2.5" fill="currentColor"><textPath href="#yayA" startOffset="50%" text-anchor="middle">★ BİLGİ · SEVGİ · GELECEK ★</textPath></text>'+
+ '<text x="100" y="113" text-anchor="middle" font-family="Georgia,serif" font-size="40" font-weight="700" fill="currentColor">DK</text></svg>';};
+var KOSE_SVG='<svg viewBox="0 0 60 60" width="100%" height="100%"><path d="M4 56 V14 Q4 4 14 4 H56" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 56 V18 Q10 10 18 10 H56" fill="none" stroke="currentColor" stroke-width=".8"/><circle cx="14" cy="14" r="3.2" fill="currentColor"/><path d="M22 14 q6 -6 12 0 q-6 6 -12 0z M14 22 q-6 6 0 12 q6 -6 0 -12z" fill="currentColor" opacity=".8"/></svg>';
+var ROZET_SVG='<svg viewBox="0 0 100 100" width="100%" height="100%"><g fill="currentColor"><path d="M50 3 l7 9 11-4 3 11 11 1-1 11 10 6-6 9 6 9-10 6 1 11-11 1-3 11-11-4-7 9-7-9-11 4-3-11-11-1 1-11-10-6 6-9-6-9 10-6-1-11 11-1 3-11 11 4z" opacity=".95"/></g><circle cx="50" cy="50" r="30" fill="#fff"/><circle cx="50" cy="50" r="27" fill="none" stroke="currentColor" stroke-width="1.2"/><text x="50" y="46" text-anchor="middle" font-family="Georgia,serif" font-size="9" font-weight="700" fill="currentColor">ÖZEL</text><text x="50" y="57" text-anchor="middle" font-family="Georgia,serif" font-size="7.5" fill="currentColor">HAZIRLANMIŞTIR</text><text x="50" y="66" text-anchor="middle" font-size="8" fill="currentColor">★</text></svg>';
+
+function logoHTML(){return V.ayar.logo?'<img src="'+V.ayar.logo+'" alt="">':MUHUR_SVG(V.ayar.okul);}
+
+function ciz(){
+  var a=V.ayar,html='';
+  html+='<div class="ust"><div class="ustSatir"><div class="logoMini" style="color:var(--ana)">'+logoHTML()+'</div>'+
+    '<div class="ustBaslik"><b>Gelişim Karnesi</b><span>'+esc(a.okul)+' · '+esc(V.meta.donem||a.donem)+' <span id="kayitDurum" style="color:#16a34a;font-weight:600"></span></span></div>'+
+    '<button class="bulutRozet" id="bulutRozet" onclick="bulutTani()"></button>'+
+    '<button class="ikonBtn" title="Sitedeki diğer çalışmalar" onclick="siteAc()">🏠</button>'+
+    '<button class="ikonBtn" title="Ayarlar" onclick="sekmeGit(\'ayar\')">⚙️</button></div>'+
+    '<div class="sekmeler">'+
+    sekmeBtn('kurulum','🏫 Sınıflar & Öğrenciler')+sekmeBtn('gorus','✍️ Görüş Yaz')+sekmeBtn('takip','📊 Takip')+sekmeBtn('karne','🖨️ Karneler')+sekmeBtn('ayar','⚙️ Ayarlar')+
+    '</div></div>'+(gorunenDonem()?'<div class="arsivBant">📚 Arşiv görüntüleniyor: <b>'+esc(V.meta.donem)+'</b> '+esc(V.meta.yil||'')+' <button class="btn kucuk" onclick="donemGoster(\'\')">Güncel döneme dön</button></div>':'')+
+    (BULUT.yeniSurum?'<div class="arsivBant" style="background:#ecfdf5;border-color:#a7f3d0;color:#065f46">🔄 Bu sistemin daha yeni bir sürümü var (sürüm '+BULUT.yeniSurum+'). Gruptaki en güncel dosyayı açın — verileriniz bulutta, hiçbiri kaybolmaz.</div>':'')+
+    '<div id="icerik"></div>';
+  document.getElementById('app').innerHTML=html;bulutRozetGuncelle();
+  var ic=document.getElementById('icerik');
+  if(SEKME==='kurulum')ic.innerHTML=cizKurulum();
+  else if(SEKME==='gorus')ic.innerHTML=cizGorus();
+  else if(SEKME==='takip')ic.innerHTML=cizTakip();
+  else if(SEKME==='karne'){ic.innerHTML=cizKarneler();onizlemeYenile();}
+  else ic.innerHTML=cizAyar();
+  cbRozet();
+}
+function sekmeBtn(id,ad){return '<button class="sekme'+(SEKME===id?' aktif':'')+'" onclick="sekmeGit(\''+id+'\')">'+ad+'</button>';}
+function sekmeGit(id){SEKME=id;ciz();window.scrollTo({top:0});}
+function cizKoru(){var y=window.scrollY;ciz();window.scrollTo(0,y);}
+
+function sinifCipleri(fn,secili,ilerlemeGoster){
+  if(!V.siniflar.length)return '';
+  return '<div class="cipler" style="margin-bottom:12px">'+V.siniflar.map(function(s){
+    var ek='';if(ilerlemeGoster){var p=sinifIlerleme(s);ek='<span class="say">'+(p.top?Math.round(p.dolu/p.top*100):0)+'%</span>';}
+    else ek='<span class="say">'+sinifOgr(s.id).length+'</span>';
+    return '<button class="cip'+(s.id===secili?' aktif':'')+'" onclick="'+fn+'(\''+s.id+'\')">'+esc(s.ad)+ek+'</button>';}).join('')+'</div>';
+}
+function seciliSinif(){var s=sinifBul(V.secim.sinif);if(!s&&V.siniflar.length){s=V.siniflar[0];V.secim.sinif=s.id;}return s;}
+function sinifSec(id){V.secim.sinif=id;kaydet(true);ciz();}
+
+/* ================= 1) KURULUM ================= */
+function cizKurulum(){
+  var h='<div class="kart"><h2>🏫 Sınıflar</h2><p class="aciklama">Tüm şubeler e-Okul listesiyle yüklü. Buradaki değişiklikler (kadro, öğrenci) buluta kaydedilir ve tüm öğretmenlerde görünür.</p>'+
+    '<div class="satir"><input class="gir" id="yeniSinif" placeholder="Örn: 4A" style="max-width:180px" onkeydown="if(event.key===\'Enter\')sinifEkle()">'+
+    '<button class="btn" onclick="sinifEkle()">＋ Sınıf Ekle</button>'+
+    '</div>'+
+    '<div class="ipucu" style="margin:14px 0 0;background:#eff6ff;border-color:#bfdbfe;color:#1e3a8a">📄 <b>e-Okul sınıf listesi (PDF) varsa en kolayı bu:</b> PDF’i seçin, sistem tüm şubeleri, öğrenci adlarını ve numaralarını kendisi ekler. Yeni öğrenci gelince güncel PDF’i tekrar yükleyin — yalnızca <b>yeni gelenler</b> eklenir, yazılmış görüşler korunur.'+
+    '<div style="margin-top:10px"><label class="btn" style="cursor:pointer">📄 e-Okul PDF listesi yükle<input type="file" accept="application/pdf,.pdf" multiple hidden onchange="eokulPdf(this)"></label></div></div></div>';
+  if(!V.siniflar.length){
+    h+='<div class="kart bos"><div class="buyuk">🎓</div><p><b>Sınıflar buluttan yükleniyor…</b><br>İnternet bağlantısını kontrol edin. Gerekirse yukarıdan sınıf ekleyebilirsiniz.</p></div>';
+    return h;}
+  var s=seciliSinif();
+  h+=sinifCipleri('sinifSec',s.id,false);
+  var ogr=sinifOgr(s.id);
+  h+='<div class="kart"><div class="satir" style="justify-content:space-between"><h2 style="margin:0">'+esc(s.ad)+' sınıfı</h2>'+
+     '<div class="satir"><button class="btn kucuk cizgili" onclick="sinifYenidenAdlandir(\''+s.id+'\')">✏️ Adını değiştir</button><button class="btn kucuk kirmizi" onclick="sinifSil(\''+s.id+'\')">🙈 Listeden kaldır</button></div></div></div>';
+  h+='<div class="iki"><div class="kart"><h3>👩‍🏫 Öğretmen kadrosu ('+s.kadro.length+')</h3><p class="aciklama">Bu sınıfa giren dersler ve öğretmenler. Karnedeki sıra bu sıradır. Sınıf öğretmeni görüşü karnede “Genel Değerlendirme” olarak en üstte, geniş görünür.</p>'+
+    '<table class="tablo"><tr><th>Ders</th><th>Öğretmen</th><th></th></tr>'+
+    s.kadro.map(function(r,i){return '<tr><td><input value="'+esc(r.ders)+'" onchange="kadroDegis(\''+s.id+'\','+i+',\'ders\',this.value)"></td>'+
+      '<td><input value="'+esc(r.ogretmen)+'" placeholder="Öğretmen adı" onchange="kadroDegis(\''+s.id+'\','+i+',\'ogretmen\',this.value)"></td>'+
+      '<td style="white-space:nowrap"><button class="sil" title="Yukarı" onclick="kadroTasi(\''+s.id+'\','+i+',-1)">↑</button><button class="sil" title="Sil" onclick="kadroSil(\''+s.id+'\','+i+')">✕</button></td></tr>';}).join('')+
+    '</table><div class="satir" style="margin-top:10px"><button class="btn kucuk" onclick="kadroEkle(\''+s.id+'\')">＋ Ders ekle</button>'+
+    '<button class="btn kucuk acik" onclick="kadroHepsine(\''+s.id+'\')">📋 Bu kadroyu tüm sınıflara uygula</button></div></div>';
+  h+='<div class="kart"><h3>🧒 Öğrenciler ('+ogr.length+')</h3>'+
+    '<div class="alan"><label>Listeyi yapıştırın (Excel’den kopyalayabilirsiniz) — her satıra bir öğrenci: “Ad Soyad  No” ya da “No  Ad Soyad”</label>'+
+    '<textarea id="yapistir" rows="4" placeholder="Ali Yılmaz	12&#10;Zeynep Kaya	15&#10;..."></textarea></div>'+
+    '<div class="satir"><button class="btn" onclick="listeEkle(\''+s.id+'\')">＋ Listeyi ekle</button>'+
+    '<label class="btn acik" style="cursor:pointer">📄 Excel / CSV dosyası seç<input type="file" accept=".xlsx,.xls,.csv,.txt" hidden onchange="dosyadanListe(this,\''+s.id+'\')"></label></div>'+
+    (ogr.length?'<table class="tablo" style="margin-top:12px"><tr><th style="width:70px">No</th><th>Ad Soyad</th><th></th></tr>'+
+      ogr.map(function(o){return '<tr><td><input value="'+esc(o.no)+'" onchange="ogrDegis(\''+o.id+'\',\'no\',this.value)"></td><td><input value="'+esc(o.ad)+'" onchange="ogrDegis(\''+o.id+'\',\'ad\',this.value)"></td><td><button class="sil" onclick="ogrSil(\''+o.id+'\')">✕</button></td></tr>';}).join('')+'</table>'
+      :'<p class="aciklama" style="margin-top:12px">Bu sınıfta henüz öğrenci yok.</p>')+'</div></div>';
+  return h;
+}
+function yeniKadro(){return VARSAYILAN_KADRO.map(function(k){return {id:yeniId('r'),ders:k[0],ogretmen:k[1]};});}
+function sinifEkle(ad){ad=(ad||(document.getElementById('yeniSinif')||{}).value||'').trim();if(!ad){toast('Sınıf adı yazın.');return;}
+  if(V.siniflar.some(function(s){return s.ad.toLocaleLowerCase('tr-TR')===ad.toLocaleLowerCase('tr-TR');})){toast(ad+' zaten var.');return;}
+  var sid='s_'+sabitId(ad);if(BULUT.liste[sid]&&BULUT.liste[sid].gizli){geriGetir(sid);return;}var s={id:sid,ad:ad,kadro:VARSAYILAN_KADRO.map(function(k,i){return {id:'r_'+sabitId(ad)+'_'+i,ders:k[0],ogretmen:i===0?'':k[1]};})};
+  V.siniflar.push(s);V.siniflar.sort(sinifSira);V.secim.sinif=s.id;V.kts[sid]=Date.now();BULUT.listeBekleyen[sid]={ad:ad,gizli:false};kaydet();ciz();sinifAbone(sid);}
+function hazirSiniflar(){var eklenen=0;['Ana Sınıfı','1A','2A','3A','4A','5A','6A','7A','8A'].forEach(function(ad){
+  if(!V.siniflar.some(function(s){return s.ad===ad;})){V.siniflar.push({id:yeniId('s'),ad:ad,kadro:yeniKadro()});eklenen++;}});
+  kaydet();ciz();toast(eklenen+' sınıf eklendi. Her sınıfın kadrosunu kontrol etmeyi unutmayın.');}
+function sinifYenidenAdlandir(id){var s=sinifBul(id);var y=prompt('Yeni sınıf adı:',s.ad);if(y&&y.trim()){s.ad=y.trim();V.kts[id]=Date.now();BULUT.listeBekleyen[id]={ad:s.ad,gizli:false};kaydet();ciz();}}
+function sinifSil(id){var s=sinifBul(id);if(!confirm(s.ad+' sınıfı listeden kaldırılsın mı?\n\nHiçbir görüş silinmez; sınıf bulutta saklanır ve Ayarlar → “Kaldırılan sınıflar”dan tek dokunuşla geri getirilebilir.'))return;
+  V.ogrenciler=V.ogrenciler.filter(function(o){return o.sinifId!==id;});
+  V.siniflar=V.siniflar.filter(function(x){return x.id!==id;});V.secim.sinif='';BULUT.listeBekleyen[id]={ad:s.ad,gizli:true};sinifAboneBirak(id);kaydet();ciz();toast(s.ad+' listeden kaldırıldı (bulutta korunuyor).');}
+function kadroDegis(sid,i,alan,deger){sinifBul(sid).kadro[i][alan]=deger.trim();V.kts[sid]=Date.now();kaydet();}
+function kadroEkle(sid){sinifBul(sid).kadro.push({id:yeniId('r'),ders:'Yeni Ders',ogretmen:''});V.kts[sid]=Date.now();kaydet();ciz();}
+function kadroSil(sid,i){var s=sinifBul(sid),r=s.kadro[i];var sayi=sinifOgr(sid).filter(function(o){return doluMu(gorus(o.id,r.id));}).length;
+  if(!confirm(r.ders+(r.ogretmen?' ('+r.ogretmen+')':'')+' bu sınıfın karnesinden kaldırılsın mı?'+(sayi?'\n\n'+sayi+' yazılmış görüş SİLİNMEZ; bulutta saklanmaya devam eder.':'')))return;
+  s.kadro.splice(i,1);V.kts[sid]=Date.now();kaydet();ciz();}
+function kadroTasi(sid,i,y){var k=sinifBul(sid).kadro;if(i+y<0||i+y>=k.length)return;var t=k[i];k[i]=k[i+y];k[i+y]=t;V.kts[sid]=Date.now();kaydet();ciz();}
+function kadroHepsine(sid){var kaynak=sinifBul(sid);if(!confirm('“'+kaynak.ad+'” kadrosu diğer tüm sınıflara kopyalansın mı?\n(Aynı ders + öğretmen satırlarındaki yazılmış görüşler korunur. Sınıf öğretmeni adları korunur.)'))return;
+  V.siniflar.forEach(function(s){if(s===kaynak)return;var eski=s.kadro;
+    s.kadro=kaynak.kadro.map(function(r){var es=eski.filter(function(e){return e.ders===r.ders&&(e.ogretmen===r.ogretmen||r.ders==='Sınıf Öğretmeni');})[0];
+      return {id:es?es.id:yeniId('r'),ders:r.ders,ogretmen:(r.ders==='Sınıf Öğretmeni'&&es)?es.ogretmen:(r.ders==='Sınıf Öğretmeni'?'':r.ogretmen)};});V.kts[s.id]=Date.now();});
+  kaydet();toast('Kadro tüm sınıflara uygulandı.');}
+function satirCoz(satir){
+  satir=satir.replace(/\r/g,'').trim();if(!satir)return null;
+  if(/^(s\.?\s*)?(no|numara|okul no|ad|adı|ad soyad|adı soyadı|öğrenci|öğrenci adı|isim|sıra)([\s\t;,]+(no|numara|ad|adı|soyad|soyadı|ad soyad|adı soyadı|öğrenci adı|isim|okul no))*$/i.test(satir))return null;
+  var p=satir.split(/\t|;|,|\s{2,}/).map(function(x){return x.trim();}).filter(Boolean);
+  var no='',ad='';
+  if(p.length>=2){var sayiIdx=-1;p.forEach(function(x,i){if(sayiIdx<0&&/^\d{1,6}$/.test(x))sayiIdx=i;});
+    if(sayiIdx>-1){no=p[sayiIdx];ad=p.filter(function(x,i){return i!==sayiIdx&&!/^\d+$/.test(x);}).join(' ');}else ad=p.join(' ');}
+  else{var m=satir.match(/^(\d{1,6})[\s.\-)]+(.+)$/)||null;var m2=satir.match(/^(.+?)\s+(\d{1,6})$/)||null;
+    if(m){no=m[1];ad=m[2];}else if(m2){ad=m2[1];no=m2[2];}else ad=satir;}
+  ad=ad.replace(/\s+/g,' ').trim();
+  if(!ad||/^(ad|adı|ad soyad|adı soyadı|öğrenci|isim)$/i.test(ad))return null;
+  ad=ad.split(' ').map(function(k){return k.charAt(0).toLocaleUpperCase('tr-TR')+k.slice(1).toLocaleLowerCase('tr-TR');}).join(' ');
+  return {ad:ad,no:no};
+}
+function listeyiIsle(metin,sid){var n=0;metin.split('\n').forEach(function(l){var o=satirCoz(l);if(o){
+  if(V.ogrenciler.some(function(x){return x.sinifId===sid&&x.ad===o.ad;}))return;
+  var s=sinifBul(sid);V.ogrenciler.push({id:o.no?('o_'+sabitId(s.ad)+'_'+o.no):yeniId('o'),sinifId:sid,ad:o.ad,no:o.no});n++;}});V.kts[sid]=Date.now();kaydet();ciz();toast(n+' öğrenci eklendi.');}
+function listeEkle(sid){var t=document.getElementById('yapistir').value;if(!t.trim()){toast('Önce listeyi kutuya yapıştırın.');return;}listeyiIsle(t,sid);}
+function dosyadanListe(inp,sid){var f=inp.files[0];if(!f)return;
+  if(/\.(xlsx|xls)$/i.test(f.name)){toast('Excel okunuyor…');betikYukle('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js',function(ok){
+      if(!ok){toast('Excel okuyucu yüklenemedi (internet?). Excel’den kopyalayıp kutuya yapıştırabilirsiniz.',4200);return;}
+      var r=new FileReader();r.onload=function(){try{var wb=XLSX.read(r.result,{type:'array'});var ws=wb.Sheets[wb.SheetNames[0]];
+        var rows=XLSX.utils.sheet_to_json(ws,{header:1});listeyiIsle(rows.map(function(x){return (x||[]).join('\t');}).join('\n'),sid);}catch(e){toast('Dosya okunamadı.');}};
+      r.readAsArrayBuffer(f);});}
+  else{var r=new FileReader();r.onload=function(){listeyiIsle(String(r.result),sid);};r.readAsText(f,'UTF-8');}}
+function ogrDegis(id,alan,d){V.ogrenciler.forEach(function(o){if(o.id===id){o[alan]=d.trim();V.kts[o.sinifId]=Date.now();}});kaydet();}
+function ogrSil(id){var o=V.ogrenciler.filter(function(x){return x.id===id;})[0];if(!confirm(o.ad+' bu sınıfın listesinden çıkarılsın mı?\n\nYazılmış görüşleri SİLİNMEZ; e-Okul listesiyle yeniden eklenirse görüşleriyle birlikte geri gelir.'))return;
+  V.ogrenciler=V.ogrenciler.filter(function(x){return x.id!==id;});V.kts[o.sinifId]=Date.now();kaydet();ciz();}
+function betikYukle(src,cb){if(document.querySelector('script[src="'+src+'"]')){cb(true);return;}var s=document.createElement('script');s.src=src;s.onload=function(){cb(true);};s.onerror=function(){cb(false);};document.head.appendChild(s);}
+
+/* ---------- e-Okul PDF sınıf listesi okuyucu ---------- */
+var PDFJS='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.min.js';
+var PDFJS_ISCI='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.worker.min.js';
+function adDuzelt(s){return s.replace(/\s+/g,' ').trim().split(' ').map(function(k){var l=k.toLocaleLowerCase('tr-TR');return l.charAt(0).toLocaleUpperCase('tr-TR')+l.slice(1);}).join(' ');}
+function eokulSatirlar(pdf){var sayfalar=[],i=1;
+  return new Promise(function(coz,red){function sonraki(){if(i>pdf.numPages){coz(sayfalar);return;}
+    pdf.getPage(i).then(function(pg){return pg.getTextContent();}).then(function(tc){
+      var gruplar=[];tc.items.forEach(function(it){if(!it.str||!it.str.trim())return;var y=it.transform[5],x=it.transform[4];
+        var g=gruplar.filter(function(gg){return Math.abs(gg.y-y)<3;})[0];if(!g){g={y:y,p:[]};gruplar.push(g);}g.p.push({x:x,w:it.width||0,s:it.str,h:Math.abs(it.transform[0])||8});});
+      gruplar.sort(function(a,b){return b.y-a.y;});
+      sayfalar.push(gruplar.map(function(g){g.p.sort(function(a,b){return a.x-b.x;});var out='',son=null;
+        g.p.forEach(function(q){if(son){var bosluk=q.x-(son.x+son.w);out+=(bosluk>q.h*0.2)?' ':'';}out+=q.s;son=q;});
+        return out.replace(/\s+/g,' ').trim();}));
+      i++;sonraki();}).catch(red);}sonraki();});}
+function eokulCoz(sayfalar){var siniflar=[],akt=null;
+  sayfalar.forEach(function(satirlar){satirlar.forEach(function(l){
+    var m=l.match(/(Ana\s*Sınıfı|(\d{1,2})\s*\.\s*Sınıf)\s*\/\s*([A-ZÇĞİÖŞÜ])\s*Şubesi/i);
+    if(m){var ad=m[2]?(m[2]+m[3].toLocaleUpperCase('tr-TR')):('Ana Sınıfı '+m[3].toLocaleUpperCase('tr-TR'));
+      akt=siniflar.filter(function(s){return s.ad===ad;})[0];if(!akt){akt={ad:ad,ogretmen:'',ogr:[]};siniflar.push(akt);}return;}
+    if(!akt)return;
+    var t=l.match(/Sınıf Öğretmeni\s*:\s*(.*?)\s*(Sınıf Başkanı|$)/i);if(t){if(t[1].trim())akt.ogretmen=adDuzelt(t[1]);return;}
+    var o=l.match(/^(\d{1,3})\s+(\d{1,9})\s+(.+?)\s+(Erkek|Kız)\s*$/i);
+    if(o&&!akt.ogr.some(function(x){return x.no===o[2];}))akt.ogr.push({no:o[2],ad:adDuzelt(o[3])});});});
+  return siniflar.filter(function(s){return s.ogr.length;});}
+function eokulPdf(inp){var dosyalar=[].slice.call(inp.files);inp.value='';if(!dosyalar.length)return;toast('PDF okunuyor…',1500);
+  betikYukle(PDFJS,function(ok){if(!ok||!window.pdfjsLib){toast('PDF okuyucu yüklenemedi — internet bağlantısını kontrol edin.',4000);return;}
+    var hepsi=[];
+    isciHazirla().then(function(){return Promise.all(dosyalar.map(function(f){return f.arrayBuffer().then(function(b){return pdfjsLib.getDocument({data:b}).promise;}).then(eokulSatirlar).then(function(s){hepsi=hepsi.concat(eokulCoz(s));});}));})
+    .then(function(){if(!hepsi.length){toast('Bu PDF’te e-Okul sınıf listesi bulunamadı.',4000);return;}eokulOnay(hepsi);})
+    .catch(function(){toast('PDF okunamadı. Dosya bozuk ya da şifreli olabilir.',4000);});});}
+var ISCI_URL=null;
+function isciHazirla(){if(ISCI_URL)return Promise.resolve();
+  /* Dosyadan (file://) açıldığında da çalışsın diye işçi betiği blob olarak kurulur */
+  return fetch(PDFJS_ISCI).then(function(r){return r.text();}).then(function(t){ISCI_URL=URL.createObjectURL(new Blob([t],{type:'text/javascript'}));pdfjsLib.GlobalWorkerOptions.workerSrc=ISCI_URL;})
+    .catch(function(){pdfjsLib.GlobalWorkerOptions.workerSrc=PDFJS_ISCI;});}
+var EOKUL_BEKLEYEN=null;
+function sinifSira(a,b){function k(x){var m=x.ad.match(/^(\d+)/);return x.ad.indexOf('Ana')===0?'0'+x.ad:(m?('1'+('0'+m[1]).slice(-2)+x.ad):'9'+x.ad);}return k(a).localeCompare(k(b),'tr');}
+function eokulPlan(liste){return liste.map(function(s){var m=V.siniflar.filter(function(x){return x.ad.toLocaleLowerCase('tr-TR')===s.ad.toLocaleLowerCase('tr-TR');})[0];
+  var var_=m?sinifOgr(m.id):[];var yeni=s.ogr.filter(function(o){return !var_.some(function(x){return (x.no&&x.no===o.no)||x.ad.toLocaleLowerCase('tr-TR')===o.ad.toLocaleLowerCase('tr-TR');});});
+  var giden=var_.filter(function(x){return !s.ogr.some(function(o){return (x.no&&x.no===o.no)||x.ad.toLocaleLowerCase('tr-TR')===o.ad.toLocaleLowerCase('tr-TR');});});
+  return {s:s,mevcut:m,yeni:yeni,giden:giden};});}
+function eokulOnay(liste){liste.sort(sinifSira);EOKUL_BEKLEYEN=liste;var plan=eokulPlan(liste),top=0,yeniTop=0;
+  var satir=plan.map(function(p){top+=p.s.ogr.length;yeniTop+=p.yeni.length;
+    return '<tr><td><b>'+esc(p.s.ad)+'</b>'+(p.mevcut?'':' <span class="rozet tam">yeni sınıf</span>')+(p.s.ogretmen?'<br><small style="color:#64748b">Sınıf öğr.: '+esc(p.s.ogretmen)+'</small>':'')+'</td><td>'+p.s.ogr.length+'</td><td><b style="color:'+(p.yeni.length?'#15803d':'#94a3b8')+'">+'+p.yeni.length+'</b>'+
+      (p.yeni.length&&p.yeni.length<=4&&p.mevcut?'<br><small>'+p.yeni.map(function(o){return esc(o.ad);}).join(', ')+'</small>':'')+
+      (p.giden.length?'<br><small style="color:#c2410c">Listede yok: '+p.giden.map(function(o){return esc(o.ad);}).join(', ')+'</small>':'')+'</td></tr>';}).join('');
+  modal('<div class="pencereUst"><h3>📄 e-Okul listesi okundu</h3><button class="ikonBtn" onclick="kapatModal()">✕</button></div>'+
+   '<p class="aciklama">'+plan.length+' şube, '+top+' öğrenci bulundu. <b>'+yeniTop+' yeni öğrenci</b> eklenecek. Var olan öğrenciler ve yazılmış görüşler değişmez.</p>'+
+   '<table class="tablo"><tr><th>Şube</th><th>Listede</th><th>Eklenecek</th></tr>'+satir+'</table>'+
+   '<p class="aciklama" style="margin-top:10px">💡 Turuncu “Listede yok” yazanlar e-Okul’da görünmeyen öğrencilerdir (nakil olmuş olabilir). Sistem onları silmez; isterseniz kendiniz silebilirsiniz. Yabancı isimlerde harf düzeltmesi gerekirse öğrenci adına dokunup düzeltebilirsiniz.</p>'+
+   '<div class="satir" style="justify-content:flex-end"><button class="btn acik" onclick="kapatModal()">Vazgeç</button><button class="btn altin" onclick="eokulUygula()" '+(yeniTop||plan.some(function(p){return !p.mevcut;})?'':'disabled')+'>✓ '+yeniTop+' öğrenciyi ekle</button></div>');}
+function eokulUygula(){var plan=eokulPlan(EOKUL_BEKLEYEN),n=0,yeniS=0,ilk=null;
+  var geriGelen=[];
+  plan.forEach(function(p){var s=p.mevcut;if(!s&&BULUT.liste['s_'+sabitId(p.s.ad)]&&BULUT.liste['s_'+sabitId(p.s.ad)].gizli){geriGetir('s_'+sabitId(p.s.ad));geriGelen.push(p.s.ad);return;}
+    if(!s){var sl=sabitId(p.s.ad);s={id:'s_'+sl,ad:p.s.ad,kadro:VARSAYILAN_KADRO.map(function(k,i){return {id:'r_'+sl+'_'+i,ders:k[0],ogretmen:i===0?'':k[1]};})};V.siniflar.push(s);yeniS++;V.kts[s.id]=Date.now();BULUT.listeBekleyen[s.id]={ad:s.ad,gizli:false};sinifAbone(s.id);}
+    if(p.s.ogretmen){var so=s.kadro.filter(function(r){return r.ders==='Sınıf Öğretmeni';})[0];if(so&&!so.ogretmen)so.ogretmen=p.s.ogretmen;}
+    p.yeni.forEach(function(o){V.ogrenciler.push({id:'o_'+sabitId(s.ad)+'_'+o.no,sinifId:s.id,ad:o.ad,no:o.no});n++;});V.kts[s.id]=Date.now();if(!ilk)ilk=s;});
+  V.siniflar.sort(sinifSira);
+  if(ilk)V.secim.sinif=ilk.id;kaydet();kapatModal();ciz();toast('✓ '+n+' öğrenci eklendi'+(yeniS?', '+yeniS+' yeni şube açıldı':'')+'.'+(geriGelen.length?' Daha önce kaldırılmış '+geriGelen.join(', ')+' geri getirildi; yeni öğrenci varsa PDF’i bir kez daha yükleyin.':' Kadroları kontrol etmeyi unutmayın.'),5000);}
+
+/* ================= 2) GÖRÜŞ YAZ ================= */
+function tumOgretmenler(){var m={};V.siniflar.forEach(function(s){s.kadro.forEach(function(r){var ad=ogretmenAdi(r,s);m[ad]=m[ad]||[];m[ad].push({s:s,r:r});});});return m;}
+function cizGorus(){
+  if(!V.siniflar.length)return '<div class="kart bos"><div class="buyuk">☁️</div><p><b>Sınıflar yükleniyor…</b><br>Bu dönem için buluttan veri bekleniyor.</p></div>';
+  var ogm=tumOgretmenler(),adlar=Object.keys(ogm).sort(function(a,b){return a.localeCompare(b,'tr');});
+  var sec=V.secim.ogretmen;if(!ogm[sec])sec='';
+  var sinifOgrAdlari=adlar.filter(function(a){return ogm[a].some(function(g){return g.r.ders==='Sınıf Öğretmeni';});}),bransAdlari=adlar.filter(function(a){return sinifOgrAdlari.indexOf(a)<0;});
+  function secenek(a){return '<option'+(a===sec?' selected':'')+' value="'+esc(a)+'">'+esc(a)+'</option>';}
+  var h='<div class="kart"><h2>✍️ Öğretmen Görüşü</h2><p class="aciklama">Adınızı seçin; size ait sınıf ve dersler gelir. Yazdıklarınız anında hem bu cihaza hem buluta kaydedilir; sınıf öğretmeni kendi ekranında hemen görür.</p>'+
+    '<div class="alan" style="max-width:420px"><label>Öğretmen</label><select onchange="ogretmenSec(this.value)"><option value="">— Adınızı seçin —</option>'+
+    '<optgroup label="Sınıf öğretmenleri">'+sinifOgrAdlari.map(secenek).join('')+'</optgroup><optgroup label="Branş öğretmenleri">'+bransAdlari.map(secenek).join('')+'</optgroup></select></div>';
+  if(!sec){h+='</div><div class="ipucu">💡 Listede adınız yoksa <b>Sınıflar & Öğrenciler</b> bölümünden sınıfın kadrosuna ekleyin. Sınıf öğretmeni adı boşsa “Sınıf Öğretmeni (4A)” olarak görünür.</div>';return h;}
+  var gorevler=ogm[sec];var aktif=null;
+  gorevler.forEach(function(g){if(g.r.id===V.secim.satir)aktif=g;});if(!aktif){aktif=gorevler[0];V.secim.satir=aktif.r.id;}
+  h+='<div class="cipler">'+gorevler.map(function(g){var ogr=sinifOgr(g.s.id),d=ogr.filter(function(o){return doluMu(gorus(o.id,g.r.id));}).length;
+    return '<button class="cip'+(g===aktif?' aktif':'')+'" onclick="satirSec(\''+g.r.id+'\')">'+esc(g.s.ad)+' · '+esc(g.r.ders)+'<span class="say">'+d+'/'+ogr.length+'</span></button>';}).join('')+'</div></div>';
+  var s=aktif.s,r=aktif.r,ogr=sinifOgr(s.id);GORUS_EKRAN={sid:s.id,rid:r.id};
+  if(r.ders==='Sınıf Öğretmeni'&&!r.ogretmen)h+='<div class="ipucu" style="background:#eff6ff;border-color:#bfdbfe;color:#1e3a8a">👩‍🏫 <b>'+esc(s.ad)+' sınıf öğretmeni misiniz?</b> Adınızı yazın; karnedeki imza alanında ve listede bu ad görünür.<div class="satir" style="margin-top:8px"><input class="gir" id="soAd" placeholder="Örn: Selin Yılmaz" style="max-width:260px"><button class="btn kucuk" onclick="sinifOgretmeniAdi(\''+s.id+'\',\''+r.id+'\')">Kaydet</button></div></div>';
+  var dolu=ogr.filter(function(o){return doluMu(gorus(o.id,r.id));}).length;
+  h+='<div class="kart" style="padding:14px 18px"><div class="satir" style="justify-content:space-between"><div><b style="color:var(--ana)">'+esc(s.ad)+' · '+esc(r.ders)+'</b> <span class="durum">'+dolu+' / '+ogr.length+' öğrenci tamamlandı</span></div>'+
+    '<div class="satir"><button class="btn kucuk acik" onclick="hepsineHazir(\''+s.id+'\',\''+r.id+'\')">✨ Boş olanlara taslak oluştur</button></div></div>'+
+    '<div class="ilerleme" style="margin-top:10px"><i style="width:'+(ogr.length?dolu/ogr.length*100:0)+'%"></i></div></div>';
+  if(!ogr.length)return h+'<div class="kart bos">Bu sınıfta öğrenci yok. <button class="btn kucuk" onclick="sekmeGit(\'kurulum\')">Öğrenci ekle</button></div>';
+  h+='<div class="ipucu">💡 Üç alanda seviye seçip <b>✨ Taslak oluştur</b>’a basın; sistem öğrenciye özel bir görüş yazar, siz düzeltirsiniz. <b>💡 Cümle ekle</b> ile hazır cümle bankasını kullanabilirsiniz.</div>';
+  h+=ogr.map(function(o){return ogrKartHTML(o,s,r);}).join('');
+  return h;
+}
+function ogrKartHTML(o,s,r){var g=gorus(o.id,r.id)||{},sv=g.sev||{},m=g.metin||'',uz=V.ayar.onerilenUzunluk;
+  return '<div class="ogrKart'+(doluMu(g)?' tamam':'')+'" id="k_'+o.id+'"><div class="ogrUst"><span class="ogrNo">'+esc(o.no||'—')+'</span><span class="ogrAd">'+esc(o.ad)+'</span>'+
+    '<span class="durum'+(doluMu(g)?' ok':'')+'" id="d_'+o.id+'">'+(doluMu(g)?'✓ Yazıldı':'Bekliyor')+'</span></div>'+
+    '<div class="seviyeler">'+ALANLAR.map(function(a){return '<div class="sev"><small>'+buyukTR(a[1])+'</small><div class="sevBtnlar">'+
+      [1,2,3].map(function(n){return '<button class="s'+n+(sv[a[0]]===n?' aktif':'')+'" onclick="sevSec(\''+o.id+'\',\''+r.id+'\',\''+a[0]+'\','+n+',this)">'+SEVIYE_AD[n]+'</button>';}).join('')+'</div></div>';}).join('')+'</div>'+
+    '<textarea class="gorusMetin" id="t_'+o.id+'" placeholder="'+esc(ilkAd(o.ad))+' hakkındaki görüşünüzü yazın…" oninput="metinYaz(\''+o.id+'\',\''+r.id+'\',this)">'+esc(m)+'</textarea>'+
+    '<div class="gorusAlt"><div class="satir"><button class="btn kucuk altin" onclick="taslak(\''+o.id+'\',\''+s.id+'\',\''+r.id+'\')">✨ Taslak oluştur</button>'+
+    '<button class="btn kucuk acik" onclick="cumleAc(\''+o.id+'\',\''+s.id+'\',\''+r.id+'\')">💡 Cümle ekle</button></div>'+
+    '<span class="sayac'+(m.length>uz?' uzun':'')+'" id="c_'+o.id+'">'+m.length+' / ~'+uz+' karakter</span></div></div>';
+}
+var GORUS_EKRAN=null;
+function ogretmenSec(a){V.secim.ogretmen=a;V.secim.satir='';kaydet(true);ciz();}
+function sinifOgretmeniAdi(sid,rid){var ad=(document.getElementById('soAd').value||'').trim();if(ad.length<3){toast('Adınızı yazın.');return;}
+  var r=sinifBul(sid).kadro.filter(function(x){return x.id===rid;})[0];r.ogretmen=ad;V.kts[sid]=Date.now();V.secim.ogretmen=ad;V.secim.satir=rid;kaydet();ciz();toast('✓ Adınız kaydedildi.');}
+function satirSec(id){V.secim.satir=id;kaydet(true);ciz();}
+function gorusAl(oid,rid){var k=gKey(oid,rid);if(!V.gorusler[k])V.gorusler[k]={metin:'',sev:{},ts:0};var g=V.gorusler[k];if(!g.sev)g.sev={};
+  if(!g.s){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0];if(o)g.s=o.sinifId;}if(V.secim.ogretmen)g.y=V.secim.ogretmen;return g;}
+var yazZaman;
+function metinYaz(oid,rid,ta){var g=gorusAl(oid,rid);g.metin=ta.value;g.ts=Date.now();durumGuncelle(oid,g);clearTimeout(yazZaman);yazZaman=setTimeout(function(){kaydet();},400);}
+function durumGuncelle(oid,g){var uz=V.ayar.onerilenUzunluk,c=document.getElementById('c_'+oid),d=document.getElementById('d_'+oid),k=document.getElementById('k_'+oid);
+  if(c){c.textContent=g.metin.length+' / ~'+uz+' karakter';c.className='sayac'+(g.metin.length>uz?' uzun':'');}
+  var ok=doluMu(g);if(d){d.textContent=ok?'✓ Yazıldı':'Bekliyor';d.className='durum'+(ok?' ok':'');}if(k)k.className='ogrKart'+(ok?' tamam':'');}
+function sevSec(oid,rid,alan,n,btn){var g=gorusAl(oid,rid);g.sev[alan]=(g.sev[alan]===n)?0:n;g.ts=Date.now();kaydet();
+  var grup=btn.parentNode.querySelectorAll('button');for(var i=0;i<grup.length;i++)grup[i].classList.toggle('aktif',g.sev[alan]===i+1);}
+function dersAnahtar(ders){var d=(ders||'').toLocaleLowerCase('tr-TR');for(var k in DERS_OZEL){if(d.indexOf(k)>-1)return k;}return null;}
+function taslakMetin(o,s,r,g){var ad=ilkAd(o.ad),ders=r.ders==='Sınıf Öğretmeni'?'derslerinde':r.ders,sv=g.sev||{},h=hash(o.id+r.id);
+  var ak=sv.akademik||2,so=sv.sosyal||2,du=sv.duygusal||2;
+  function sec(dz,n){return dz[(h+n)%dz.length];}
+  var c1=sec(BANKA.akademik[ak],0).replace(/\{ad\}/g,ad).replace(/\{ders\}/g,ders).replace('derslerinde dersinde','derslerinde').replace('derslerinde dersindeki','derslerindeki');
+  var parcalar=[c1];var dk=dersAnahtar(r.ders),genelMi=r.ders==='Sınıf Öğretmeni';
+  if(dk&&!genelMi)parcalar.push(sec(ak===1?DERS_OZEL[dk].z:DERS_OZEL[dk].g,1));
+  parcalar.push(sec(BANKA.sosyal[so],2));
+  if(genelMi||sv.duygusal)parcalar.push(sec(BANKA.duygusal[du],3));
+  if(genelMi||ak===1)parcalar.push(ak===1?BANKA.oneri[0]:(ak===3?BANKA.oneri[4]:sec(BANKA.oneri,5)));
+  return parcalar.join(' ');}
+function taslak(oid,sid,rid){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0],s=sinifBul(sid),r=s.kadro.filter(function(x){return x.id===rid;})[0];
+  var g=gorusAl(oid,rid);if(doluMu(g)&&!confirm('Mevcut metnin yerine yeni taslak yazılsın mı?'))return;
+  g.metin=taslakMetin(o,s,r,g);g.ts=Date.now();kaydet();var ta=document.getElementById('t_'+oid);if(ta)ta.value=g.metin;durumGuncelle(oid,g);}
+function hepsineHazir(sid,rid){var s=sinifBul(sid),r=s.kadro.filter(function(x){return x.id===rid;})[0],n=0;
+  if(!confirm('Görüşü boş olan öğrencilere seçtiğiniz seviyelere göre taslak yazılacak. Sonra mutlaka okuyup düzenleyin. Devam?'))return;
+  sinifOgr(sid).forEach(function(o){var g=gorusAl(o.id,rid);if(!doluMu(g)){g.metin=taslakMetin(o,s,r,g);g.ts=Date.now();n++;}});kaydet();ciz();toast(n+' öğrenciye taslak yazıldı. Lütfen tek tek gözden geçirin.');}
+var CUMLE_HEDEF=null;
+function cumleAc(oid,sid,rid){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0],s=sinifBul(sid),r=s.kadro.filter(function(x){return x.id===rid;})[0];
+  CUMLE_HEDEF={oid:oid,rid:rid};var ad=ilkAd(o.ad),ders=r.ders==='Sınıf Öğretmeni'?'derslerinde':r.ders;
+  function f(t){return t.replace(/\{ad\}/g,ad).replace(/\{ders\}/g,ders).replace('derslerinde dersinde','derslerinde').replace('derslerinde dersindeki','derslerindeki');}
+  function grup(baslik,liste){return '<div class="cumleGrup"><b>'+baslik+'</b>'+liste.map(function(c){return '<button class="cumle" onclick="cumleEkle(this)">'+esc(f(c))+'</button>';}).join('')+'</div>';}
+  var dk=dersAnahtar(r.ders);
+  modal('<div class="pencereUst"><h3>💡 '+esc(o.ad)+' · Cümle bankası</h3><button class="ikonBtn" onclick="kapatModal()">✕</button></div><p class="aciklama">Dokunduğunuz cümle metnin sonuna eklenir. Dilediğiniz kadar seçebilirsiniz.</p>'+
+    (dk?grup('🎯 '+buyukTR(r.ders)+' DERSİNE ÖZEL',DERS_OZEL[dk].g.concat(DERS_OZEL[dk].z)):'')+
+    grup('📘 AKADEMİK — ÇOK İYİ',BANKA.akademik[3])+grup('📘 AKADEMİK — İYİ',BANKA.akademik[2])+grup('📘 AKADEMİK — GELİŞMEKTE',BANKA.akademik[1])+
+    grup('🤝 SOSYAL',BANKA.sosyal[3].concat(BANKA.sosyal[2],BANKA.sosyal[1]))+grup('💛 DUYGUSAL',BANKA.duygusal[3].concat(BANKA.duygusal[2],BANKA.duygusal[1]))+grup('🏡 VELİYE ÖNERİ',BANKA.oneri));}
+function cumleEkle(btn){var g=gorusAl(CUMLE_HEDEF.oid,CUMLE_HEDEF.rid),c=btn.textContent;g.metin=(g.metin.trim()?g.metin.trim()+' ':'')+c;g.ts=Date.now();kaydet();
+  var ta=document.getElementById('t_'+CUMLE_HEDEF.oid);if(ta)ta.value=g.metin;durumGuncelle(CUMLE_HEDEF.oid,g);btn.style.background='#f0fdf4';btn.style.borderColor='#4ade80';}
+
+/* ================= 3) TAKİP ================= */
+function cizTakip(){
+  if(!V.siniflar.length)return '<div class="kart bos"><div class="buyuk">📊</div><p>Henüz sınıf yok.</p></div>';
+  var toplamD=0,toplamT=0;V.siniflar.forEach(function(s){var p=sinifIlerleme(s);toplamD+=p.dolu;toplamT+=p.top;});
+  var tamKarne=0;V.ogrenciler.forEach(function(o){var s=sinifBul(o.sinifId);if(s&&s.kadro.length&&s.kadro.every(function(r){return doluMu(gorus(o.id,r.id));}))tamKarne++;});
+  var h='<div class="ozetKutular"><div class="ozet"><b>'+(toplamT?Math.round(toplamD/toplamT*100):0)+'%</b><span>Genel tamamlanma</span></div>'+
+    '<div class="ozet"><b>'+toplamD+'<small style="font-size:14px;color:#94a3b8"> / '+toplamT+'</small></b><span>Yazılan görüş</span></div>'+
+    '<div class="ozet"><b>'+tamKarne+'<small style="font-size:14px;color:#94a3b8"> / '+V.ogrenciler.length+'</small></b><span>Tamamlanmış karne</span></div></div>';
+  var s=seciliSinif();
+  h+=sinifCipleri('takipSinif',s.id,true);
+  var ogr=sinifOgr(s.id);
+  h+='<div class="kart"><div class="satir" style="justify-content:space-between;margin-bottom:10px"><h2 style="margin:0">'+esc(s.ad)+' · Kim yazdı, kim yazmadı?</h2>'+
+    '<button class="btn kucuk altin" onclick="eksikKopyala(\''+s.id+'\')">📋 Eksik listesini kopyala (WhatsApp)</button></div>';
+  if(!ogr.length)return h+'<p class="aciklama">Bu sınıfta öğrenci yok.</p></div>';
+  h+='<div class="matris"><table><tr><th>Öğrenci</th>'+s.kadro.map(function(r){return '<th title="'+esc(ogretmenAdi(r,s))+'">'+esc(r.ders)+'<br><span style="font-weight:500">'+esc(ilkAd(r.ogretmen)||'—')+'</span></th>';}).join('')+'<th>Durum</th></tr>'+
+    ogr.map(function(o){var d=0;var hucre=s.kadro.map(function(r){var ok=doluMu(gorus(o.id,r.id));if(ok)d++;return '<td>'+(ok?'<span class="tik">✓</span>':'<span class="eksik">○</span>')+'</td>';}).join('');
+      return '<tr><td><b>'+esc(o.ad)+'</b></td>'+hucre+'<td><span class="rozet '+(d===s.kadro.length?'tam':(d?'yarim':''))+'">'+d+'/'+s.kadro.length+'</span></td></tr>';}).join('')+
+    '<tr><td><b>Toplam</b></td>'+s.kadro.map(function(r){var d=ogr.filter(function(o){return doluMu(gorus(o.id,r.id));}).length;return '<td><b style="color:'+(d===ogr.length?'#16a34a':'#c2410c')+'">'+d+'/'+ogr.length+'</b></td>';}).join('')+'<td></td></tr></table></div></div>';
+  return h;
+}
+function takipSinif(id){V.secim.sinif=id;kaydet(true);ciz();}
+function eksikKopyala(sid){var s=sinifBul(sid),ogr=sinifOgr(sid),biten=[],eksik=[];
+  s.kadro.forEach(function(r){var e=ogr.filter(function(o){return !doluMu(gorus(o.id,r.id));}).length;if(e)eksik.push('• '+ogretmenAdi(r,s)+' ('+r.ders+') – '+e+' öğrenci');else biten.push('• '+ogretmenAdi(r,s));});
+  var t='📊 *'+s.ad+' Öğrenci Gelişim Karnesi – Durum*\n\n'+(eksik.length?'⏳ *Eksik görüşler:*\n'+eksik.join('\n')+'\n\n':'🎉 Tüm görüşler tamamlandı!\n\n')+(biten.length?'✅ *Tamamlayan:*\n'+biten.join('\n'):'')+'\n\nSevgili öğretmenlerim, görüşlerinizi en kısa sürede tamamlamanızı rica ederim. 🙏';
+  kopyala(t,'Eksik listesi kopyalandı — WhatsApp grubuna yapıştırabilirsiniz.');}
+function kopyala(t,m){function eski(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}ta.remove();toast(m);}
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(function(){toast(m);},eski);else eski();}
+
+/* ================= 4) KARNELER ================= */
+var ONIZ_OGR='';
+function cizKarneler(){
+  if(!V.siniflar.length)return '<div class="kart bos"><div class="buyuk">🖨️</div><p>Henüz sınıf yok.</p></div>';
+  var s=seciliSinif(),ogr=sinifOgr(s.id);
+  if(!ogr.some(function(o){return o.id===ONIZ_OGR;}))ONIZ_OGR=ogr.length?ogr[0].id:'';
+  var h=sinifCipleri('karneSinif',s.id,true);
+  h+='<div class="kart"><div class="satir" style="justify-content:space-between"><div><h2 style="margin:0">'+esc(s.ad)+' karneleri</h2><p class="aciklama" style="margin:4px 0 0">Yazdır → yazıcıyı seçin. PDF için yazıcı olarak “PDF olarak kaydet”i seçin. Arka plan renkleri otomatik açıktır.</p></div>'+
+    '<div class="satir"><button class="btn altin" onclick="yazdir(\'sinif\')" '+(ogr.length?'':'disabled')+'>🖨️ Tüm sınıfı yazdır ('+ogr.length+')</button>'+
+    '<button class="btn" onclick="yazdir(\'tek\')" '+(ONIZ_OGR?'':'disabled')+'>🖨️ Seçili karneyi yazdır</button></div></div></div>';
+  if(!ogr.length)return h+'<div class="kart bos">Bu sınıfta öğrenci yok.</div>';
+  h+='<div class="karneDuzen"><div class="kart" style="padding:8px 14px">'+
+    ogr.map(function(o){var d=s.kadro.filter(function(r){return doluMu(gorus(o.id,r.id));}).length;
+      return '<div class="karneSatir" style="cursor:pointer;'+(o.id===ONIZ_OGR?'background:#f8fafc;border-radius:10px':'')+'" onclick="onizSec(\''+o.id+'\')"><span class="ogrNo">'+esc(o.no||'—')+'</span><span class="ad">'+esc(o.ad)+'</span><span class="rozet '+(d===s.kadro.length?'tam':(d?'yarim':''))+'">'+d+'/'+s.kadro.length+'</span></div>';}).join('')+
+    '</div><div><div class="onizlemeKap" id="onizKap"><div class="olcek" id="onizOlcek"></div></div><p class="aciklama" id="onizNot" style="margin-top:8px"></p></div></div>';
+  return h;
+}
+function karneSinif(id){V.secim.sinif=id;kaydet(true);ciz();}
+function onizSec(id){ONIZ_OGR=id;ciz();}
+function karneHTML(o){
+  var s=sinifBul(o.sinifId),a=V.ayar,ad=o.ad;
+  var satirlar=s.kadro.map(function(r){return {r:r,g:gorus(o.id,r.id)};}).filter(function(x){return !a.bosGizle||doluMu(x.g);});
+  var genel=satirlar.filter(function(x){return x.r.ders==='Sınıf Öğretmeni';});
+  var diger=satirlar.filter(function(x){return x.r.ders!=='Sınıf Öğretmeni';});
+  function kart(x,genelMi){var g=x.g||{},sv=g.sev||{};
+    var piller=a.pilGoster?ALANLAR.filter(function(al){return sv[al[0]];}).map(function(al){return '<span class="kPil p'+sv[al[0]]+'">'+al[1]+' · '+SEVIYE_AD[sv[al[0]]]+'</span>';}).join(''):'';
+    return '<div class="kKart'+(genelMi?' genel':'')+'"><div class="kKartUst"><span class="kDers">'+(genelMi?'Sınıf Öğretmeni · Genel Değerlendirme':esc(x.r.ders))+'</span><span class="kOgr">'+esc(x.r.ogretmen||'')+'</span></div>'+
+      (piller?'<div class="kPiller">'+piller+'</div>':'')+'<div class="kMetin">'+(doluMu(g)?esc(g.metin.trim()):'<span style="color:#cbd5e1">………………………………………………………………</span>')+'</div></div>';}
+  var sinifOgretmeni=(genel[0]&&genel[0].r.ogretmen)||((s.kadro.filter(function(r){return r.ders==='Sınıf Öğretmeni';})[0]||{}).ogretmen)||'';
+  var tema={lacivert:'',bordo:' t-bordo',zumrut:' t-zumrut',mor:' t-mor'}[a.tema]||'';
+  var ayak=esc(a.ayakYazi||'').replace(/\{ad\}/g,'<b>'+esc(ad)+'</b>').replace(/\{okul\}/g,esc(a.okul));
+  return '<div class="karne'+tema+'">'+
+    '<div class="kCer1"></div><div class="kCer2"></div>'+
+    '<div class="kKose k1">'+KOSE_SVG+'</div><div class="kKose k2">'+KOSE_SVG+'</div><div class="kKose k3">'+KOSE_SVG+'</div><div class="kKose k4">'+KOSE_SVG+'</div>'+
+    '<div class="kFiligran">'+MUHUR_SVG(a.okul)+'</div>'+
+    '<div class="kIc">'+
+      '<div class="kBas"><div class="kMuhur">'+logoHTML()+'</div><div><div class="kOkul">'+esc(a.okul)+'</div><div class="kBaslik">ÖĞRENCİ GELİŞİM KARNESİ</div><div class="kAlt">Öğretmen Görüş ve Değerlendirme Formu</div>'+
+        '<div class="kDonem"><span>'+esc(V.meta.donem||a.donem)+'</span></div></div><div class="kSag"><span class="kYil">'+esc(V.meta.yil||a.yil)+'</span>EĞİTİM ÖĞRETİM<br>YILI</div></div>'+
+      '<div class="kBilgi"><div><small>Öğrencinin Adı Soyadı</small><b>'+esc(ad)+'</b></div><div><small>Okul No</small><b>'+esc(o.no||'—')+'</b></div><div><small>Sınıfı / Şubesi</small><b>'+esc(s.ad)+'</b></div><div><small>Dönem</small><b>'+esc(V.meta.donem||a.donem)+'</b></div></div>'+
+      (genel.length?'<div class="kBolum">Genel Değerlendirme</div><div class="kIzgara tek">'+genel.map(function(x){return kart(x,true);}).join('')+'</div>':'')+
+      '<div class="kBolum">Ders Öğretmenlerimizin Görüşleri</div>'+
+      '<div class="kIzgara'+(diger.length<=2?' tek':'')+'">'+(diger.length?diger.map(function(x){return kart(x,false);}).join(''):'<div class="kMetin" style="color:#94a3b8">Henüz ders öğretmeni görüşü girilmedi.</div>')+'</div>'+
+      '<div class="kBosluk"></div>'+
+      '<div class="kImzalar"><div class="kImza"><b>'+esc(sinifOgretmeni||' ')+'</b><span>SINIF ÖĞRETMENİ</span></div><div class="kImza"><b>'+esc(a.rehber||' ')+'</b><span>REHBERLİK BİRİMİ</span></div><div class="kImza"><b>'+esc(a.mudur||' ')+'</b><span>OKUL MÜDÜRÜ</span></div></div>'+
+      '<div class="kAyak"><div class="kRozet">'+ROZET_SVG+'</div><div class="kAyakYazi">'+ayak+'</div><div class="kEtiket">'+esc(buyukTR(a.okul))+'</div></div>'+
+    '</div></div>';
+}
+function karneTasiyor(ic){var son=ic.querySelector('.kAyak'),bos=ic.querySelector('.kBosluk');return (son.offsetTop+son.offsetHeight>ic.clientHeight+1)||bos.offsetHeight<4;}
+function karneSigdir(el){var ic=el.querySelector('.kIc');var fs=10.6;el.classList.remove('uzun');el.style.setProperty('--fs',fs+'px');
+  var say=0;while(karneTasiyor(ic)&&fs>8&&say<40){fs-=.2;el.style.setProperty('--fs',fs.toFixed(1)+'px');say++;}
+  if(karneTasiyor(ic)){el.style.setProperty('--fs','9.8px');el.classList.add('uzun');return false;}return true;}
+function onizlemeYenile(){var kap=document.getElementById('onizOlcek');if(!kap||!ONIZ_OGR)return;
+  var o=V.ogrenciler.filter(function(x){return x.id===ONIZ_OGR;})[0];kap.innerHTML=karneHTML(o);
+  var el=kap.firstChild;var sigdi=karneSigdir(el);
+  function olcekle(){var w=document.getElementById('onizKap').clientWidth-28;var k=w/el.offsetWidth;kap.style.transform='scale('+k+')';kap.parentNode.style.height=(el.offsetHeight*k+28)+'px';}
+  olcekle();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){karneSigdir(el);olcekle();});
+  var not=document.getElementById('onizNot');if(not)not.innerHTML=sigdi?'✓ Karne tek sayfaya sığıyor (yazı boyutu otomatik ayarlandı).':'⚠️ Görüşler çok uzun; karne 2 sayfaya taşıyor. Bazı görüşleri kısaltmanız önerilir.';}
+window.addEventListener('resize',function(){if(SEKME==='karne')onizlemeYenile();});
+function yazdir(tur){var s=seciliSinif();var liste=tur==='tek'?V.ogrenciler.filter(function(x){return x.id===ONIZ_OGR;}):sinifOgr(s.id);
+  if(!liste.length)return;var alan=document.getElementById('yazdirAlani');alan.innerHTML=liste.map(karneHTML).join('');
+  function hazirla(){var ks=alan.querySelectorAll('.karne'),uzun=0;for(var i=0;i<ks.length;i++){if(!karneSigdir(ks[i]))uzun++;}
+    var z=document.getElementById('app').style.zoom;document.getElementById('app').style.zoom='';
+    if(uzun)toast(uzun+' karne 2 sayfa olacak (görüşler uzun).',3000);
+    setTimeout(function(){window.print();document.getElementById('app').style.zoom=z;},120);}
+  toast('Karneler hazırlanıyor…',1200);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(hazirla);else hazirla();}
+
+/* ================= 5) AYARLAR ================= */
+function cizAyar(){var a=V.ayar;
+  function g(id,lab,val,ph){return '<div class="alan"><label>'+lab+'</label><input value="'+esc(val)+'" placeholder="'+esc(ph||'')+'" onchange="ayarDegis(\''+id+'\',this.value)"></div>';}
+  var h='<div class="kart"><h2>🏷️ Karne bilgileri</h2><p class="aciklama">Bu bilgiler tüm karnelerde görünür.</p><div class="satir" style="align-items:flex-start">'+
+    g('okul','Okul adı (karnedeki etiket)',a.okul)+'<div class="alan"><label>Eğitim öğretim yılı · Dönem</label><div class="gir" style="background:#f8fafc">'+esc(a.yil)+' · <b>'+esc(a.donem)+'</b></div></div></div><div class="satir" style="align-items:flex-start">'+
+    g('mudur','Okul müdürü',a.mudur)+g('rehber','Rehberlik birimi (ad)',a.rehber,'Örn: Özgün Hoca')+'</div>'+
+    '<div class="alan"><label>Alt ibare ({ad} = öğrencinin adı)</label><textarea rows="2" onchange="ayarDegis(\'ayakYazi\',this.value)">'+esc(a.ayakYazi)+'</textarea></div>'+
+    '<div class="alan"><label>Renk teması</label><div class="cipler">'+[['lacivert','🔵 Lacivert-Altın'],['bordo','🟥 Bordo'],['zumrut','🟢 Zümrüt'],['mor','🟣 Mor']].map(function(t){return '<button class="cip'+(a.tema===t[0]?' aktif':'')+'" onclick="ayarDegis(\'tema\',\''+t[0]+'\',1)">'+t[1]+'</button>';}).join('')+'</div></div>'+
+    '<div class="satir"><label class="btn acik" style="cursor:pointer">🖼️ Okul logosu yükle<input type="file" accept="image/*" hidden onchange="logoYukle(this)"></label>'+(a.logo?'<button class="btn kucuk kirmizi" onclick="ayarDegis(\'logo\',\'\',1)">Logoyu kaldır (mühür kullan)</button>':'<span class="aciklama" style="margin:0">Logo yoksa zarif bir okul mührü kullanılır.</span>')+'</div>'+
+    '<div style="margin-top:12px" class="satir"><label class="satir" style="gap:6px"><input type="checkbox" '+(a.pilGoster?'checked':'')+' onchange="ayarDegis(\'pilGoster\',this.checked,1)"> Seviye etiketlerini (Akademik · Çok İyi…) karnede göster</label></div>'+
+    '<div class="satir"><label class="satir" style="gap:6px"><input type="checkbox" '+(a.bosGizle?'checked':'')+' onchange="ayarDegis(\'bosGizle\',this.checked,1)"> Görüş yazılmamış dersleri karnede gösterme</label></div></div>';
+  h+=cizBulutKart()+cizArsivKart();
+  h+='<div class="kart"><h2>💾 Ek yedek (isteğe bağlı)</h2><p class="aciklama">Veriler zaten bulutta ve bu cihazda saklanıyor. Yine de dönem sonunda bir yedek dosyası indirip saklamanız önerilir. İnternetsiz çalışan öğretmen “Görüşlerimi dosya olarak gönder” ile dosya da yollayabilir; “İçe aktar” ile birleşir.</p>'+
+    '<div class="satir"><button class="btn" onclick="disaAktar(\'tam\')">💾 Bu dönemin yedeğini indir</button>'+
+    '<button class="btn acik" onclick="disaAktar(\'ogretmen\')">📤 Görüşlerimi dosya olarak gönder</button>'+
+    '<label class="btn altin" style="cursor:pointer">📥 İçe aktar / birleştir<input type="file" accept=".json" multiple hidden onchange="iceAktar(this)"></label></div></div>';
+  h+='<div class="kart"><h2>🧰 Araçlar</h2><div class="satir">'+
+    '<button class="btn kucuk cizgili" onclick="cocukBoyu()">📏 Çocuk Boyu: '+(document.body.classList.contains('cocukBoyu')?'Açık':'Kapalı')+'</button>'+
+    '<button class="btn kucuk cizgili" onclick="ekranModu()">📺 Ekran: '+EKRAN_AD[ekranIdx()]+'</button>'+
+    '<button class="btn kucuk cizgili" onclick="qrAc()">📲 QR ile paylaş</button>'+
+    '<button class="btn kucuk cizgili" onclick="karsilama(true)">❓ Nasıl kullanılır?</button>'+
+    '<button class="btn kucuk cizgili" onclick="siteAc()">🏠 Sitedeki diğer çalışmalar</button>'+
+    '</div><p class="aciklama" style="margin:12px 0 0">🔒 Veriler okulun kendi bulut veritabanında (Değişim Koleji MEGA sistemiyle aynı Firebase projesi) ve bu cihazda saklanır; üçüncü kişilerle paylaşılmaz. Sistemde “kalıcı silme” yoktur. · Sürüm '+SURUM+'</p></div>';
+  return h;}
+function ayarDegis(k,v,yeniden){V.ayar[k]=typeof v==='string'?v.trim():v;V.ayarTs=Date.now();kaydet();if(yeniden)ciz();}
+function logoYukle(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var img=new Image();img.onload=function(){
+  var m=360,k=Math.min(1,m/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=img.width*k;c.height=img.height*k;c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+  V.ayar.logo=c.toDataURL('image/png');V.ayarTs=Date.now();kaydet();ciz();toast('Logo eklendi.');};img.src=r.result;};r.readAsDataURL(f);}
+function dosyaIndir(ad,metin){var b=new Blob([metin],{type:'application/json'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download=ad;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},1500);}
+function tarihEk(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+function disaAktar(tur){
+  if(tur==='tam'){dosyaIndir('Gelisim_Karnesi_Yedek_'+sabitId(V.meta.donem||'')+'_'+tarihEk()+'.json',JSON.stringify({tip:'dkKarneTam',surum:SURUM,donem:PK,veri:V}));toast('Yedek indirildi.');return;}
+  var ad=V.secim.ogretmen;if(!ad){toast('Önce “Görüş Yaz” bölümünden adınızı seçin.');sekmeGit('gorus');return;}
+  var ogm=tumOgretmenler()[ad]||[],rids={};ogm.forEach(function(g){rids[g.r.id]=1;});var paket={};
+  Object.keys(V.gorusler).forEach(function(k){if(rids[k.split('|')[1]])paket[k]=V.gorusler[k];});
+  var dad='Gorusler_'+ad.replace(/[^\wçğıöşüÇĞİÖŞÜ]+/g,'_')+'_'+tarihEk()+'.json',icerik=JSON.stringify({tip:'dkKarnePaket',surum:SURUM,ogretmen:ad,gorusler:paket}),say=Object.keys(paket).length;
+  if(!say){toast('Henüz yazılmış görüşünüz yok.');return;}
+  try{var dosya=new File([icerik],dad,{type:'application/json'});
+    if(navigator.canShare&&navigator.canShare({files:[dosya]})){navigator.share({files:[dosya],title:'Gelişim Karnesi görüşlerim',text:ad+' – '+say+' öğrenci görüşü'}).then(function(){toast('✓ Gönderildi.');}).catch(function(){});return;}}catch(e){}
+  dosyaIndir(dad,icerik);
+  toast(say+' görüş dosyası indirildi. Bu dosyayı WhatsApp’tan karne sorumlusuna gönderin.',4500);}
+function iceAktar(inp){var dosyalar=[].slice.call(inp.files);if(!dosyalar.length)return;var toplam=0,i=0;
+  function sonraki(){if(i>=dosyalar.length){kaydet();ciz();toast('✓ İçe aktarıldı · '+toplam+' görüş güncellendi.');return;}
+    var r=new FileReader();r.onload=function(){try{var d=JSON.parse(r.result);toplam+=birlestir(d);}catch(e){toast(dosyalar[i].name+' okunamadı.');}i++;sonraki();};r.readAsText(dosyalar[i]);}
+  sonraki();}
+function birlestir(d){var n=0,gor={},harita={};
+  if(d.tip==='dkKarneTam'){var v=d.veri;
+    v.siniflar.forEach(function(s){var m=sinifBul(s.id)||V.siniflar.filter(function(x){return x.ad.toLocaleLowerCase('tr-TR')===s.ad.toLocaleLowerCase('tr-TR');})[0];
+      if(!m){if(BULUT.liste[s.id]&&BULUT.liste[s.id].gizli){geriGetir(s.id);return;}V.siniflar.push(s);V.kts[s.id]=Date.now();BULUT.listeBekleyen[s.id]={ad:s.ad,gizli:false};sinifAbone(s.id);return;}harita[s.id]=m.id;
+      s.kadro.forEach(function(r){var e=m.kadro.filter(function(x){return x.id===r.id||(x.ders===r.ders&&x.ogretmen===r.ogretmen);})[0];
+        if(e)harita[r.id]=e.id;else{m.kadro.push(r);V.kts[m.id]=Date.now();}});});
+    v.ogrenciler.forEach(function(o){var sid=harita[o.sinifId]||o.sinifId;
+      var e=V.ogrenciler.filter(function(x){return x.id===o.id||(x.sinifId===sid&&x.ad===o.ad);})[0];
+      if(e)harita[o.id]=e.id;else{V.ogrenciler.push({id:o.id,sinifId:sid,ad:o.ad,no:o.no});V.kts[sid]=Date.now();}});
+    gor=v.gorusler||{};}
+  else if(d.tip==='dkKarnePaket')gor=d.gorusler||{};else{toast('Bu dosya karne dosyası değil.');return 0;}
+  var ogrIds={},satirIds={},yetim=0;V.ogrenciler.forEach(function(o){ogrIds[o.id]=1;});V.siniflar.forEach(function(s){s.kadro.forEach(function(r){satirIds[r.id]=1;});});
+  Object.keys(gor).forEach(function(k0){var p=k0.split('|'),k=gKey(harita[p[0]]||p[0],harita[p[1]]||p[1]),kp=k.split('|');
+    if(!ogrIds[kp[0]]||!satirIds[kp[1]]){yetim++;return;}
+    var m=V.gorusler[k];if(!m||(gor[k0].ts||0)>(m.ts||0)){V.gorusler[k]=gor[k0];n++;}});
+  if(yetim)setTimeout(function(){toast('⚠️ '+yetim+' görüşün öğrencisi/dersi bu bilgisayarda bulunamadı. Önce aynı kurulum (tam yedek) yüklenmeli.',5000);},2800);
+  return n;}
+
+/* ---------- Örnek veri ---------- */
+function ornekYukle(){
+  var s=V.siniflar.filter(function(x){return x.ad==='4A (Örnek)';})[0];
+  if(!s){s={id:yeniId('s'),ad:'4A (Örnek)',kadro:yeniKadro()};s.kadro[0].ogretmen='Selin Öğretmen';V.siniflar.push(s);
+    [['Ahmet Yıldız','101'],['Elif Demir','102'],['Mert Kaya','103'],['Zeynep Arslan','104'],['Yusuf Çelik','105'],['Defne Şahin','106']].forEach(function(x){V.ogrenciler.push({id:yeniId('o'),sinifId:s.id,ad:x[0],no:x[1]});});
+    var ogr=sinifOgr(s.id);
+    ogr.forEach(function(o,oi){s.kadro.forEach(function(r,ri){if(oi>2&&ri>5)return;var sev={akademik:[3,2,3,2,1,3][(oi+ri)%6],sosyal:[3,3,2,3,2,2][(oi+ri)%6],duygusal:[3,2,3,2,2,3][(oi+ri)%6]};
+      var g={metin:'',sev:sev,ts:Date.now()};g.metin=taslakMetin(o,s,r,g);V.gorusler[gKey(o.id,r.id)]=g;});});}
+  V.secim.sinif=s.id;V.secim.ogretmen='Barış Öğretmen';V.secim.satir='';kaydet();ciz();toast('🎬 Örnek “4A (Örnek)” sınıfı eklendi. İstediğiniz zaman silebilirsiniz.',2000);}
+
+/* ================= ZİRVE: Karşılama · QR · Çocuk Boyu · Ekran · Site ================= */
+function karsilama(zorla){if(!zorla){try{if(localStorage.getItem('zirve_karsilama_karne'))return;}catch(e){}}
+  modal('<div class="karsilamaKafa"><h2>Öğrenci Gelişim Karnesi</h2><p>'+esc(V.ayar.okul)+' · Her öğrenciye, öğretmenlerinin kaleminden özel bir karne.</p></div>'+
+   '<div class="adim"><i>1</i><div><b>Sınıflar ve öğrenciler hazır</b><p>Anaokulundan 8. sınıfa tüm şubeler e-Okul listesiyle yüklü. Yeni öğrenci gelince e-Okul PDF’i ile eklenir.</p></div></div>'+
+   '<div class="adim"><i>2</i><div><b>Her öğretmen adını seçip yazar</b><p>Seviyeleri işaretleyin, ✨ <b>Taslak oluştur</b> ile öğrenciye özel metin hazırlansın, siz son dokunuşu yapın.</p></div></div>'+
+   '<div class="adim"><i>3</i><div><b>Kendiliğinden buluta gider</b><p>Evden, telefondan, bilgisayardan — nerede yazarsanız yazın görüşleriniz anında okulun bulutuna kaydedilir ve sınıf öğretmeninin ekranına düşer. Hiçbir kayıt silinmez; yıllar sonra bile Ayarlar → Arşiv’den açılır.</p></div></div>'+
+   '<div class="adim"><i>4</i><div><b>Sınıf öğretmeni yazdırır</b><p>Tüm görüşler tamamlanınca 🖨️ Karneler’den sertifika görünümlü renkli A4 karneler tek tıkla yazıcıya ya da PDF’e gider; önce Rehberlik Birimine, sonra veliye.</p></div></div>'+
+   '<div class="satir" style="justify-content:flex-end;margin-top:6px"><button class="btn altin" onclick="kapatModal()">Başlayalım ✨</button></div>');
+  try{localStorage.setItem('zirve_karsilama_karne','1');}catch(e){}}
+function qrAc(){var url=location.href;var dosya=location.protocol==='file:';
+  modal('<div class="pencereUst"><h3>📲 QR ile paylaş</h3><button class="ikonBtn" onclick="kapatModal()">✕</button></div>'+
+   (dosya?'<div class="ipucu">Bu sayfa bilgisayardaki bir dosyadan açıldı; QR yalnızca sayfa sitede yayındaysa diğer cihazlarda açılır. Sitedeki bağlantıyı kullanın.</div>':'')+
+   '<div id="qrYer" style="display:grid;place-items:center;background:#fff;padding:14px;min-height:220px">QR hazırlanıyor…</div>'+
+   '<div class="satir" style="justify-content:center"><button class="btn acik" onclick="kopyala(\''+esc(url).replace(/'/g,"\\'")+'\',\'Bağlantı kopyalandı.\')">🔗 Bağlantıyı kopyala</button><button class="btn" onclick="qrIndir()">⬇️ PNG indir</button></div>');
+  betikYukle('https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js',function(ok){var y=document.getElementById('qrYer');if(!y)return;
+    if(!ok||!window.qrcode){y.textContent='QR için internet gerekli.';return;}var q=qrcode(0,'M');q.addData(url);q.make();y.innerHTML=q.createImgTag(6,8);});}
+function qrIndir(){var im=document.querySelector('#qrYer img');if(!im)return;var a=document.createElement('a');a.href=im.src;a.download='Gelisim_Karnesi_QR.gif';a.click();}
+window.ZIRVE_paylasAc=qrAc;
+function cocukBoyu(d){var acik=d===undefined?!document.body.classList.contains('cocukBoyu'):!!d;document.body.classList.toggle('cocukBoyu',acik);
+  try{localStorage.setItem('zirve_cocuk_boyu',acik?'1':'0');}catch(e){}cbRozet();if(SEKME==='ayar')ciz();}
+window.ZIRVE_cocukBoyu=cocukBoyu;
+function cbRozet(){var r=document.getElementById('cbRozet');if(document.body.classList.contains('cocukBoyu')){if(!r){r=document.createElement('div');r.id='cbRozet';r.className='cbRozet';r.textContent='📏 Çocuk Boyu';document.body.appendChild(r);}}else if(r)r.remove();}
+var EKRAN_AD=['Otomatik','Normal','Akıllı Tahta','Büyük Tahta'],EKRAN_Z=[null,1,1.3,1.6];
+function ekranIdx(){try{return parseInt(localStorage.getItem('zirve_ekran_karne')||'0',10)||0;}catch(e){return 0;}}
+function otomatikZoom(){var w=screen.width,dok=('ontouchstart' in window)||navigator.maxTouchPoints>0,dpr=window.devicePixelRatio||1;
+  if(w>=3000)return 1.6;if(w>=1600&&dok&&dpr<=1.25)return 1.3;return 1;}
+function ekranUygula(){var i=ekranIdx(),z=i===0?otomatikZoom():EKRAN_Z[i];document.getElementById('app').style.zoom=z===1?'':z;return z;}
+function ekranModu(){var i=(ekranIdx()+1)%4;try{localStorage.setItem('zirve_ekran_karne',String(i));}catch(e){}ekranUygula();ciz();toast('Ekran: '+EKRAN_AD[i]);}
+window.ZIRVE_ekranReset=function(){document.getElementById('app').style.zoom='';};window.ZIRVE_ekranGeri=ekranUygula;
+function siteAc(){var k=document.createElement('div');k.className='siteKatman';k.id='siteKatman';
+  k.innerHTML='<div class="sUst"><button class="btn" onclick="document.getElementById(\'siteKatman\').remove()">◀ Geri Dön</button><b style="flex:1;color:var(--ana)">Sitedeki diğer çalışmalar</b><a class="btn acik" href="'+SITE+'" target="_top" style="text-decoration:none">Siteye Git ↗</a></div><iframe src="'+SITE+'" title="Site"></iframe>';
+  document.body.appendChild(k);}
+window.addEventListener('online',function(){toast('🌐 İnternet geri geldi — bekleyen kayıtlar buluta gönderiliyor.');
+  if(!BULUT.F&&BULUT.durum==='hata'){setTimeout(guvenliYenile,1500);return;}
+  if(BULUT.durum!=='bagli'&&BULUT.durum!=='baglaniyor')bulutBaslat();else bulutPlanla(true);bulutRozetGuncelle();});
+window.addEventListener('offline',function(){toast('📴 İnternet yok — yazdıklarınız bu cihazda saklanıyor, internet gelince buluta gider.',4000);bulutRozetGuncelle();});
+window.addEventListener('beforeunload',function(e){if(BULUT.bekleyen>0&&navigator.onLine){e.preventDefault();e.returnValue='';}});
+
+/* ================= BULUT (okulun Firestore'u · MEGA ile aynı proje, ayrı kayıtlar) =================
+   Kayıt yeri: maas_config / k12_gk_ayar · k12_gk_<dönem>_liste · k12_gk_<dönem>_<sınıf>
+   Kural: buluttan hiçbir şey silinmez. Görüşler alan alan birleştirilir (en yeni yazım geçerli). */
+var FB_CFG={apiKey:"AIzaSyAqeO-yQyQPnLsOqKmSNvVH23WPvneIjaU",authDomain:"shaped-totem-481514-c5.firebaseapp.com",projectId:"shaped-totem-481514-c5",storageBucket:"shaped-totem-481514-c5.firebasestorage.app",messagingSenderId:"519295049418",appId:"1:519295049418:web:7d04e18c4ea36bc088de33"};
+var FB_URL='https://www.gstatic.com/firebasejs/11.0.1/';
+var KOLEKSIYON='maas_config';
+var BULUT={durum:'yok',hata:'',yazHata:'',okuHata:'',authHata:'',db:null,F:null,abone:{},hazir:{},gonderilen:{sinif:{},g:{},ayarTs:0},
+  liste:{},listeHazir:false,listeBekleyen:{},ayarHazir:false,bekleyen:0,sonOk:0,donemler:{},surumBulut:0,yeniSurum:0,planZ:null,cizZ:null};
+function bRef(ek){return BULUT.F.doc(BULUT.db,KOLEKSIYON,'k12_gk_'+ek);}
+function hataAcikla(e){var c=(e&&e.code)||'',m=(e&&e.message)||String(e||'');
+  if(c.indexOf('permission-denied')>-1)return 'Bulut izni yok (veritabanı kuralları). Barış Öğretmene haber verin. Bu arada yazdıklarınız bu cihazda güvende.';
+  if(c.indexOf('resource-exhausted')>-1)return 'Bulutun günlük kotası doldu; yarın kendiliğinden devam eder. Yazdıklarınız bu cihazda güvende.';
+  if(c.indexOf('unavailable')>-1||!navigator.onLine)return 'Buluta ulaşılamıyor (internet). Yazdıklarınız bu cihazda güvende, internet gelince gönderilir.';
+  if(c.indexOf('invalid-argument')>-1)return 'Kayıt biçimi reddedildi: '+m;
+  return (c?c+': ':'')+m;}
+function bulutBaslat(){if(BULUT.durum==='baglaniyor'||BULUT.durum==='bagli')return;
+  BULUT.durum='baglaniyor';BULUT.hata='';bulutRozetGuncelle();
+  Promise.all([import(FB_URL+'firebase-app.js'),import(FB_URL+'firebase-auth.js'),import(FB_URL+'firebase-firestore.js')]).then(function(m){
+    var A=m[0],Au=m[1],F=m[2];BULUT.F=F;var app;
+    try{app=A.getApp('gelisimKarnesi');}catch(e){app=A.initializeApp(FB_CFG,'gelisimKarnesi');}
+    try{BULUT.db=F.initializeFirestore(app,{localCache:F.persistentLocalCache({tabManager:F.persistentMultipleTabManager()})});}
+    catch(e){try{BULUT.db=F.getFirestore(app);}catch(e2){BULUT.db=F.initializeFirestore(app,{});}}
+    var auth=Au.getAuth(app);
+    return new Promise(function(coz){var bitti=false;function son(){if(!bitti){bitti=true;coz();}}
+      try{Au.onAuthStateChanged(auth,function(u){if(u)son();});}catch(e){}
+      Au.signInAnonymously(auth).then(son).catch(function(e){BULUT.authHata=(e&&e.code)||String(e);son();});
+      setTimeout(son,12000);});
+  }).then(function(){BULUT.durum='bagli';bulutRozetGuncelle();ayarAbone();donemAbone();
+  }).catch(function(e){BULUT.durum='hata';BULUT.hata=navigator.onLine?('Bulut bağlantısı kurulamadı: '+((e&&e.message)||e)):'İnternet yok';bulutRozetGuncelle();
+    if(!BULUT.F)return; /* kütüphane hiç yüklenemediyse internet gelince sayfa güvenle yenilenir (veriler cihazda) */
+    setTimeout(function(){if(BULUT.durum==='hata'){BULUT.durum='yok';bulutBaslat();}},30000);});}
+function guvenliYenile(){var ae=document.activeElement;if(ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='INPUT')){setTimeout(guvenliYenile,5000);return;}
+  kaydet(true);location.reload();}
+function bulutHata(e){BULUT.okuHata=hataAcikla(e);bulutRozetGuncelle();}
+/* Dinleyici hata verirse kapanır; 15 sn sonra yeniden abone olunur */
+function dinleyiciHata(anahtar,yeniden){return function(e){bulutHata(e);if(BULUT.abone[anahtar]){try{BULUT.abone[anahtar]();}catch(x){}delete BULUT.abone[anahtar];}
+  setTimeout(function(){if(!BULUT.abone[anahtar])yeniden();},15000);};}
+function sunucuYok(sn){return !sn.exists()&&sn.metadata&&sn.metadata.fromCache;}
+function ayarAbone(){if(BULUT.abone._ayar)return;
+  BULUT.abone._ayar=BULUT.F.onSnapshot(bRef('ayar'),function(sn){if(sunucuYok(sn))return;var D=sn.exists()?sn.data():{};BULUT.okuHata='';BULUT.ayarHazir=true;
+    BULUT.donemler=D.donemler||{};BULUT.surumBulut=D.surum||0;if(BULUT.surumBulut>SURUM&&BULUT.yeniSurum!==BULUT.surumBulut){BULUT.yeniSurum=BULUT.surumBulut;bulutCizPlanla();}
+    if(D.ayar&&(D.ts||0)>(V.ayarTs||0)){var eskiPk=pkHesap(V.ayar);V.ayar=Object.assign(varsayilanAyar(),D.ayar);V.ayarTs=D.ts;
+      BULUT.gonderilen.ayarTs=D.ts;
+      if(!gorunenDonem()&&pkHesap(V.ayar)!==eskiPk){V.ayar.donem=V.ayar.donem;donemGecisBekle(eskiPk);return;}
+      kaydet(true);bulutCizPlanla();}
+    else BULUT.gonderilen.ayarTs=Math.max(BULUT.gonderilen.ayarTs||0,D.ts||0);
+    bulutPlanla();bulutRozetGuncelle();},dinleyiciHata('_ayar',ayarAbone));}
+/* Dönem değişmeden önce bu cihazdaki gönderilmemiş görüşler eski döneme gönderilir */
+function donemGecisBekle(eskiPk){var yeniAyar=temiz(V.ayar),yeniTs=V.ayarTs,bas=Date.now();
+  V.ayar=Object.assign(varsayilanAyar(),V.ayar);
+  (function bekle(){var hazirSay=V.siniflar.filter(function(s){return BULUT.hazir[s.id];}).length;
+    if(PK===eskiPk&&(hazirSay<V.siniflar.length||BULUT.bekleyen>0)&&Date.now()-bas<25000){bulutFark();setTimeout(bekle,1000);return;}
+    V.ayar=yeniAyar;V.ayarTs=yeniTs;donemDegistir();toast('🗓️ Yeni döneme geçildi: '+V.ayar.donem+'. Önceki dönem arşivde.',4500);})();}
+function aboneBirakHepsi(){Object.keys(BULUT.abone).forEach(function(k){if(k==='_ayar')return;try{BULUT.abone[k]();}catch(e){}delete BULUT.abone[k];});}
+function donemAbone(){if(!BULUT.db)return;aboneBirakHepsi();BULUT.listeHazir=false;BULUT.liste={};BULUT.hazir={};BULUT.gonderilen.sinif={};BULUT.gonderilen.g={};
+  var pk=PK;
+  function listeAbone(){BULUT.abone._liste=BULUT.F.onSnapshot(bRef(pk+'_liste'),function(sn){if(pk!==PK||sunucuYok(sn))return;var D=sn.exists()?sn.data():{};BULUT.okuHata='';
+    BULUT.liste=D.s||{};BULUT.listeHazir=true;var degisti=false;
+    Object.keys(BULUT.liste).forEach(function(sid){var L=BULUT.liste[sid];if(BULUT.listeBekleyen[sid])return;var yerel=sinifBul(sid);
+      if(L.gizli&&yerel){V.siniflar=V.siniflar.filter(function(x){return x.id!==sid;});V.ogrenciler=V.ogrenciler.filter(function(o){return o.sinifId!==sid;});sinifAboneBirak(sid);degisti=true;}
+      else if(!L.gizli&&!yerel){V.siniflar.push({id:sid,ad:L.ad,kadro:[]});V.siniflar.sort(sinifSira);sinifAbone(sid);degisti=true;}
+      else if(!L.gizli&&yerel&&L.ad&&L.ad!==yerel.ad&&!(V.kts[sid]>(L.ts||0))){yerel.ad=L.ad;degisti=true;}});
+    if(degisti){kaydet(true);bulutCizPlanla();}
+    bulutPlanla();bulutRozetGuncelle();},dinleyiciHata('_liste',function(){if(pk===PK)listeAbone();}));}
+  listeAbone();
+  V.siniflar.forEach(function(s){sinifAbone(s.id);});}
+function sinifAbone(sid){if(!BULUT.db||BULUT.abone[sid])return;var pk=PK;
+  BULUT.abone[sid]=BULUT.F.onSnapshot(bRef(pk+'_'+sid),function(sn){if(pk!==PK||sunucuYok(sn))return;BULUT.okuHata='';bulutSinifUygula(sid,sn.exists()?sn.data():null);},
+    dinleyiciHata(sid,function(){if(pk===PK&&sinifBul(sid))sinifAbone(sid);}));}
+function sinifAboneBirak(sid){if(BULUT.abone[sid]){try{BULUT.abone[sid]();}catch(e){}delete BULUT.abone[sid];}delete BULUT.hazir[sid];}
+function ogrSinif(oid){for(var i=0;i<V.ogrenciler.length;i++)if(V.ogrenciler[i].id===oid)return V.ogrenciler[i].sinifId;return '';}
+function sinifOgrDuz(sid){return sinifOgr(sid).map(function(o){return {id:o.id,ad:o.ad,no:o.no||''};});}
+function sirali(o){if(Array.isArray(o))return '['+o.map(sirali).join(',')+']';if(o&&typeof o==='object')return '{'+Object.keys(o).sort().map(function(k){return JSON.stringify(k)+':'+sirali(o[k]);}).join(',')+'}';return JSON.stringify(o===undefined?null:o);}
+function sinifImza(s){return sirali({ad:s.ad,kadro:s.kadro,ogr:sinifOgrDuz(s.id)});}
+function bulutSinifUygula(sid,D){var s=sinifBul(sid);if(!s)return;var once=sinifImza(s),degisti=false;
+  if(D&&D.kadro&&D.kadro.length&&((D.kts||0)>=(V.kts[sid]||0)||!s.kadro.length)){
+    s.ad=D.ad||s.ad;s.kadro=D.kadro;
+    V.ogrenciler=V.ogrenciler.filter(function(o){return o.sinifId!==sid;}).concat((D.ogr||[]).map(function(o){return {id:o.id,sinifId:sid,ad:o.ad,no:o.no||''};}));
+    V.kts[sid]=D.kts||0;var son=sinifImza(s);BULUT.gonderilen.sinif[sid]=son;if(son!==once)degisti=true;}
+  /* eski sürümden taşınan yerel ekler (öğrenci, öğretmen adı) bulut kopyasına eklenir, hiçbiri ezilmez */
+  if(V.goc&&V.goc[sid]){var gc=V.goc[sid],ekle=false;
+    gc.ogr.forEach(function(o){if(!V.ogrenciler.some(function(x){return x.id===o.id||(x.sinifId===sid&&x.ad===o.ad);})){V.ogrenciler.push({id:o.id,sinifId:sid,ad:o.ad,no:o.no});ekle=true;}});
+    gc.kadro.forEach(function(r){var m=s.kadro.filter(function(x){return x.id===r.id||(x.ders===r.ders&&(x.ogretmen===r.ogretmen||!x.ogretmen));})[0];
+      if(m&&!m.ogretmen&&r.ogretmen){m.ogretmen=r.ogretmen;ekle=true;}else if(!m&&r.ogretmen){s.kadro.push(r);ekle=true;}});
+    delete V.goc[sid];if(ekle){V.kts[sid]=Date.now();degisti=true;}}
+  var g=(D&&D.g)||{};
+  Object.keys(g).forEach(function(k){var c=g[k]||{},l=V.gorusler[k];
+    if(!l||(c.ts||0)>(l.ts||0)){V.gorusler[k]={metin:c.metin||'',sev:c.sev||{},ts:c.ts||0,y:c.y||'',s:c.s||sid};degisti=true;BULUT.gonderilen.g[k]=c.ts||0;}
+    else if((l.ts||0)>(c.ts||0))BULUT.gonderilen.g[k]=c.ts||0; /* buluttaki daha eski: yereldeki yeni sürüm yeniden gönderilir */
+    else BULUT.gonderilen.g[k]=Math.max(BULUT.gonderilen.g[k]||0,c.ts||0);});
+  BULUT.hazir[sid]=true;BULUT.sonOk=Date.now();
+  if(degisti){kaydet(true);bulutCizPlanla();}
+  bulutPlanla();bulutRozetGuncelle();}
+function bulutPlanla(hemen){clearTimeout(BULUT.planZ);BULUT.planZ=setTimeout(bulutFark,hemen?60:1600);}
+function temiz(o){return JSON.parse(JSON.stringify(o));}
+function yaz(ek,veri,geriAl){BULUT.bekleyen++;bulutRozetGuncelle();
+  return BULUT.F.setDoc(bRef(ek),temiz(veri),{merge:true}).then(function(){BULUT.bekleyen--;BULUT.sonOk=Date.now();BULUT.yazHata='';bulutRozetGuncelle();},
+    function(e){BULUT.bekleyen--;BULUT.yazHata=hataAcikla(e);if(geriAl)geriAl();bulutRozetGuncelle();setTimeout(function(){bulutPlanla();},20000);});}
+function bulutFark(){if(BULUT.durum!=='bagli'||!BULUT.db)return;var pk=PK;
+  if(BULUT.ayarHazir){var ay={},gerek=false,aktifPk=pkHesap(V.ayar);
+    if((V.ayarTs||0)>(BULUT.gonderilen.ayarTs||0)){ay.ayar=V.ayar;ay.ts=V.ayarTs;gerek=true;}
+    if(!BULUT.donemler[aktifPk]){ay.donemler={};ay.donemler[aktifPk]={yil:V.ayar.yil,donem:V.ayar.donem,ts:Date.now()};gerek=true;}
+    if((BULUT.surumBulut||0)<SURUM){ay.surum=SURUM;gerek=true;}
+    if(gerek){var oncekiTs=BULUT.gonderilen.ayarTs;BULUT.gonderilen.ayarTs=Math.max(oncekiTs||0,V.ayarTs||0);
+      if(ay.donemler)BULUT.donemler[aktifPk]=ay.donemler[aktifPk];if(ay.surum)BULUT.surumBulut=SURUM;
+      yaz('ayar',ay,function(){BULUT.gonderilen.ayarTs=oncekiTs;if(ay.donemler)delete BULUT.donemler[aktifPk];if(ay.surum)BULUT.surumBulut=0;});}}
+  if(BULUT.listeHazir){var up={},var_=false;
+    V.siniflar.forEach(function(s){if(!BULUT.liste[s.id]&&!BULUT.listeBekleyen[s.id]){up[s.id]={ad:s.ad,gizli:false,ts:Date.now()};var_=true;}});
+    Object.keys(BULUT.listeBekleyen).forEach(function(sid){up[sid]=Object.assign({ts:Date.now()},BULUT.listeBekleyen[sid]);var_=true;});
+    if(var_){var bek=BULUT.listeBekleyen;BULUT.listeBekleyen={};Object.keys(up).forEach(function(k){BULUT.liste[k]=up[k];});
+      yaz(pk+'_liste',{s:up},function(){Object.keys(bek).forEach(function(k){BULUT.listeBekleyen[k]=bek[k];});Object.keys(up).forEach(function(k){delete BULUT.liste[k];});});}}
+  V.siniflar.forEach(function(s){if(!BULUT.hazir[s.id])return;var veri=null,sid=s.id;
+    var imza=sinifImza(s);
+    if(s.kadro.length&&imza!==BULUT.gonderilen.sinif[sid]){var onceImza=BULUT.gonderilen.sinif[sid];if(!V.kts[sid])V.kts[sid]=1;
+      veri={ad:s.ad,kadro:s.kadro,ogr:sinifOgrDuz(sid),kts:V.kts[sid]};BULUT.gonderilen.sinif[sid]=imza;
+      var geriSinif=function(){BULUT.gonderilen.sinif[sid]=onceImza;};}
+    var gg={},anahtarlar=[];
+    Object.keys(V.gorusler).forEach(function(k){var g=V.gorusler[k];if(!g||!g.ts)return;var gs=g.s||ogrSinif(k.split('|')[0]);if(gs!==sid)return;
+      if(g.ts>(BULUT.gonderilen.g[k]||0)){gg[k]={metin:g.metin||'',sev:g.sev||{},ts:g.ts,y:g.y||'',s:sid};anahtarlar.push([k,BULUT.gonderilen.g[k]||0]);BULUT.gonderilen.g[k]=g.ts;}});
+    if(anahtarlar.length){veri=veri||{};veri.g=gg;}
+    if(veri)yaz(pk+'_'+sid,veri,function(){if(geriSinif)geriSinif();anahtarlar.forEach(function(a){BULUT.gonderilen.g[a[0]]=a[1];});});});
+}
+setInterval(function(){if(BULUT.durum==='bagli')bulutFark();bulutRozetGuncelle();},30000);
+function bulutCizPlanla(){clearTimeout(BULUT.cizZ);BULUT.cizZ=setTimeout(function(){
+  var ic=document.getElementById('icerik'),ae=document.activeElement;
+  var yaziyor=ic&&ae&&ic.contains(ae)&&(ae.tagName==='TEXTAREA'||ae.tagName==='INPUT'||ae.tagName==='SELECT');
+  if(document.getElementById('perde')||document.getElementById('siteKatman')){BULUT.cizZ=setTimeout(bulutCizPlanla,1500);return;}
+  if(!yaziyor){cizKoru();return;}
+  if(SEKME==='gorus'&&GORUS_EKRAN){var s=sinifBul(GORUS_EKRAN.sid),r=s&&s.kadro.filter(function(x){return x.id===GORUS_EKRAN.rid;})[0];if(!s||!r)return;
+    sinifOgr(s.id).forEach(function(o){var kart=document.getElementById('k_'+o.id);if(!kart||kart.contains(ae))return;var y=document.createElement('div');y.innerHTML=ogrKartHTML(o,s,r);kart.parentNode.replaceChild(y.firstChild,kart);});}
+  else BULUT.cizZ=setTimeout(bulutCizPlanla,2000);},500);}
+function bulutRozetGuncelle(){var el=document.getElementById('bulutRozet');if(!el)return;var c='',t='';
+  if(!navigator.onLine){c='bek';t='📴 <span class="uzunYazi">Çevrimdışı · </span>cihazda';}
+  else if(BULUT.yazHata||BULUT.okuHata||BULUT.durum==='hata'){c='hata';t='⚠️ <span class="uzunYazi">Bulut </span>sorunu';}
+  else if(BULUT.durum!=='bagli'||!BULUT.listeHazir){t='☁️ Bağlanıyor…';}
+  else if(BULUT.bekleyen>0){c='bek';t='☁️ Kaydediliyor…';}
+  else{c='ok';t='☁️ <span class="uzunYazi">Bulutta </span>kayıtlı ✓';}
+  el.className='bulutRozet '+c;el.innerHTML=t;}
+function zamanOnce(ts){if(!ts)return 'henüz yok';var s=Math.round((Date.now()-ts)/1000);if(s<60)return s+' sn önce';if(s<3600)return Math.round(s/60)+' dk önce';return new Date(ts).toLocaleString('tr-TR');}
+function bulutTani(){
+  function satir(ok,baslik,acik){return '<div class="taniSatir"><span style="font-size:18px">'+(ok===true?'✅':ok===false?'⛔':'⏳')+'</span><div><b>'+baslik+'</b><small>'+acik+'</small></div></div>';}
+  var yerel=true;try{localStorage.setItem(DEPO+'test','1');}catch(e){yerel=false;}
+  var sinifSay=Object.keys(BULUT.hazir).length;
+  var h='<div class="pencereUst"><h3>☁️ Kayıt durumu</h3><button class="ikonBtn" onclick="kapatModal()">✕</button></div>'+
+    satir(yerel,'Bu cihazda kayıt',yerel?'Yazdığınız her şey bu cihazda saklanıyor.':'Bu tarayıcı cihaza kayıt yapamıyor (gizli sekme olabilir).')+
+    satir(navigator.onLine,'İnternet',navigator.onLine?'Bağlı.':'Bağlantı yok — internet gelince bekleyen kayıtlar otomatik gönderilir.')+
+    satir(BULUT.durum==='bagli'?true:(BULUT.durum==='hata'?false:null),'Bulut bağlantısı',BULUT.durum==='bagli'?'Okulun veritabanına bağlı.':(BULUT.hata||'Bağlanıyor…'))+
+    satir(BULUT.okuHata?false:(BULUT.listeHazir?true:null),'Buluttan okuma',BULUT.okuHata||(BULUT.listeHazir?(sinifSay+' sınıf eşitlendi.'):'Bekleniyor…'))+
+    satir(BULUT.yazHata?false:(BULUT.bekleyen?null:(BULUT.sonOk?true:null)),'Buluta yazma',BULUT.yazHata||(BULUT.bekleyen?BULUT.bekleyen+' kayıt gönderiliyor…':'Son başarılı eşitleme: '+zamanOnce(BULUT.sonOk)))+
+    '<p class="aciklama" style="margin-top:12px">Hiçbir kayıt silinmez: bulutta dönem dönem arşivlenir, ayrıca bu cihazda da kopyası durur.</p>'+
+    '<div class="satir" style="justify-content:flex-end"><button class="btn acik" onclick="kopyala(bulutRapor(),\'Durum kopyalandı — Barış Öğretmene gönderebilirsiniz.\')">📋 Durumu kopyala</button><button class="btn" onclick="bulutYenidenEsitle()">🔄 Şimdi eşitle</button></div>';
+  modal(h);}
+function bulutRapor(){return 'Gelişim Karnesi durum · sürüm '+SURUM+' · dönem '+PK+'\nİnternet: '+navigator.onLine+'\nBulut: '+BULUT.durum+' '+(BULUT.hata||'')+'\nOkuma: '+(BULUT.okuHata||('ok, sınıf '+Object.keys(BULUT.hazir).length))+'\nYazma: '+(BULUT.yazHata||('ok, bekleyen '+BULUT.bekleyen))+'\nGiriş: '+(BULUT.authHata||'ok')+'\nSon eşitleme: '+zamanOnce(BULUT.sonOk)+'\nTarayıcı: '+navigator.userAgent;}
+function bulutYenidenEsitle(){kapatModal();BULUT.yazHata='';BULUT.okuHata='';if(!BULUT.F){guvenliYenile();return;}if(BULUT.durum!=='bagli'){BULUT.durum='yok';bulutBaslat();}else donemAbone();toast('🔄 Eşitleniyor…');}
+function cizBulutKart(){return '<div class="kart"><h2>☁️ Kayıt ve eşitleme</h2><p class="aciklama">Her görüş yazıldığı anda <b>bu cihaza</b> ve <b>okulun bulut veritabanına</b> kaydedilir. Hangi cihazdan yazılırsa yazılsın tüm öğretmenlerin ekranına düşer. Sistemde “kalıcı silme” yoktur: kaldırılan sınıf/öğrenci/ders bile bulutta saklanır, her dönem ayrı arşivlenir; yıllar sonra da açılabilir.</p>'+
+  '<div class="satir"><button class="btn" onclick="bulutTani()">🔍 Kayıt durumunu kontrol et</button></div></div>';}
+function donemListesi(){var lst={};Object.keys(BULUT.donemler||{}).forEach(function(k){lst[k]=BULUT.donemler[k];});
+  try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf(DEPO+'d_')===0){var pk=k.slice((DEPO+'d_').length);if(!lst[pk]){var d=lsAl(k);lst[pk]=(d&&d.meta&&d.meta.donem)?d.meta:{donem:pk,yil:''};}}}}catch(e){}
+  return lst;}
+function cizArsivKart(){var lst=donemListesi(),aktif=pkHesap(V.ayar),gor=PK;
+  var gizli=Object.keys(BULUT.liste||{}).filter(function(sid){return BULUT.liste[sid].gizli;});
+  return '<div class="kart"><h2>📚 Dönemler ve arşiv</h2><p class="aciklama">Her dönemin görüşleri ayrı saklanır. Geçmiş bir dönemi açıp karnelerini yeniden yazdırabilirsiniz.</p>'+
+    Object.keys(lst).sort().reverse().map(function(pk){var m=lst[pk];return '<div class="karneSatir"><span class="ad">'+esc(m.donem||pk)+' <span class="durum">'+esc(m.yil||'')+'</span></span>'+
+      (pk===aktif?'<span class="rozet tam">Güncel dönem</span>':'')+(pk===gor?'<span class="rozet">Açık</span>':'<button class="btn kucuk acik" onclick="donemGoster(\''+(pk===aktif?'':pk)+'\')">Aç</button>')+'</div>';}).join('')+
+    '<div class="satir" style="margin-top:12px"><button class="btn kucuk cizgili" onclick="yeniDonem()">🗓️ Yeni dönem başlat</button></div>'+
+    (gizli.length?'<h3 style="margin-top:16px">🙈 Listeden kaldırılan sınıflar</h3>'+gizli.map(function(sid){return '<div class="karneSatir"><span class="ad">'+esc(BULUT.liste[sid].ad)+'</span><button class="btn kucuk" onclick="geriGetir(\''+sid+'\')">↩️ Geri getir</button></div>';}).join(''):'')+'</div>';}
+function donemGoster(pk){try{if(pk)localStorage.setItem(DEPO+'gorunen',pk);else localStorage.removeItem(DEPO+'gorunen');}catch(e){}donemDegistir();window.scrollTo(0,0);}
+function donemDegistir(){kaydet(true);PK=gorunenDonem()||pkHesap(V.ayar);V.secim.satir='';donemYukle(PK,null);kaydet(true);if(BULUT.db)donemAbone();ciz();}
+function yeniDonem(){var ad=prompt('Yeni dönemin adı (örn: Haziran 2027):','');if(!ad||!ad.trim())return;
+  var yil=(prompt('Eğitim öğretim yılı:',V.ayar.yil)||V.ayar.yil).trim();
+  if(pkHesap({yil:yil,donem:ad.trim()})===pkHesap(V.ayar)){toast('Bu zaten güncel dönem.');return;}
+  if(!confirm('“'+ad.trim()+'” dönemi başlatılsın mı?\n\nŞu anki dönemin bütün görüşleri arşivde kalır, hiçbiri silinmez. Sınıflar ve öğrenciler yeni döneme kopyalanır, görüş alanları boş başlar. Bu değişiklik TÜM öğretmenlerde geçerli olur.'))return;
+  try{localStorage.removeItem(DEPO+'gorunen');}catch(e){}
+  kaydet(true);var kopya={siniflar:temiz(V.siniflar),ogrenciler:temiz(V.ogrenciler)};
+  V.ayar.donem=ad.trim();V.ayar.yil=yil;V.ayarTs=Date.now();PK=pkHesap(V.ayar);
+  if(!lsAl(DEPO+'d_'+PK)){V.siniflar=kopya.siniflar;V.ogrenciler=kopya.ogrenciler;V.gorusler={};V.kts={};V.siniflar.forEach(function(s){V.kts[s.id]=Date.now();});}
+  else donemYukle(PK,null);
+  V.meta={yil:V.ayar.yil,donem:V.ayar.donem};V.secim.satir='';kaydet();if(BULUT.db)donemAbone();ciz();toast('🗓️ '+V.ayar.donem+' dönemi başladı. Önceki dönem arşivde.',4000);}
+function geriGetir(sid){var L=BULUT.liste[sid];if(!L)return;if(!sinifBul(sid)){V.siniflar.push({id:sid,ad:L.ad,kadro:[]});V.siniflar.sort(sinifSira);}
+  BULUT.listeBekleyen[sid]={ad:L.ad,gizli:false};BULUT.liste[sid]={ad:L.ad,gizli:false};sinifAbone(sid);kaydet();ciz();toast('↩️ '+L.ad+' geri getirildi.');}
+
+/* ---------- Başlat ---------- */
+yukle();
+(function(){var cb=null;try{cb=localStorage.getItem('zirve_cocuk_boyu');}catch(e){}
+  if(cb==='1'||(cb===null&&otomatikZoom()===1.3))document.body.classList.add('cocukBoyu');})();
+kaydet(true);
+ciz();ekranUygula();
+bulutBaslat();
+setTimeout(function(){karsilama(false);},300);
+</script>
+</body>
+</html>

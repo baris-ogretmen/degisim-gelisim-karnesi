@@ -232,7 +232,7 @@ body.cocukBoyu .toast{bottom:130px}
    DEĞİŞİM KOLEJİ · ÖĞRENCİ GELİŞİM KARNESİ  — sürüm 1
    Tek dosya · çevrimdışı çalışır · veriler bu bilgisayarda saklanır
    ============================================================ */
-var SURUM = 6;
+var SURUM = 8;
 var ANAHTAR = 'dkKarne_v1';
 var SITE = 'https://baris-ogretmen.github.io/site-1/';
 
@@ -243,7 +243,7 @@ var VARSAYILAN_KADRO = [
   ['Matematik','Uğur Öğretmen'],
   ['İngilizce','Erva Öğretmen'],
   ['İngilizce','Ayça Öğretmen'],
-  ['Speaking','Sede Öğretmen'],
+  ['Speaking ','Sede Öğretmen'],
   ['Sosyal Bilgiler','Nurbanu Öğretmen'],
   ['Türkçe','Gamze Öğretmen'],
   ['Fen Bilgisi','Tuncay Öğretmen'],
@@ -255,6 +255,7 @@ function sabitId(s){return String(s).toLocaleLowerCase('tr-TR').replace(/ç/g,'c
 function okulListesiniKur(){var eklenen=0;
   OKUL_LISTESI.forEach(function(x){var sid='s_'+sabitId(x[0]);var s=sinifBul(sid);
     if(!s){s={id:sid,ad:x[0],kadro:VARSAYILAN_KADRO.map(function(k,i){return {id:'r_'+sabitId(x[0])+'_'+i,ders:k[0],ogretmen:(i===0?x[1]:k[1])};})};V.siniflar.push(s);}
+    kadroGoc(s);
     x[2].forEach(function(o){var oid='o_'+sabitId(x[0])+'_'+o[0];if(!V.ogrenciler.some(function(y){return y.id===oid;})){V.ogrenciler.push({id:oid,sinifId:sid,ad:o[1],no:o[0]});eklenen++;}});});
   return eklenen;}
 var SEVIYE_AD = {1:'Gelişmekte',2:'İyi',3:'Çok İyi'};
@@ -581,6 +582,121 @@ function eokulUygula(){var plan=eokulPlan(EOKUL_BEKLEYEN),n=0,yeniS=0,ilk=null;
   V.siniflar.sort(sinifSira);
   if(ilk)V.secim.sinif=ilk.id;kaydet();kapatModal();ciz();toast('✓ '+n+' öğrenci eklendi'+(yeniS?', '+yeniS+' yeni şube açıldı':'')+'.'+(geriGelen.length?' Daha önce kaldırılmış '+geriGelen.join(', ')+' geri getirildi; yeni öğrenci varsa PDF’i bir kez daha yükleyin.':' Kadroları kontrol etmeyi unutmayın.'),5000);}
 
+/* ================= BARIŞ ÖĞRETMEN · HAZIR GÖRÜŞLER (öğrenci başına 10 farklı, hepsi olumlu) ================= */
+var BARIS='Barış Öğretmen';
+var HZ={
+  ilk:{A:['{ad} robotik ve kodlama derslerinde verilen görevleri adım adım düşünerek çözüyor.',
+    '{ad} kodlama etkinliklerinde algoritma kurmayı çok güzel kavradı.',
+    '{ad} robotik ve kodlama derslerimizde meraklı ve istekli bir öğrenci.',
+    '{ad} blok kodlama çalışmalarında komutları doğru sırayla dizmeyi başarıyla uyguluyor.',
+    '{ad} kodlama görevlerinde hata yaptığında pes etmeden yeniden deniyor; bu çok kıymetli bir davranış.',
+    '{ad} robot tasarım etkinliklerinde yaratıcı fikirler ortaya koyuyor.',
+    '{ad} derslerde problem çözme becerisini her geçen hafta biraz daha geliştiriyor.',
+    '{ad} kodlama derslerinde dikkatini toplayıp görevlerini özenle tamamlıyor.',
+    '{ad} robotik ve kodlama derslerinde öğrendiklerini yeni görevlere rahatlıkla uygulayabiliyor.',
+    '{ad} kodlama oyunlarında yön ve sıra mantığını rahatlıkla kullanıyor.',
+    '{ad} grup çalışmalarında arkadaşlarıyla fikir paylaşarak güzel işler çıkarıyor.',
+    '{ad} derslerde sorduğu sorularla merakını hep canlı tutuyor.'],
+   B:['Yapay zekâ derslerimizde teknolojinin günlük hayatımızdaki yerini fark etti ve konuya ilgiyle yaklaştı.',
+    'Yapay zekâ etkinliklerinde makinelerin nasıl öğrendiğini anlamaya yönelik güzel sorular soruyor.',
+    'Yapay zekâ konusunda öğrendiklerini kendi cümleleriyle anlatabiliyor.',
+    'Yapay zekâ derslerinde teknolojiyi bilinçli ve doğru kullanmanın önemini kavradı.',
+    'Yapay zekâ çalışmalarında farklı örnekler üzerinden düşünmeyi seviyor.',
+    'Yapay zekâ derslerinde dikkatle dinliyor ve etkinliklere katkı sağlıyor.',
+    'Yapay zekâ etkinliklerinde fikirlerini paylaşmaktan keyif alıyor.',
+    'Yapay zekâ ile ilgili sohbetlerimizde merakı ve yorumlarıyla dikkat çekiyor.',
+    'Yapay zekâ derslerinde gördüğümüz kavramları günlük hayattan örneklerle ilişkilendirebiliyor.',
+    'Yapay zekâ uygulamalarını tanırken soru sormaktan ve denemekten çekinmiyor.'],
+   C:['Satrançta hamle yapmadan önce düşünmeyi alışkanlık hâline getiriyor.',
+    'Satranç ve akıl oyunlarında sabırlı ve dikkatli bir oyun ortaya koyuyor.',
+    'Akıl oyunlarında farklı çözüm yolları denemekten keyif alıyor.',
+    'Satranç derslerinde taşların görevlerini ve temel kuralları çok iyi kavradı.',
+    'Satrançta kazanmayı da kaybetmeyi de olgunlukla karşılıyor; bu çok güzel bir tavır.',
+    'Akıl ve zekâ oyunlarında dikkatini uzun süre koruyabiliyor.',
+    'Satranç oynarken rakibinin hamlelerini de düşünmeye başladı.',
+    'Zekâ oyunlarında mantık yürütme becerisi her derste biraz daha gelişiyor.',
+    'Satranç ve akıl oyunlarına büyük bir istekle katılıyor.',
+    'Akıl oyunlarında arkadaşlarıyla saygılı ve keyifli bir şekilde oynuyor.'],
+   D:['Bu güzel merakını ve emeğini aynen sürdürmesini dilerim.','Kendisiyle gurur duyuyorum, başarılarının devamını diliyorum.',
+    'Önümüzdeki dönemde de aynı istekle devam edeceğine inanıyorum.','Derslerimize kattığı enerji için kendisine teşekkür ediyorum.',
+    'Bu çizgide ilerledikçe çok daha güzel işler çıkaracağından eminim.','Gösterdiği emek için kendisini tebrik ediyorum.',
+    'Onunla ders yapmak benim için büyük bir keyif.','Yeni dönemde de birlikte çok güzel şeyler öğreneceğiz.',
+    'Bu ilgisini evde de desteklemenizi rica ederim.','Emeği ve güzel tavırları için kendisini kutluyorum.']},
+  ana:{A:['{ad} satranç derslerinde taşları tanıma ve hareket ettirme konusunda çok istekli.',
+    '{ad} satranç tahtasını tanırken büyük bir merak gösterdi.',
+    '{ad} satranç taşlarının nasıl hareket ettiğini öğrenirken çok keyif alıyor.',
+    '{ad} satranç etkinliklerinde sırasını sabırla bekliyor ve kurallara uyuyor.',
+    '{ad} satranç oyunlarında dikkatini toplamayı her geçen hafta daha iyi başarıyor.',
+    '{ad} satranç derslerimize neşesiyle renk katıyor.',
+    '{ad} satranç hikâyeleri ve oyunlarıyla taşları kolayca öğrendi.',
+    '{ad} satranç oynarken arkadaşlarıyla paylaşmayı ve sıra beklemeyi güzelce uyguluyor.',
+    '{ad} satranç derslerinde öğrendiklerini hatırlamada çok başarılı.',
+    '{ad} satranca olan ilgisi ve heyecanıyla dikkat çekiyor.'],
+   B:['Robotik kodlama oyunlarında yön komutlarını keyifle uyguluyor.',
+    'Kodlama etkinliklerinde ileri, geri, sağ ve sol kavramlarını güzelce kullanıyor.',
+    'Robotik kodlama derslerinde sıralama ve örüntü oyunlarını keyifle oynuyor.',
+    'Kodlama oyunlarında adımları sırayla takip etmeyi öğrendi.',
+    'Robotlarla ilgili etkinliklerde merakı hep canlı.',
+    'Kodlama oyunlarında küçük görevleri tamamladıkça yaşadığı sevinç görülmeye değer.',
+    'Robotik kodlama etkinliklerine heyecanla katılıyor ve arkadaşlarıyla uyumlu çalışıyor.',
+    'Akıllı tahtadaki kodlama oyunlarında sırasını bekleyip görevini özenle yapıyor.',
+    'Kodlama derslerinde problem çözmeye yönelik ilk adımları başarıyla atıyor.',
+    'Robotik kodlama oyunlarında dikkatini toplayıp yönergeleri dinliyor.'],
+   D:['Onunla ders yapmak çok keyifli.','Bu güzel merakını aynen sürdürmesini dilerim.','Kendisiyle gurur duyuyorum.',
+    'Gösterdiği istek için kendisini tebrik ediyorum.','Yeni dönemde birlikte çok güzel şeyler öğreneceğiz.',
+    'Derslerimize kattığı neşe için teşekkür ediyorum.','Her derste biraz daha geliştiğini görmek beni çok mutlu ediyor.',
+    'Bu ilgisini evde de oyunlarla desteklemenizi rica ederim.','Emeği için kendisini kutluyorum.','Başarılarının devamını diliyorum.']},
+  kocluk:{A:['{ad} ile yaptığımız koçluk görüşmelerinde hedeflerini netleştirdik ve bu hedeflere uygun bir çalışma planı oluşturduk.',
+    '{ad} koçluk görüşmelerimize açık ve samimi bir tutumla katılıyor.',
+    '{ad} kendi güçlü yönlerini fark etmeye başladı; bu, LGS sürecinde ona büyük bir güç verecek.',
+    '{ad} çalışma planını uygulama konusunda sorumluluk alıyor.',
+    '{ad} koçluk sürecinde zamanını daha verimli kullanmanın yollarını öğreniyor.',
+    '{ad} görüşmelerimizde kendini rahatça ifade ediyor ve önerileri dikkatle dinliyor.',
+    '{ad} deneme sonuçlarını değerlendirirken eksiklerini görüp üzerine gitmeye istekli.',
+    '{ad} LGS sürecine hedef odaklı ve kararlı bir şekilde hazırlanıyor.',
+    '{ad} koçluk derslerimizde motivasyonunu yüksek tutmayı başarıyor.',
+    '{ad} düzenli tekrar ve soru çözümünün önemini çok iyi kavradı.'],
+   B:['Planlı çalışma alışkanlığı her geçen hafta daha da oturuyor.','Sınav kaygısıyla başa çıkma yöntemlerini öğrenmeye açık ve istekli.',
+    'Kendi öğrenme stilini tanıdıkça çalışmaları daha verimli hâle geliyor.','Hedeflerini küçük adımlara bölerek ilerlemeyi öğrendi.',
+    'Ders çalışma ile dinlenme arasındaki dengeyi kurmaya özen gösteriyor.','Zorlandığı konularda yardım istemekten çekinmiyor; bu çok olgun bir davranış.',
+    'Haftalık hedeflerini takip etme konusunda güzel bir istikrar yakaladı.','Odaklanma süresini artırmak için uyguladığımız yöntemleri benimsedi.',
+    'Gelecekle ilgili hayallerini konuşurken gözlerindeki heyecan görülmeye değer.','Kendine olan güveni koçluk sürecinde belirgin şekilde arttı.'],
+   D:['LGS yolculuğunda kendisine güveniyorum, başarılarının devamını diliyorum.','Bu kararlılıkla devam ettiğinde hedeflerine ulaşacağına inanıyorum.',
+    'Emeği ve azmi için kendisini tebrik ediyorum.','Bu süreçte yanında olmaktan mutluluk duyuyorum.',
+    'Evde de çalışma planını birlikte takip etmenizi rica ederim.','Kendisiyle gurur duyuyorum.',
+    'Önümüzdeki aylarda çok güzel sonuçlar alacağından eminim.','Azmini kaybetmeden yoluna devam etmesini dilerim.',
+    'Gösterdiği olgunluk için kendisini kutluyorum.','Birlikte çok güzel bir dönem geçireceğimize inanıyorum.']}
+};
+function kademe(s){var a=(s&&s.ad)||'';if(/^ana/i.test(a))return 'ana';if(/^8/.test(a))return 'kocluk';return 'ilk';}
+function barisDers(s){var k=kademe(s);return k==='ana'?'Satranç · Robotik ve Kodlama':(k==='kocluk'?'Eğitim Koçluğu':'Robotik ve Kodlama · Yapay Zekâ · Satranç ve Akıl Oyunları');}
+function barisSatiri(r){return r&&(r.ogretmen||'').trim()===BARIS;}
+/* k: öğrencinin sınıftaki sırası, i: seçenek no (0–9). Aynı öğrencinin 10 seçeneği ve aynı sınıftaki öğrencilerin seçenekleri birbirinden farklıdır. */
+function hazirGorus(o,s,i){var liste=sinifOgr(s.id),k=Math.max(0,liste.map(function(x){return x.id;}).indexOf(o.id)),c=hash(s.id)%10,ad=ilkAd(o.ad),T=HZ[kademe(s)];
+  function al(dz,n){return dz[((n%dz.length)+dz.length)%dz.length];}
+  var a=al(T.A,c+k+i*5).replace(/\{ad\}/g,ad),b=al(T.B,c+3*k+i*3),d=al(T.D,c+k+i),p;
+  if(T.C){var cc=al(T.C,c+7*k+i*7);p=(i%2)?[a,cc,b,d]:[a,b,cc,d];}
+  else if(kademe(s)==='kocluk'){var b2=al(T.B,c+3*k+i*3+5);p=(i%2)?[a,b2,b,d]:[a,b,b2,d];}
+  else p=[a,b,d];
+  return p.join(' ');}
+function hazirAc(oid,sid,rid){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0],s=sinifBul(sid);if(!o||!s)return;CUMLE_HEDEF={oid:oid,rid:rid};
+  var h='';for(var i=0;i<10;i++)h+='<button class="cumle" onclick="hazirSec(\''+oid+'\',\''+rid+'\','+i+')"><small style="color:#b8893b;font-weight:700">Seçenek '+(i+1)+'</small><br>'+esc(hazirGorus(o,s,i))+'</button>';
+  modal('<div class="pencereUst"><h3>📋 '+esc(o.ad)+' · hazır görüşler</h3><button class="ikonBtn" onclick="kapatModal()">✕</button></div><p class="aciklama">Birine dokunun, kutuya yazılsın. Sonra dilediğiniz gibi düzeltebilirsiniz. Mevcut bir yazı varsa “Önceki sürümler”de saklanır.</p>'+h);}
+function hazirSec(oid,rid,i){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0],s=sinifBul(o.sinifId);
+  var g=gorusAl(oid,rid);if(doluMu(g)&&!confirm('Kutudaki mevcut yazının yerine bu seçenek yazılsın mı?\n(Mevcut yazı “Önceki sürümler”de saklanır.)'))return;
+  surumZorla(g);g.metin=hazirGorus(o,s,i);g.ts=Date.now();if(V.secim.ogretmen)g.y=V.secim.ogretmen;kaydet();kapatModal();
+  var ta=document.getElementById('t_'+oid);if(ta){ta.value=g.metin;durumGuncelle(oid,g);}else cizKoru();toast('✓ Seçenek '+(i+1)+' yazıldı. Dilediğiniz gibi düzeltebilirsiniz.');}
+function hazirHepsine(sid,rid){var s=sinifBul(sid),n=0,bos=sinifOgr(sid).filter(function(o){return !doluMu(gorus(o.id,rid));});
+  if(!bos.length){toast('Bu sınıfta boş kutu yok; yazılmış hiçbir görüşe dokunulmadı.');return;}
+  if(!confirm(s.ad+' sınıfında görüşü BOŞ olan '+bos.length+' öğrenciye birer hazır görüş yazılacak.\n\nDolu kutulara (sizin ya da başkasının yazdıklarına) kesinlikle dokunulmaz. Devam?'))return;
+  bos.forEach(function(o){var g=gorusAl(o.id,rid);if(doluMu(g))return;g.metin=hazirGorus(o,s,0);g.ts=Date.now();if(V.secim.ogretmen)g.y=V.secim.ogretmen;n++;});
+  kaydet();cizKoru();toast('✓ '+n+' öğrenciye hazır görüş yazıldı. Beğenmediğinizi “📋 Hazır görüşler”den değiştirebilirsiniz.',4500);}
+/* Kadro başlık güncellemesi: yalnızca bulut kopyası geldikten sonra ve yalnızca eski varsayılan değerler duruyorsa uygulanır (görüşlere dokunmaz) */
+function kadroGoc(s){var ok=false;(s.kadro||[]).forEach(function(r){
+  /* Sürüm 7'nin yaptığı ad değişikliği geri alınır: satır eskisi gibi “Sede Öğretmen · Speaking” kalır (görüşlere dokunulmaz) */
+  /* not: ders adının sonundaki boşluk görünmez; açık kalmış eski sürüm 7 sekmelerinin satırı tekrar değiştirmesini (döngüyü) engeller */
+  if((r.ogretmen||'').trim()==='Sedi Teacher'&&r.ders==='İngilizce'){r.ogretmen='Sede Öğretmen';r.ders='Speaking ';ok=true;}
+  if(barisSatiri(r)&&(r.ders==='Robotik ve Kodlama'||r.ders==='Robotik Kodlama')){var y=barisDers(s);if(r.ders!==y){r.ders=y;ok=true;}}});return ok;}
+
 /* ================= 2) GÖRÜŞ YAZ ================= */
 function tumOgretmenler(){var m={};V.siniflar.forEach(function(s){s.kadro.forEach(function(r){var ad=ogretmenAdi(r,s);m[ad]=m[ad]||[];m[ad].push({s:s,r:r});});});return m;}
 function cizGorus(){
@@ -601,7 +717,7 @@ function cizGorus(){
   if(r.ders==='Sınıf Öğretmeni'&&!r.ogretmen)h+='<div class="ipucu" style="background:#eff6ff;border-color:#bfdbfe;color:#1e3a8a">👩‍🏫 <b>'+esc(s.ad)+' sınıf öğretmeni misiniz?</b> Adınızı yazın; karnedeki imza alanında ve listede bu ad görünür.<div class="satir" style="margin-top:8px"><input class="gir" id="soAd" placeholder="Örn: Selin Yılmaz" style="max-width:260px"><button class="btn kucuk" onclick="sinifOgretmeniAdi(\''+s.id+'\',\''+r.id+'\')">Kaydet</button></div></div>';
   var dolu=ogr.filter(function(o){return doluMu(gorus(o.id,r.id));}).length;
   h+='<div class="kart" style="padding:14px 18px"><div class="satir" style="justify-content:space-between"><div><b style="color:var(--ana)">'+esc(s.ad)+' · '+esc(r.ders)+'</b> <span class="durum">'+dolu+' / '+ogr.length+' öğrenci tamamlandı</span></div>'+
-    '<div class="satir"><button class="btn kucuk acik" onclick="hepsineHazir(\''+s.id+'\',\''+r.id+'\')">✨ Boş olanlara taslak oluştur</button></div></div>'+
+    '<div class="satir">'+(barisSatiri(r)?'<button class="btn kucuk altin" onclick="hazirHepsine(\''+s.id+'\',\''+r.id+'\')">📋 Boş olanlara hazır görüşlerimi yerleştir</button>':'<button class="btn kucuk acik" onclick="hepsineHazir(\''+s.id+'\',\''+r.id+'\')">✨ Boş olanlara taslak oluştur</button>')+'</div></div>'+
     '<div class="ilerleme" style="margin-top:10px"><i style="width:'+(ogr.length?dolu/ogr.length*100:0)+'%"></i></div></div>';
   if(!ogr.length)return h+'<div class="kart bos">Bu sınıfta öğrenci yok. <button class="btn kucuk" onclick="sekmeGit(\'kurulum\')">Öğrenci ekle</button></div>';
   h+='<div class="satir" style="margin-bottom:12px"><input class="gir" id="ogrAra" placeholder="🔍 Öğrenci ara…" style="max-width:260px" oninput="gorusFiltre()">'+
@@ -618,6 +734,7 @@ function ogrKartHTML(o,s,r){var g=gorus(o.id,r.id)||{},sv=g.sev||{},m=g.metin||'
     '<textarea class="gorusMetin" id="t_'+o.id+'" placeholder="'+esc(ilkAd(o.ad))+' hakkındaki görüşünüzü yazın…" oninput="metinYaz(\''+o.id+'\',\''+r.id+'\',this)">'+esc(m)+'</textarea>'+
     '<div class="gorusAlt"><div class="satir"><button class="btn kucuk altin" onclick="taslak(\''+o.id+'\',\''+s.id+'\',\''+r.id+'\')">✨ Taslak oluştur</button>'+
     '<button class="btn kucuk acik" onclick="cumleAc(\''+o.id+'\',\''+s.id+'\',\''+r.id+'\')">💡 Cümle ekle</button>'+
+    (barisSatiri(r)?'<button class="btn kucuk" style="background:#1e3a5f" onclick="hazirAc(\''+o.id+'\',\''+s.id+'\',\''+r.id+'\')">📋 Hazır görüşler (10)</button>':'')+
     '<button class="btn kucuk cizgili" onclick="karneGoster(\''+o.id+'\')">👁️ Karnesini gör</button>'+
     ((g.h&&g.h.length)?'<button class="btn kucuk cizgili" onclick="surumler(\''+o.id+'\',\''+r.id+'\')">↩️ Önceki sürümler ('+g.h.length+')</button>':'')+'</div>'+
     '<span class="sayac" id="c_'+o.id+'">'+sayacYazi(g)+'</span></div></div>';
@@ -649,6 +766,7 @@ function satirSec(id){V.secim.satir=id;kaydet(true);ciz();}
 /* Başka öğretmen yazınca ya da 10 dk ara verilince eski metin “önceki sürümler”e saklanır (son 3) — üzerine yazılsa bile kaybolmaz */
 function surumSakla(g){var ben=V.secim.ogretmen||'';if(g.metin&&g.metin.trim()&&(g.y!==ben||Date.now()-(g.ts||0)>600000)){
   var h=g.h||[];if(!h.length||h[0].metin!==g.metin){g.h=[{metin:g.metin,ts:g.ts||0,y:g.y||''}].concat(h).slice(0,3);}}}
+function surumZorla(g){if(g&&g.metin&&g.metin.trim()){var h=g.h||[];if(!h.length||h[0].metin!==g.metin)g.h=[{metin:g.metin,ts:g.ts||0,y:g.y||''}].concat(h).slice(0,3);}}
 function gorusAl(oid,rid,degistir){var k=gKey(oid,rid);if(!V.gorusler[k])V.gorusler[k]={metin:'',sev:{},ts:0};var g=V.gorusler[k];if(!g.sev)g.sev={};
   if(degistir!==false)surumSakla(g);
   if(!g.s){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0];if(o)g.s=o.sinifId;}if(V.secim.ogretmen)g.y=V.secim.ogretmen;return g;}
@@ -672,7 +790,7 @@ function taslakMetin(o,s,r,g){var ad=ilkAd(o.ad),ders=r.ders==='Sınıf Öğretm
   return parcalar.join(' ');}
 function taslak(oid,sid,rid){var o=V.ogrenciler.filter(function(x){return x.id===oid;})[0],s=sinifBul(sid),r=s.kadro.filter(function(x){return x.id===rid;})[0];
   var g=gorusAl(oid,rid);if(doluMu(g)&&!confirm('Mevcut metnin yerine yeni taslak yazılsın mı?'))return;
-  g.metin=taslakMetin(o,s,r,g);g.ts=Date.now();kaydet();var ta=document.getElementById('t_'+oid);if(ta)ta.value=g.metin;durumGuncelle(oid,g);}
+  surumZorla(g);g.metin=taslakMetin(o,s,r,g);g.ts=Date.now();kaydet();var ta=document.getElementById('t_'+oid);if(ta)ta.value=g.metin;durumGuncelle(oid,g);}
 function hepsineHazir(sid,rid){var s=sinifBul(sid),r=s.kadro.filter(function(x){return x.id===rid;})[0],n=0;
   if(!confirm('Görüşü boş olan öğrencilere seçtiğiniz seviyelere göre taslak yazılacak. Sonra mutlaka okuyup düzenleyin. Devam?'))return;
   sinifOgr(sid).forEach(function(o){var g=gorusAl(o.id,rid);if(!doluMu(g)){g.metin=taslakMetin(o,s,r,g);g.ts=Date.now();n++;}});kaydet();ciz();toast(n+' öğrenciye taslak yazıldı. Lütfen tek tek gözden geçirin.');}
@@ -989,6 +1107,7 @@ function bulutSinifUygula(sid,D){var s=sinifBul(sid);if(!s)return;var once=sinif
     if(!l||(c.ts||0)>(l.ts||0)){V.gorusler[k]={metin:c.metin||'',sev:c.sev||{},ts:c.ts||0,y:c.y||'',s:c.s||sid,h:c.h||[]};degisti=true;BULUT.gonderilen.g[k]=c.ts||0;}
     else if((l.ts||0)>(c.ts||0))BULUT.gonderilen.g[k]=c.ts||0; /* buluttaki daha eski: yereldeki yeni sürüm yeniden gönderilir */
     else BULUT.gonderilen.g[k]=Math.max(BULUT.gonderilen.g[k]||0,c.ts||0);});
+  if(D&&D.kadro&&D.kadro.length&&kadroGoc(s)){V.kts[sid]=Date.now();degisti=true;}
   BULUT.hazir[sid]=true;BULUT.sonOk=Date.now();
   if(degisti){kaydet(true);bulutCizPlanla();}
   bulutPlanla();bulutRozetGuncelle();}

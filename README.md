@@ -1,0 +1,1 @@
+# degisim-gelisim-karnesi

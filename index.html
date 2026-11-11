@@ -250,7 +250,7 @@ body.cocukBoyu .toast{bottom:130px}
    DEĞİŞİM KOLEJİ · ÖĞRENCİ GELİŞİM KARNESİ  — sürüm 1
    Tek dosya · çevrimdışı çalışır · veriler bu bilgisayarda saklanır
    ============================================================ */
-var SURUM = 14;
+var SURUM = 15;
 var ANAHTAR = 'dkKarne_v1';
 var SITE = 'https://baris-ogretmen.github.io/site-1/';
 
@@ -268,7 +268,7 @@ var VARSAYILAN_KADRO = [
   ['İngilizce','Derya Öğretmen']
 ];
 /* Değişim Koleji e-Okul sınıf listeleri (Ekim 2026). Kimlikler sabittir: farklı cihazlardan gelen görüşler sorunsuz birleşir. */
-var OKUL_LISTESI = [["Ana Sınıfı A","Ebru Aldağ",[["4","Ayaz Selim Gögce"],["5","Dolunay Vuralgil"],["6","Miray Uluslar"],["9","Ramin İbrahim"],["10","Hamza Daşdan"],["11","Yusuf Daşdan"],["12","Yamaç Koca"],["16","Miray Çelikgün"],["4641","Kübra Neva Seven"]]],["Ana Sınıfı B","Özlem Sercan",[["1","Ahsen Kurt"],["2","Çağdaş Armağan Aksakal"],["3","Karan Aydın"],["7","Aylol Bekkouche"],["8","Metehan Sağlam"],["15","Mehmet Selim Ateş"]]],["1A","",[["72","Derya Erkoç"],["132","Fatma Nil Cengiz"],["140","Davran Ibragimov"],["256","Ahsen Taç"],["263","Noah Naamna"],["364","Yusuf Kaya"],["590","Yaman Ali Karagöz"],["696","Almira Ayşen Soylu"],["876","Buğlem Pırıl Aksakal"],["3549","Hamza Ahmet Memiş"]]],["2A","Derya Bekiroğlu",[["61","Cihan Topal"],["276","Aras Alpkan"],["332","Alparslan Soylu"],["531","Ali Barlas Paçacı"],["659","Kuzey Ege Gögce"],["666","Agâh Yıldırım"],["740","Ömer Aslan"],["3044","Mina Gönül Uluslar"],["4949","Ömer Taha Aksoy"],["6534","Sümeyye Yadigar Arpa"]]],["3A","",[["21","Tahsin Ömür Dikici"],["34","Defne Koçdemir"],["135","Asya Koca"],["344","Simay Selin Aksakal"],["511","Sarp Samsunlu"],["723","Rami Bekkouche"]]],["4A","Derya Bekiroğlu",[["180","Sihra Azra Alizoroğlu"],["394","Oğuz Kağan Soylu"],["820","Ayşe Nur Yılmaz"],["1044","Yavuz Selim Ertürk"],["1406","Poyraz Mert"],["1407","Zeynep Aydın"],["1453","Utku Sarıbıyık"],["3535","Aras Mert Erçel"],["5555","Ece Bahar Çilingir"],["5949","Mustafa Öztürk"],["6565","Rabia Tüncel"],["7174","Levent İbrahim"],["8120","Atlas Alpkan"],["1008445","Emin Kaya"]]],["5A","",[["76","Ömer Ayaz Yorulmaz"],["106","Mustafa Onur Kurt"],["252","Dastan Ibragimov"],["330","Berat Başer"],["454","Emir Aslan"],["494","Kuzey Koca"],["516","Almila Işıl Atmış"],["834","Dilvin Vuralgil"],["894","Yağız Efe Tırıç"],["3465","Rania Üncü"],["3636","Ayaz Güzelaydın"]]],["6A","",[["22","Ayça Öztürk"],["122","Mikhail Tumgoev"],["156","Aybike Özbatı"],["216","Kerem Bulut"],["542","Yusuf Arda Çelik"],["686","Asım Turan"],["858","Muhammed Kuçar"],["886","İpek Emecen"],["918","Deniz Bekiroğlu"],["942","Zakariya Naamna"],["1000285","Emir Kaya"]]],["7A","",[["49","Fatma Gönül"],["86","Ayşe Pınar Sercan"],["584","Mustafa Mert İşler"],["723","Fatema Bekkouche"]]],["8A","",[["72","Yusuf Tuaç"],["124","Elif Erva Ustaoğlu"],["276","Kıvanç Tanrıverdi"],["281","Selman Emin Kurt"],["810","Zehra Öztürk"],["3404","Dilan Berfin Taşdemir"],["5016","Ailin Ibragimova"],["5020","Zeliha Sancak"],["5032","Beren Alpkan"],["7272","Rüzgar Zerdeşt Yılmaz"]]]];
+var OKUL_LISTESI = [["Ana Sınıfı A","Ebru Aldağ",[["4","Ayaz Selim Gögce"],["5","Dolunay Vuralgil"],["6","Miray Uluslar"],["9","Ramin İbrahim"],["10","Hamza Daşdan"],["11","Yusuf Daşdan"],["12","Yamaç Koca"],["16","Miray Çelikgün"],["4641","Kübra Neva Seven"]]],["Ana Sınıfı B","Özlem Sercan",[["1","Ahsen Kurt"],["2","Çağdaş Armağan Aksakal"],["3","Karan Aydın"],["7","Aylol Bekkouche"],["8","Metehan Sağlam"],["15","Mehmet Selim Ateş"]]],["1A","",[["365","Mete Öztürk"],["72","Derya Erkoç"],["132","Fatma Nil Cengiz"],["140","Davran Ibragimov"],["256","Ahsen Taç"],["263","Noah Naamna"],["364","Yusuf Kaya"],["590","Yaman Ali Karagöz"],["696","Almira Ayşen Soylu"],["876","Buğlem Pırıl Aksakal"],["3549","Hamza Ahmet Memiş"]]],["2A","Derya Bekiroğlu",[["61","Cihan Topal"],["276","Aras Alpkan"],["332","Alparslan Soylu"],["531","Ali Barlas Paçacı"],["659","Kuzey Ege Gögce"],["666","Agâh Yıldırım"],["740","Ömer Aslan"],["3044","Mina Gönül Uluslar"],["4949","Ömer Taha Aksoy"],["6534","Sümeyye Yadigar Arpa"]]],["3A","",[["21","Tahsin Ömür Dikici"],["34","Defne Koçdemir"],["135","Asya Koca"],["344","Simay Selin Aksakal"],["511","Sarp Samsunlu"],["723","Rami Bekkouche"]]],["4A","Derya Bekiroğlu",[["180","Sihra Azra Alizoroğlu"],["394","Oğuz Kağan Soylu"],["820","Ayşe Nur Yılmaz"],["1044","Yavuz Selim Ertürk"],["1406","Poyraz Mert"],["1407","Zeynep Aydın"],["1453","Utku Sarıbıyık"],["3535","Aras Mert Erçel"],["5555","Ece Bahar Çilingir"],["5949","Mustafa Öztürk"],["6565","Rabia Tüncel"],["7174","Levent İbrahim"],["8120","Atlas Alpkan"],["1008445","Emin Kaya"]]],["5A","",[["748","Eymen Aydın"],["76","Ömer Ayaz Yorulmaz"],["106","Mustafa Onur Kurt"],["252","Dastan Ibragimov"],["330","Berat Başer"],["454","Emir Aslan"],["494","Kuzey Koca"],["516","Almila Işıl Atmış"],["834","Dilvin Vuralgil"],["894","Yağız Efe Tırıç"],["3465","Rania Üncü"],["3636","Ayaz Güzelaydın"]]],["6A","",[["22","Ayça Öztürk"],["122","Mikhail Tumgoev"],["156","Aybike Özbatı"],["216","Kerem Bulut"],["542","Yusuf Arda Çelik"],["686","Asım Turan"],["858","Muhammed Kuçar"],["886","İpek Emecen"],["918","Deniz Bekiroğlu"],["942","Zakariya Naamna"],["1000285","Emir Kaya"]]],["7A","",[["49","Fatma Gönül"],["86","Ayşe Pınar Sercan"],["584","Mustafa Mert İşler"],["723","Fatema Bekkouche"]]],["8A","",[["72","Yusuf Tuaç"],["124","Elif Erva Ustaoğlu"],["276","Kıvanç Tanrıverdi"],["281","Selman Emin Kurt"],["810","Zehra Öztürk"],["3404","Dilan Berfin Taşdemir"],["5016","Ailin Ibragimova"],["5020","Zeliha Sancak"],["5032","Beren Alpkan"],["7272","Rüzgar Zerdeşt Yılmaz"]]]];
 function sabitId(s){return String(s).toLocaleLowerCase('tr-TR').replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u').replace(/[^a-z0-9]+/g,'');}
 function okulListesiniKur(){var eklenen=0;
   OKUL_LISTESI.forEach(function(x){var sid='s_'+sabitId(x[0]);var s=sinifBul(sid);
@@ -501,9 +501,28 @@ function cizKurulum(){
       '<label class="btn kucuk" style="cursor:pointer;margin-top:8px">📷 Toplu fotoğraf yükle<input type="file" accept="image/*" multiple hidden onchange="fotoToplu(this,\''+s.id+'\')"></label></div>'+
       '<table class="tablo" style="margin-top:12px"><tr><th></th><th style="width:70px">No</th><th>Ad Soyad</th><th></th></tr>'+
       ogr.map(function(o){return '<tr><td style="width:46px"><button class="fotoBtn" title="Fotoğraf ekle / değiştir" onclick="fotoSec(\''+o.id+'\')">'+avatarHTML(o,36)+'<em>📷</em></button></td><td><input value="'+esc(o.no)+'" onchange="ogrDegis(\''+o.id+'\',\'no\',this.value)"></td><td><input value="'+esc(o.ad)+'" onchange="ogrDegis(\''+o.id+'\',\'ad\',this.value)"></td><td style="white-space:nowrap">'+(FOTO[o.id]?'<button class="btn kucuk cizgili" style="margin-right:8px" title="Fotoğrafı kaldır" onclick="fotoKaldir(\''+o.id+'\')">🗑️<span class="uzunYazi"> Foto</span></button>':'')+'<button class="sil" onclick="ogrSil(\''+o.id+'\')">✕</button></td></tr>';}).join('')+'</table>'
-      :'<p class="aciklama" style="margin-top:12px">Bu sınıfta henüz öğrenci yok.</p>')+'</div></div>';
+      :'<p class="aciklama" style="margin-top:12px">Bu sınıfta henüz öğrenci yok.</p>')+'</div></div>'+kayipPanel(s);
   return h;
 }
+/* ---------- Kurtarma: listede olmayan ama hakkında yazılmış görüşü olan öğrenciler ---------- */
+function kayiplar(s){var var_={},grup={};sinifOgr(s.id).forEach(function(o){var_[o.id]=1;});var on='o_'+sabitId(s.ad)+'_';
+  Object.keys(V.gorusler).forEach(function(k){var oid=k.split('|')[0],g=V.gorusler[k];if(var_[oid]||!doluMu(g))return;if(oid==='ornek_ogrenci')return;
+    if(g.s!==s.id&&oid.indexOf(on)!==0)return;(grup[oid]=grup[oid]||[]).push({k:k,g:g});});return grup;}
+function kayipPanel(s){var grup=kayiplar(s),ids=Object.keys(grup);if(!ids.length)return '';var on='o_'+sabitId(s.ad)+'_',ogr=sinifOgr(s.id);
+  return '<div class="kart" style="border-color:#fdba74;background:#fff7ed"><h3>🔎 Listede olmayan öğrencilere ait görüşler ('+ids.length+')</h3><p class="aciklama">Bu öğrenciler sınıf listesinde görünmüyor ama haklarında yazılmış görüşler bulutta duruyor (hiçbiri silinmedi). Listeye geri ekleyin ya da listedeki doğru öğrenciyle birleştirin; yazılar aynen gelir.</p>'+
+    ids.map(function(oid){var L=grup[oid],no=oid.indexOf(on)===0?oid.slice(on.length):'',ornek=L[0].g.metin.trim().slice(0,140);
+      return '<div class="ogrKart" style="margin-bottom:10px"><div class="ogrUst"><span class="ogrNo">'+esc(no||'?')+'</span><span class="ogrAd">'+L.length+' görüş</span></div><div class="aciklama" style="margin:0 0 8px">“'+esc(ornek)+'…”</div>'+
+        '<div class="satir"><button class="btn kucuk" onclick="kayipEkle(\''+s.id+'\',\''+oid+'\',\''+esc(no)+'\')">➕ Listeye geri ekle</button>'+
+        '<select class="gir" style="max-width:220px" onchange="kayipBirlestir(\''+s.id+'\',\''+oid+'\',this.value)"><option value="">🔗 Listedeki öğrenciyle birleştir…</option>'+ogr.map(function(o){return '<option value="'+o.id+'">'+esc(o.ad)+' ('+esc(o.no||'—')+')</option>';}).join('')+'</select></div></div>';}).join('')+'</div>';}
+function kayipEkle(sid,oid,no){var ad=prompt('Öğrencinin adı soyadı:','');if(!ad||!ad.trim())return;var n=prompt('Okul numarası:',no||'')||'';
+  BULUT.cikarilan[oid]=0;delete BULUT.cikarilan[oid];V.ogrenciler.push({id:oid,sinifId:sid,ad:ad.trim(),no:n.trim()});V.kts[sid]=Date.now();kaydet();ciz();toast('✓ '+ad.trim()+' geri eklendi; hakkındaki bütün görüşler yerinde.',4000);}
+function kayipBirlestir(sid,oid,hedef){if(!hedef)return;var o=V.ogrenciler.filter(function(x){return x.id===hedef;})[0];
+  if(!confirm('Bu görüşler '+o.ad+' ile birleştirilsin mi?\n\nBoş kutulara yazılır; dolu kutulardaki mevcut yazıya dokunulmaz (gelen yazı “Önceki sürümler”e eklenir). Hiçbir şey silinmez.')){ciz();return;}
+  var n=0,simdi=Date.now();kayiplar(sinifBul(sid))[oid].forEach(function(x){var rid=x.k.split('|')[1],tk=hedef+'|'+rid,t=V.gorusler[tk];
+    if(!doluMu(t)){V.gorusler[tk]={metin:x.g.metin,sev:x.g.sev||{},ts:simdi,y:x.g.y||'',s:sid,h:(t&&t.h)||[]};}
+    else{t.h=[{metin:x.g.metin,ts:x.g.ts||0,y:(x.g.y||'')+' (birleştirildi)'}].concat(t.h||[]).slice(0,5);t.ts=simdi;}
+    surumZorla(x.g);x.g.metin='';x.g.ts=simdi;n++;});
+  kaydet();ciz();toast('✓ '+n+' görüş '+o.ad+' ile birleştirildi.',4000);}
 function yeniKadro(){return VARSAYILAN_KADRO.map(function(k){return {id:yeniId('r'),ders:k[0],ogretmen:k[1]};});}
 function sinifEkle(ad){ad=(ad||(document.getElementById('yeniSinif')||{}).value||'').trim();if(!ad){toast('Sınıf adı yazın.');return;}
   if(V.siniflar.some(function(s){return s.ad.toLocaleLowerCase('tr-TR')===ad.toLocaleLowerCase('tr-TR');})){toast(ad+' zaten var.');return;}
@@ -520,7 +539,7 @@ function kadroDegis(sid,i,alan,deger){sinifBul(sid).kadro[i][alan]=deger.trim();
 function kadroEkle(sid){sinifBul(sid).kadro.push({id:yeniId('r'),ders:'Yeni Ders',ogretmen:''});V.kts[sid]=Date.now();kaydet();ciz();}
 function kadroSil(sid,i){var s=sinifBul(sid),r=s.kadro[i];var sayi=sinifOgr(sid).filter(function(o){return doluMu(gorus(o.id,r.id));}).length;
   if(!confirm(r.ders+(r.ogretmen?' ('+r.ogretmen+')':'')+' bu sınıfın karnesinden kaldırılsın mı?'+(sayi?'\n\n'+sayi+' yazılmış görüş SİLİNMEZ; bulutta saklanmaya devam eder.':'')))return;
-  s.kadro.splice(i,1);V.kts[sid]=Date.now();kaydet();ciz();}
+  BULUT.cikarilanSatir[r.id]=1;s.kadro.splice(i,1);V.kts[sid]=Date.now();kaydet();ciz();}
 function kadroTasi(sid,i,y){var k=sinifBul(sid).kadro;if(i+y<0||i+y>=k.length)return;var t=k[i];k[i]=k[i+y];k[i+y]=t;V.kts[sid]=Date.now();kaydet();ciz();}
 function kadroHepsine(sid){var kaynak=sinifBul(sid);if(!confirm('“'+kaynak.ad+'” kadrosu diğer tüm sınıflara kopyalansın mı?\n(Aynı ders + öğretmen satırlarındaki yazılmış görüşler korunur. Sınıf öğretmeni adları korunur.)'))return;
   V.siniflar.forEach(function(s){if(s===kaynak)return;var eski=s.kadro;
@@ -554,7 +573,7 @@ function dosyadanListe(inp,sid){var f=inp.files[0];if(!f)return;
   else{var r=new FileReader();r.onload=function(){listeyiIsle(String(r.result),sid);};r.readAsText(f,'UTF-8');}}
 function ogrDegis(id,alan,d){V.ogrenciler.forEach(function(o){if(o.id===id){o[alan]=d.trim();V.kts[o.sinifId]=Date.now();}});kaydet();}
 function ogrSil(id){var o=V.ogrenciler.filter(function(x){return x.id===id;})[0];if(!confirm(o.ad+' bu sınıfın listesinden çıkarılsın mı?\n\nYazılmış görüşleri SİLİNMEZ; e-Okul listesiyle yeniden eklenirse görüşleriyle birlikte geri gelir.'))return;
-  V.ogrenciler=V.ogrenciler.filter(function(x){return x.id!==id;});V.kts[o.sinifId]=Date.now();kaydet();ciz();}
+  BULUT.cikarilan[id]=1;V.ogrenciler=V.ogrenciler.filter(function(x){return x.id!==id;});V.kts[o.sinifId]=Date.now();kaydet();ciz();}
 function betikYukle(src,cb){if(document.querySelector('script[src="'+src+'"]')){cb(true);return;}var s=document.createElement('script');s.src=src;s.onload=function(){cb(true);};s.onerror=function(){cb(false);};document.head.appendChild(s);}
 
 /* ---------- e-Okul PDF sınıf listesi okuyucu ---------- */
@@ -1252,20 +1271,35 @@ function donemAbone(){if(!BULUT.db)return;aboneBirakHepsi();BULUT.listeHazir=fal
   listeAbone();
   V.siniflar.forEach(function(s){sinifAbone(s.id);});}
 function sinifAbone(sid){if(BULUT.db&&typeof fotoAbone==='function')fotoAbone(sid);if(!BULUT.db||BULUT.abone[sid])return;var pk=PK;
-  BULUT.abone[sid]=BULUT.F.onSnapshot(bRef(pk+'_'+sid),function(sn){if(pk!==PK||sunucuYok(sn))return;BULUT.okuHata='';bulutSinifUygula(sid,sn.exists()?sn.data():null);},
+  BULUT.abone[sid]=BULUT.F.onSnapshot(bRef(pk+'_'+sid),function(sn){if(pk!==PK||sunucuYok(sn))return;BULUT.okuHata='';bulutSinifUygula(sid,sn.exists()?sn.data():null,!!(sn.metadata&&sn.metadata.fromCache));},
     dinleyiciHata(sid,function(){if(pk===PK&&sinifBul(sid))sinifAbone(sid);}));}
 function sinifAboneBirak(sid){if(BULUT.abone[sid]){try{BULUT.abone[sid]();}catch(e){}delete BULUT.abone[sid];}delete BULUT.hazir[sid];}
 function ogrSinif(oid){for(var i=0;i<V.ogrenciler.length;i++)if(V.ogrenciler[i].id===oid)return V.ogrenciler[i].sinifId;return '';}
 function sinifOgrDuz(sid){return sinifOgr(sid).map(function(o){return {id:o.id,ad:o.ad,no:o.no||''};});}
 function sirali(o){if(Array.isArray(o))return '['+o.map(sirali).join(',')+']';if(o&&typeof o==='object')return '{'+Object.keys(o).sort().map(function(k){return JSON.stringify(k)+':'+sirali(o[k]);}).join(',')+'}';return JSON.stringify(o===undefined?null:o);}
 function sinifImza(s){return sirali({ad:s.ad,kadro:s.kadro,ogr:sinifOgrDuz(s.id)});}
-function bulutSinifUygula(sid,D){var s=sinifBul(sid);if(!s)return;var once=sinifImza(s),degisti=false;
+/* ÖĞRENCİ/KADRO KORUMA: bir öğrenci ya da ders satırı, kullanıcı bilerek çıkarmadıkça listeden ASLA düşmez.
+   Önbellekten (cihazdaki eski kopya) gelen veriyle buluta hiçbir zaman liste yazılmaz. */
+BULUT.sonOgr={};BULUT.sonKadro={};BULUT.cikarilan={};BULUT.cikarilanSatir={};
+var EK_OGRENCI={s_1a:[['365','Mete Öztürk']],s_5a:[['748','Eymen Aydın']]};
+function listeKoru(s){var sid=s.id,ekle=false,var_={};sinifOgr(sid).forEach(function(o){var_[o.id]=1;});
+  (BULUT.sonOgr[sid]||[]).forEach(function(o){if(var_[o.id]||BULUT.cikarilan[o.id])return;if(sinifOgr(sid).some(function(x){return x.ad===o.ad;}))return;
+    V.ogrenciler.push({id:o.id,sinifId:sid,ad:o.ad,no:o.no||''});var_[o.id]=1;ekle=true;});
+  (BULUT.sonKadro[sid]||[]).forEach(function(r){if(BULUT.cikarilanSatir[r.id]||s.kadro.some(function(x){return x.id===r.id;}))return;s.kadro.push(temiz(r));ekle=true;});
+  return ekle;}
+function ekOgrenciler(s,D){var ekle=false,isaret=(D&&D.ekler)||{};(EK_OGRENCI[s.id]||[]).forEach(function(e){var oid='o_'+sabitId(s.ad)+'_'+e[0];
+    if(isaret[oid]||BULUT.cikarilan[oid])return;
+    if(!sinifOgr(s.id).some(function(x){return x.id===oid||x.ad.toLocaleLowerCase('tr-TR')===e[1].toLocaleLowerCase('tr-TR');})){V.ogrenciler.push({id:oid,sinifId:s.id,ad:e[1],no:e[0]});ekle=true;}
+    var m={};m[oid]=1;if(BULUT.db)yaz(PK+'_'+s.id,{ekler:m});});return ekle;}
+function bulutSinifUygula(sid,D,onbellek){var s=sinifBul(sid);if(!s)return;var once=sinifImza(s),degisti=false;
+  if(!onbellek&&D){if(D.ogr)BULUT.sonOgr[sid]=temiz(D.ogr);if(D.kadro)BULUT.sonKadro[sid]=temiz(D.kadro);}
   if(D&&D.kadro&&D.kadro.length&&((D.kts||0)>=(V.kts[sid]||0)||!s.kadro.length)){
     s.ad=D.ad||s.ad;s.kadro=D.kadro;
     V.ogrenciler=V.ogrenciler.filter(function(o){return o.sinifId!==sid;}).concat((D.ogr||[]).map(function(o){return {id:o.id,sinifId:sid,ad:o.ad,no:o.no||''};}));
     V.kts[sid]=D.kts||0;var son=sinifImza(s);BULUT.gonderilen.sinif[sid]=son;if(son!==once)degisti=true;}
+  else if(!onbellek&&D&&D.kadro&&listeKoru(s)){V.kts[sid]=Date.now();degisti=true;} /* yerel daha yeni: buluttaki öğrenci/satırlar da korunur */
   /* eski sürümden taşınan yerel ekler (öğrenci, öğretmen adı) bulut kopyasına eklenir, hiçbiri ezilmez */
-  if(V.goc&&V.goc[sid]){var gc=V.goc[sid],ekle=false;
+  if(!onbellek&&V.goc&&V.goc[sid]){var gc=V.goc[sid],ekle=false;
     gc.ogr.forEach(function(o){if(!V.ogrenciler.some(function(x){return x.id===o.id||(x.sinifId===sid&&x.ad===o.ad);})){V.ogrenciler.push({id:o.id,sinifId:sid,ad:o.ad,no:o.no});ekle=true;}});
     gc.kadro.forEach(function(r){var m=s.kadro.filter(function(x){return x.id===r.id||(x.ders===r.ders&&(x.ogretmen===r.ogretmen||!x.ogretmen));})[0];
       if(m&&!m.ogretmen&&r.ogretmen){m.ogretmen=r.ogretmen;ekle=true;}else if(!m&&r.ogretmen){s.kadro.push(r);ekle=true;}});
@@ -1275,7 +1309,9 @@ function bulutSinifUygula(sid,D){var s=sinifBul(sid);if(!s)return;var once=sinif
     if(!l||(c.ts||0)>(l.ts||0)){V.gorusler[k]={metin:c.metin||'',sev:c.sev||{},ts:c.ts||0,y:c.y||'',s:c.s||sid,h:c.h||[]};degisti=true;BULUT.gonderilen.g[k]=c.ts||0;}
     else if((l.ts||0)>(c.ts||0))BULUT.gonderilen.g[k]=c.ts||0; /* buluttaki daha eski: yereldeki yeni sürüm yeniden gönderilir */
     else BULUT.gonderilen.g[k]=Math.max(BULUT.gonderilen.g[k]||0,c.ts||0);});
+  if(onbellek){if(degisti){kaydet(true);bulutCizPlanla();}return;} /* önbellek: sadece göster, asla yazma */
   if(D&&D.kadro&&D.kadro.length&&kadroGoc(s)){V.kts[sid]=Date.now();degisti=true;}
+  if(D&&D.kadro&&D.kadro.length&&ekOgrenciler(s,D)){V.kts[sid]=Date.now();degisti=true;}
   BULUT.hazir[sid]=true;BULUT.sonOk=Date.now();
   if(degisti){kaydet(true);bulutCizPlanla();}
   bulutPlanla();bulutRozetGuncelle();}
@@ -1303,6 +1339,7 @@ function bulutFark(){if(BULUT.durum!=='bagli'||!BULUT.db)return;var pk=PK;if(Obj
     if(var_){var bek=BULUT.listeBekleyen;BULUT.listeBekleyen={};Object.keys(up).forEach(function(k){BULUT.liste[k]=up[k];});
       yaz(pk+'_liste',{s:up},function(){Object.keys(bek).forEach(function(k){BULUT.listeBekleyen[k]=bek[k];});Object.keys(up).forEach(function(k){delete BULUT.liste[k];});});}}
   V.siniflar.forEach(function(s){if(!BULUT.hazir[s.id])return;var veri=null,sid=s.id;
+    if(listeKoru(s)){V.kts[sid]=Date.now();kaydet(true);}
     var imza=sinifImza(s);
     if(s.kadro.length&&imza!==BULUT.gonderilen.sinif[sid]){var onceImza=BULUT.gonderilen.sinif[sid];if(!V.kts[sid])V.kts[sid]=1;
       veri={ad:s.ad,kadro:s.kadro,ogr:sinifOgrDuz(sid),kts:V.kts[sid]};BULUT.gonderilen.sinif[sid]=imza;

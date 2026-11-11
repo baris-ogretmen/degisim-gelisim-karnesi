@@ -250,7 +250,7 @@ body.cocukBoyu .toast{bottom:130px}
    DEĞİŞİM KOLEJİ · ÖĞRENCİ GELİŞİM KARNESİ  — sürüm 1
    Tek dosya · çevrimdışı çalışır · veriler bu bilgisayarda saklanır
    ============================================================ */
-var SURUM = 13;
+var SURUM = 14;
 var ANAHTAR = 'dkKarne_v1';
 var SITE = 'https://baris-ogretmen.github.io/site-1/';
 
@@ -797,8 +797,27 @@ function hazirHepsine(sid,rid){var s=sinifBul(sid),n=0,bos=sinifOgr(sid).filter(
   var tum=sinifOgr(sid);bos.forEach(function(o){var g=gorusAl(o.id,rid);if(doluMu(g))return;g.metin=hazirGorus(o,s,6+(tum.indexOf(o)%8));g.ts=Date.now();if(V.secim.ogretmen)g.y=V.secim.ogretmen;n++;});
   kaydet();cizKoru();toast('✓ '+n+' öğrenciye hazır görüş yazıldı. Beğenmediğinizi “📋 Hazır görüşler”den değiştirebilirsiniz.',4500);}
 /* Kadro başlık güncellemesi: yalnızca bulut kopyası geldikten sonra ve yalnızca eski varsayılan değerler duruyorsa uygulanır (görüşlere dokunmaz) */
-var SINIF_OGRETMENI={s_anasinifia:'Ebru Aldağ',s_anasinifib:'Özlem Sercan'};
-function kadroGoc(s){var ok=false;(s.kadro||[]).forEach(function(r){
+var SINIF_OGRETMENI={s_anasinifia:'Ebru Aldağ',s_anasinifib:'Özlem Sercan',s_1a:'Necmettin Öğretmen',s_2a:'Derya Bekiroğlu',s_3a:'Kamuran Öğretmen',
+  s_4a:'Tuncay Öğretmen',s_5a:'Erva Öğretmen',s_6a:'Nurbanu Öğretmen',s_7a:'Gamze Öğretmen',s_8a:'Uğur Öğretmen'};
+var DERYA='Derya Bekiroğlu';
+/* Derya Bekiroğlu 4A ve 7A'da İngilizce dersine giriyor: o sınıflardaki “İngilizce · Derya Öğretmen” satırı onun adıyla eşleşir (yoksa eklenir) */
+function deryaIngilizce(s){var ok=false,r=(s.kadro||[]).filter(function(x){return /ingilizce/i.test((x.ders||'').toLocaleLowerCase('tr-TR'))&&((x.ogretmen||'').trim()===DERYA);})[0];
+  if(!r){r=(s.kadro||[]).filter(function(x){return /ingilizce/i.test((x.ders||'').toLocaleLowerCase('tr-TR'))&&/^derya( öğretmen| hoca)?$/i.test((x.ogretmen||'').trim());})[0];if(r){r.ogretmen=DERYA;ok=true;}}
+  if(!r){r={id:'r_'+sabitId(s.ad)+'_deryaing',ders:'İngilizce',ogretmen:DERYA};s.kadro.push(r);ok=true;}
+  return {r:r,ok:ok};}
+function kadroGoc(s){var ok=false;
+  if(s.id==='s_4a'||s.id==='s_7a'){if(deryaIngilizce(s).ok)ok=true;}
+  /* 4A: e-Okul’da sınıf öğretmeni Derya Bekiroğlu görünüyordu; doğrusu Tuncay Öğretmen. Derya Hoca’nın o satıra yazdıkları
+     SİLİNMEZ: kendi İngilizce satırına taşınır (boşsa), asıl metin “Önceki sürümler”de de saklanır. Hedef doluysa yerinde bırakılır. */
+  if(s.id==='s_4a'){var so=(s.kadro||[]).filter(function(x){return x.ders==='Sınıf Öğretmeni';})[0];
+    if(so&&(so.ogretmen||'').trim()===DERYA){var ing=deryaIngilizce(s).r,simdi=Date.now();
+      Object.keys(V.gorusler).forEach(function(k){var p=k.split('|');if(p[1]!==so.id)return;var g=V.gorusler[k];if(!doluMu(g))return;
+        if(g.y&&g.y!==DERYA&&!/^Sınıf Öğretmeni/.test(g.y))return;
+        var tk=p[0]+'|'+ing.id,t=V.gorusler[tk];if(doluMu(t))return;
+        V.gorusler[tk]={metin:g.metin,sev:g.sev||{},ts:simdi,y:DERYA,s:s.id,h:[{metin:g.metin,ts:g.ts||0,y:'4A Sınıf Öğretmeni satırından taşındı'}]};
+        surumZorla(g);g.metin='';g.ts=simdi;});
+      so.ogretmen=SINIF_OGRETMENI.s_4a;ok=true;}}
+  (s.kadro||[]).forEach(function(r){
   /* Anaokulu sınıf öğretmenleri: yalnızca ad BOŞSA yazılır (yazılmış görüşler satır kimliğine bağlı, aynen kalır) */
   if(r.ders==='Sınıf Öğretmeni'&&!(r.ogretmen||'').trim()&&SINIF_OGRETMENI[s.id]){r.ogretmen=SINIF_OGRETMENI[s.id];ok=true;}
   /* Sürüm 7'nin yaptığı ad değişikliği geri alınır: satır eskisi gibi “Sede Öğretmen · Speaking” kalır (görüşlere dokunulmaz) */
